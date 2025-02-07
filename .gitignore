@@ -1,0 +1,17 @@
+# Ignore environment variables
+.env
+
+# Ignore Python-related files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+db.sqlite3
+
+# Ignore Django migrations
+backend/**/migrations/
+
+# Ignore node_modules (React)
+frontend/node_modules/
+frontend/.next/
+frontend/.cache/
