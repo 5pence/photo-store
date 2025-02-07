@@ -24,11 +24,11 @@ This is a monorepo project that combines a Django DRF backend with a React front
 
 ## Progress So Far
 
-✅ Monorepo structure set up (Backend: Django, Frontend: React)
-✅ Django project initialized with DRF
-✅ JWT Authentication implemented (Login, Register, Refresh Tokens)
-✅ SQLite database configured with environment variables
-✅ CORS set up for React-Django communication
+✅ Monorepo structure set up (Backend: Django, Frontend: React)  
+✅ Django project initialized with DRF  
+✅ JWT Authentication implemented (Login, Register, Refresh Tokens)  
+✅ SQLite database configured with environment variables  
+✅ CORS set up for React-Django communication  
 
 ## Why JWT for Authentication?
 
