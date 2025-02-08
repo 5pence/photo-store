@@ -1,6 +1,6 @@
 # Spencer's Photo Store
 
-This is a monorepo project that combines a Django DRF backend with a React frontend. The purpose of this project is both to demostrate tech skills and to create a working photo store where users can browse and purchase images. While the photography aspect is secondary, it provides a real-world use case for integrating user authentication, payments, and file uploads.
+This is a monorepo project that combines a Django DRF backend with a React frontend. The purpose of this project is both to demonstrate tech skills and to create a working photo store where users can browse and purchase images. While the photography aspect is secondary, it provides a real-world use case for integrating user authentication, payments, and file uploads.
 
 ## Tech Stack
 
@@ -8,7 +8,7 @@ This is a monorepo project that combines a Django DRF backend with a React front
 
 - Django & Django REST Framework
 - JWT Authentication (djangorestframework-simplejwt)
-- SQLite (for now, but can be swapped for PostgreSQL later)
+- SQLite (for now, but will be swapped for PostgreSQL later)
 - CORS handling (django-cors-headers)
 - Environment variables (django-environ)
 
@@ -30,7 +30,10 @@ This is a monorepo project that combines a Django DRF backend with a React front
 ✅ SQLite database configured with environment variables  
 ✅ CORS set up for React-Django communication  
 
-## Why JWT for Authentication?
+## 🔐 Authentication (JWT)  
+
+<details>
+  <summary>Why JWT for Authentication?</summary>
 
 I chose JWT (JSON Web Tokens) instead of session-based authentication because:
 
@@ -41,7 +44,28 @@ I chose JWT (JSON Web Tokens) instead of session-based authentication because:
 
 JWT is a widely used method for securing stateless APIs, making it a good fit for this project.
 
-## Next Steps
+</details>
+
+<details>
+  <summary>How Authentication Works in the Frontend</summary>
+
+- When a user logs in, they receive an **access token** and a **refresh token** from Django.
+- The **access token** is stored in `localStorage` and used in API requests for authentication.
+- If the access token **expires**, the frontend automatically sends the **refresh token** to Django to get a new access token.
+- Protected routes (like `/dashboard`) check if a user is authenticated before allowing access.
+
+✅ **Login & Registration:**  
+Users enter their credentials → React sends a request to Django → Django returns JWT tokens → Tokens are stored → User is redirected.  
+
+✅ **Token Handling:**  
+Access tokens are used for quick authentication, while refresh tokens extend session life without requiring a re-login.
+
+✅ **Protected Routes:**  
+Pages like `/dashboard` require authentication and will **redirect to login** if the user is not logged in.
+
+</details>
+
+## 🚀 Next Steps
 
 - 🔜 Connect React frontend to JWT authentication (login/signup pages)
 - 🔜 Implement user profiles (fetch user info after login)
