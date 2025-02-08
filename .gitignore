@@ -1,17 +1,36 @@
-# Ignore environment variables
+# 🔥 Ignore environment variables
 .env
+.env.local
+.env.development
+.env.production
+.env.test
+.env.*.local
 
-# Ignore Python-related files
+# 🔥 Ignore Python/Django-related files
 __pycache__/
 *.pyc
 *.pyo
 *.pyd
 db.sqlite3
-
-# Ignore Django migrations
+media/
+staticfiles/
+uploads/
 backend/**/migrations/
 
-# Ignore node_modules (React)
+# 🔥 Ignore Node.js/React dependencies
 frontend/node_modules/
 frontend/.next/
 frontend/.cache/
+frontend/dist/
+frontend/.vite/
+frontend/.vite-cache/
+
+# 🔥 Ignore IDE/editor settings
+.vscode/
+.idea/
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
