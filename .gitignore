@@ -1,4 +1,4 @@
-# 🔥 Ignore environment variables
+# Ignore environment variables
 .env
 .env.local
 .env.development
@@ -6,7 +6,7 @@
 .env.test
 .env.*.local
 
-# 🔥 Ignore Python/Django-related files
+# Ignore Python/Django-related files
 __pycache__/
 *.pyc
 *.pyo
@@ -17,15 +17,16 @@ staticfiles/
 uploads/
 backend/**/migrations/
 
-# 🔥 Ignore Node.js/React dependencies
+# Ignore Node.js/React dependencies
 frontend/node_modules/
+frontend/frontend/node_modules/ 
 frontend/.next/
 frontend/.cache/
 frontend/dist/
 frontend/.vite/
 frontend/.vite-cache/
 
-# 🔥 Ignore IDE/editor settings
+# Ignore IDE/editor settings
 .vscode/
 .idea/
 .DS_Store
