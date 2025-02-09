@@ -10,9 +10,9 @@ const Dashboard = () => {
       {user ? (
         <div>
           <img
-            src="https://via.placeholder.com/100"  // ✅ Placeholder image
+            src="https://www.w3schools.com/howto/img_avatar.png"
             alt="Profile"
-            style={{ borderRadius: "50%" }}
+            style={{ borderRadius: "50%", width: "100px" }}
           />
           <p>Welcome, <strong>{user.username}</strong>!</p>
           <p>Email: {user.email}</p>

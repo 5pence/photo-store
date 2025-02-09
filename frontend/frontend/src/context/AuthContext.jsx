@@ -18,10 +18,13 @@ export const AuthProvider = ({ children }) => {
 
   const fetchUserProfile = async () => {
     try {
-      const res = await axios.get(`${API_URL}me/`, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
-      setUser(res.data);
+        const storedToken = localStorage.getItem("accessToken"); // ✅ Ensure latest token is used
+        if (!storedToken) return;
+
+        const res = await axios.get(`${API_URL}me/`, {
+            headers: { Authorization: `Bearer ${storedToken}` },
+        });
+        setUser(res.data);
     } catch (error) {
       console.error("Failed to fetch user:", error);
     }
@@ -35,17 +38,19 @@ export const AuthProvider = ({ children }) => {
         localStorage.setItem("refreshToken", res.data.refresh);
         setToken(res.data.access);
         await fetchUserProfile();
-        navigate("/dashboard"); // ✅ Redirect to dashboard after login
+        navigate("/dashboard"); // Redirect to dashboard after login
       }
     } catch (error) {
       console.error("Login failed:", error);
     }
   };
 
-  const logout = () => {
+  const logout = (navigate) => {
     localStorage.removeItem("accessToken");
+    localStorage.removeItem("refreshToken");
     setToken(null);
     setUser(null);
+    navigate("/login");
   };
 
   return (

@@ -3,16 +3,16 @@ import { useNavigate } from "react-router-dom";
 import AuthContext from "../context/AuthContext";
 
 const Login = () => {
-  const { login, user } = useContext(AuthContext); // ✅ Get user from context
+  const { login, user } = useContext(AuthContext);
   const navigate = useNavigate();
   const [userData, setUserData] = useState({ username: "", password: "" });
 
   useEffect(() => {
     if (user) {
       console.log("User is logged in, redirecting...");
-      navigate("/dashboard"); // ✅ Redirect if user is logged in
+      navigate("/dashboard");
     }
-  }, [user, navigate]);
+  }, [user]);
 
   const handleChange = (e) => {
     setUserData({ ...userData, [e.target.name]: e.target.value });
@@ -20,15 +20,29 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await login(userData);
+    await login(userData, navigate);
   };
 
   return (
     <div>
       <h2>Login</h2>
       <form onSubmit={handleSubmit}>
-        <input type="text" name="username" placeholder="Username" onChange={handleChange} required />
-        <input type="password" name="password" placeholder="Password" onChange={handleChange} required />
+        <input 
+            type="text" 
+            name="username" 
+            placeholder="Username"
+            autoComplete="username"
+            onChange={handleChange} 
+            required 
+        />
+        <input 
+            type="password" 
+            name="password" 
+            placeholder="Password" 
+            autoComplete="current-password"
+            onChange={handleChange} 
+            required 
+        />
         <button type="submit">Login</button>
       </form>
     </div>
