@@ -1,34 +1,52 @@
 # Spencer's Photo Store
 
-This is a monorepo project that combines a Django DRF backend with a React frontend. The purpose of this project is both to demonstrate tech skills and to create a working photo store where users can browse and purchase images. While the photography aspect is secondary, it provides a real-world use case for integrating user authentication, payments, and file uploads.
+This is a monorepo project that combines a Django DRF backend with a React frontend. The purpose of this project is both to demonstrate technical skills and to create a working photo store where users can browse and purchase images. While the photography aspect is secondary, it provides a real-world use case for integrating user authentication, payments, and file uploads.
 
-## Tech Stack
+## 🎨 Design & UI
+
+This project follows a **clean, modern UI** with a well-structured layout, using:
+
+- **Tailwind CSS & DaisyUI** for a streamlined, component-based design.
+- **Montserrat** as the global font for both headings and body text.
+- A carefully selected **color palette** to reflect the theme of photography and professionalism:
+
+  - **Rust Red** (`#d64933`) – Primary color (buttons, headers, accents)
+  - **Slate Gray** (`#7e7f9a`) – Secondary color
+  - **Warm White** (`#f8f6f2`) – Background & text contrast
+  - **Neutral Gray** (`#e5e5e5`) – Form backgrounds, muted sections
+  - **Dark Gray** (`#1c1c1c`) – Footer & dark mode elements
+
+This ensures **strong readability, high contrast, and a warm, inviting feel.** The design emphasizes usability while maintaining a **sleek, professional aesthetic.**  
+
+## 🛠 Tech Stack
 
 ### Backend (Django DRF)
 
 - Django & Django REST Framework
-- JWT Authentication (djangorestframework-simplejwt)
-- SQLite (for now, but will be swapped for PostgreSQL later)
-- CORS handling (django-cors-headers)
-- Environment variables (django-environ)
+- JWT Authentication (`djangorestframework-simplejwt`)
+- SQLite (for now, will be swapped for PostgreSQL later)
+- CORS handling (`django-cors-headers`)
+- Environment variables (`django-environ`)
 
 ### Frontend (React)
 
 - React (with Tailwind + DaisyUI for styling)
-- JWT handling via localStorage
+- JWT handling via `localStorage`
 - API calls to Django
+- **Styled UI with Tailwind/DaisyUI and a custom palette**
 
 ### Payments
 
 - Stripe (to handle transactions for purchasing images)
 
-## Progress So Far
+## ✅ Progress So Far
 
-✅ Monorepo structure set up (Backend: Django, Frontend: React)  
-✅ Django project initialized with DRF  
-✅ JWT Authentication implemented (Login, Register, Refresh Tokens)  
-✅ SQLite database configured with environment variables  
-✅ CORS set up for React-Django communication  
+✔️ **Monorepo structure** set up (Backend: Django, Frontend: React)  
+✔️ **Django project initialized** with DRF  
+✔️ **JWT Authentication implemented** (Login, Register, Refresh Tokens)  
+✔️ **Styled login/signup pages** with Tailwind & DaisyUI  
+✔️ **UI refinements**: Custom colors, typography, navbar styling, layout improvements  
+✔️ **CORS configured** for React-Django communication  
 
 ## 🔐 Authentication (JWT)  
 
@@ -67,9 +85,9 @@ Pages like `/dashboard` require authentication and will **redirect to login** if
 
 ## 🚀 Next Steps
 
-- 🔜 Connect React frontend to JWT authentication (login/signup pages)
-- 🔜 Implement user profiles (fetch user info after login)
-- 🔜 Set up photo uploads (Cloudinary or local storage?)
-- 🔜 Start Stripe integration for payments
+- 🔜 **Implement Models for blog and shop**
+- 🔜 **Implement user profiles** (Extend User auth model and fetch user info after login)
+- 🔜 **Set up photo uploads** (Cloudinary or AWS or local storage?)
+- 🔜 **Start Stripe integration** for payments
 
-Keep your eyes peeled - more to come!
+Stay tuned – more updates coming soon! 🎉

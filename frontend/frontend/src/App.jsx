@@ -5,6 +5,7 @@ import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import Dashboard from "./pages/Dashboard";
 import ProtectedRoute from "./components/ProtectedRoute";
+import Navbar from "./components/Navbar";
 
 function App() {
   return (
@@ -20,21 +21,7 @@ function AppContent() {
 
   return (
     <>
-      <nav>
-        <Link to="/">Home</Link>
-        {!user ? (
-          <>
-            <Link to="/login">Login</Link>
-            <Link to="/signup">Signup</Link>
-          </>
-        ) : (
-          <>
-            <Link to="/dashboard">Dashboard</Link>
-            <button onClick={() => logout(navigate)}>Logout</button>  {/* ✅ Pass navigate */}
-          </>
-        )}
-      </nav>
-
+      <Navbar />
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
