@@ -1,6 +1,7 @@
 import { useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import AuthContext from "../context/AuthContext";
+import axios from "axios";
 
 const Signup = () => {
   const { login } = useContext(AuthContext);
@@ -12,6 +13,7 @@ const Signup = () => {
     confirmPassword: "",
   });
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
     setUserData({ ...userData, [e.target.name]: e.target.value });
@@ -45,7 +47,26 @@ const Signup = () => {
     }
 
     setError(""); // Clear error if validation passes
-    await login(userData);
+    setLoading(true);
+
+    try {
+        // Send registration request to Django API
+        const res = await axios.post("http://127.0.0.1:8000/api/auth/register/", {
+          username: userData.username,
+          email: userData.email,
+          password: userData.password,
+        });
+  
+        // Auto-login the user after successful signup
+        await login({ username: userData.username, password: userData.password });
+  
+        navigate("/dashboard"); // Redirect after login
+      } catch (error) {
+        console.error("Signup failed:", error.response?.data || error.message);
+        setError(error.response?.data?.detail || "Signup failed. Try again.");
+      } finally {
+        setLoading(false);
+      }
   };
 
   return (
@@ -108,8 +129,11 @@ const Signup = () => {
 
           {error && <p className="text-sm text-red-600">{error}</p>}
 
-          <button type="submit" className="w-full bg-[#d64933] text-white py-2 rounded-lg hover:bg-[#b53a2a] transition">
-            Sign Up
+          <button 
+            type="submit" 
+            className="w-full bg-[#d64933] text-white py-2 rounded-lg 
+            hover:bg-[#b53a2a] transition" disabled={loading}>
+            {loading ? "Signing up..." : " Sign Up"}
           </button>
         </form>
 

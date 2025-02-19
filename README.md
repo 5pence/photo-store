@@ -1,93 +1,97 @@
-# Spencer's Photo Store
+# Spencer's Studio
 
-This is a monorepo project that combines a Django DRF backend with a React frontend. The purpose of this project is both to demonstrate technical skills and to create a working photo store where users can browse and purchase images. While the photography aspect is secondary, it provides a real-world use case for integrating user authentication, payments, and file uploads.
+This is a monorepo project that combines a **Django DRF backend** with a **React frontend**. The primary goal is to **showcase my coding skills for potential employment and contract work** while also allowing me to **sell photography and digital products**. Additionally, the site will feature a blog for casual updates on my work, projects, and experiences.
 
-## 🎨 Design & UI
+## 🌐 Domain & Branding
 
-This project follows a **clean, modern UI** with a well-structured layout, using:
+This site is going to be hosted on a url chosen to reflect my diverse creative work across photography, coding, and digital content.
 
-- **Tailwind CSS & DaisyUI** for a streamlined, component-based design.
-- **Montserrat** as the global font for both headings and body text.
-- A carefully selected **color palette** to reflect the theme of photography and professionalism:
+### **Sections of the Site**
+- **Home** – Introduction to the site and its purpose
+- **Photography** – Portfolio showcase & potential sale of prints
+- **Coding** – Highlights of my coding experience, projects, and services
+- **Blog** – Casual updates, tutorials, and insights into my work
+- **Store** – Digital & physical products (filters, presets, prints, coding tools)
+- **Dashboard** – User profile & management panel for logged-in users
+- **Contact** – A way for visitors to reach out for inquiries or services
 
-  - **Rust Red** (`#d64933`) – Primary color (buttons, headers, accents)
-  - **Slate Gray** (`#7e7f9a`) – Secondary color
+---
+
+## 🎨 **Design & UI Choices**
+This project follows a **modern, professional aesthetic** while keeping usability in mind.
+
+- **Frameworks**: Tailwind CSS + DaisyUI for streamlined styling
+- **Typography**:  
+  - **Montserrat** – Used across the site for clarity and a clean, modern look
+- **Color Palette**:
+  - **Rust Red** (`#d64933`) – Primary accent (buttons, headers, calls to action)
+  - **Slate Gray** (`#7e7f9a`) – Secondary color for contrast
   - **Warm White** (`#f8f6f2`) – Background & text contrast
   - **Neutral Gray** (`#e5e5e5`) – Form backgrounds, muted sections
-  - **Dark Gray** (`#1c1c1c`) – Footer & dark mode elements
+  - **Dark Gray** (`#1c1c1c`) – Footer & darker UI elements
 
-This ensures **strong readability, high contrast, and a warm, inviting feel.** The design emphasizes usability while maintaining a **sleek, professional aesthetic.**  
+These choices ensure **strong readability, high contrast, and an inviting feel** for users.
 
-## 🛠 Tech Stack
+---
 
-### Backend (Django DRF)
-
+## **Tech Stack**
+### **Backend (Django DRF)**
 - Django & Django REST Framework
 - JWT Authentication (`djangorestframework-simplejwt`)
-- SQLite (for now, will be swapped for PostgreSQL later)
+- PostgreSQL (Planned)
 - CORS handling (`django-cors-headers`)
 - Environment variables (`django-environ`)
 
-### Frontend (React)
+### **Frontend (React)**
+- React with Vite for fast development
+- **Tailwind CSS + DaisyUI** for styling
+- JWT Authentication (handled via `localStorage`)
+- API calls to Django backend
 
-- React (with Tailwind + DaisyUI for styling)
-- JWT handling via `localStorage`
-- API calls to Django
-- **Styled UI with Tailwind/DaisyUI and a custom palette**
+### **Payments & Store**
+- Stripe integration for purchasing images & digital products
+- Secure checkout & transaction handling
 
-### Payments
+---
 
-- Stripe (to handle transactions for purchasing images)
+## **Recent Progress**
+✔ **Domain Secured** – **spencers.studio** is now the main domain  
+✔ **Navigation Setup** – Fully implemented with responsive design  
+✔ **Authentication Updated** – Login & Signup with enhanced styling  
+✔ **Navbar Redesigned** – Improved styling, mobile menu, dropdowns  
+✔ **Typography Overhaul** – Montserrat applied for clarity and consistency  
+✔ **JWT Authentication Integrated** – Secure login, registration, token handling  
 
-## ✅ Progress So Far
+---
 
-✔️ **Monorepo structure** set up (Backend: Django, Frontend: React)  
-✔️ **Django project initialized** with DRF  
-✔️ **JWT Authentication implemented** (Login, Register, Refresh Tokens)  
-✔️ **Styled login/signup pages** with Tailwind & DaisyUI  
-✔️ **UI refinements**: Custom colors, typography, navbar styling, layout improvements  
-✔️ **CORS configured** for React-Django communication  
-
-## 🔐 Authentication (JWT)  
-
+## 🔐 **Authentication (JWT)**
 <details>
-  <summary>Why JWT for Authentication?</summary>
+  <summary>Why JWT?</summary>
 
-I chose JWT (JSON Web Tokens) instead of session-based authentication because:
-
-- It works well with a React frontend (tokens are stored in localStorage or cookies).
-- It's scalable – allows mobile apps or third-party clients to authenticate easily.
-- No reliance on Django's built-in session handling, making it better for APIs.
-- Tokens can be refreshed without requiring the user to log in again immediately.
-
-JWT is a widely used method for securing stateless APIs, making it a good fit for this project.
-
+- Works well with React (tokens stored in localStorage)
+- Scalable for API use (mobile apps, third-party clients)
+- No reliance on Django’s built-in session handling
+- Refresh tokens allow extended sessions without re-login
 </details>
 
 <details>
-  <summary>How Authentication Works in the Frontend</summary>
+  <summary>How It Works</summary>
 
-- When a user logs in, they receive an **access token** and a **refresh token** from Django.
-- The **access token** is stored in `localStorage` and used in API requests for authentication.
-- If the access token **expires**, the frontend automatically sends the **refresh token** to Django to get a new access token.
-- Protected routes (like `/dashboard`) check if a user is authenticated before allowing access.
-
-✅ **Login & Registration:**  
-Users enter their credentials → React sends a request to Django → Django returns JWT tokens → Tokens are stored → User is redirected.  
-
-✅ **Token Handling:**  
-Access tokens are used for quick authentication, while refresh tokens extend session life without requiring a re-login.
-
-✅ **Protected Routes:**  
-Pages like `/dashboard` require authentication and will **redirect to login** if the user is not logged in.
-
+1. User logs in → Receives **access token** + **refresh token**  
+2. Access token is stored in `localStorage` and used for authentication  
+3. If the token expires, the frontend requests a new one using the refresh token  
+4. Protected routes (e.g., **Dashboard**) require authentication  
 </details>
 
-## 🚀 Next Steps
+---
 
-- 🔜 **Implement Models for blog and shop**
-- 🔜 **Implement user profiles** (Extend User auth model and fetch user info after login)
-- 🔜 **Set up photo uploads** (Cloudinary or AWS or local storage?)
-- 🔜 **Start Stripe integration** for payments
+## **Next Steps**
+🔜 **Photography Showcase** – Display images in a clean, engaging way  
+🔜 **Store Setup** – Start adding products & payment handling  
+🔜 **Blog System** – Simple post feed with markdown support  
+🔜 **Dashboard Enhancements** – Improve user experience and content management  
 
-Stay tuned – more updates coming soon! 🎉
+---
+
+## **Final Notes**
+This project is a **work in progress**, and I'm excited to develop it further. If you're interested in **photography, coding, or digital products**, stay tuned for upcoming updates!

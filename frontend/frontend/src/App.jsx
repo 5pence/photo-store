@@ -1,34 +1,35 @@
-import { BrowserRouter as Router, Route, Routes, Link, useNavigate } from "react-router-dom";
-import { useContext } from "react";
-import AuthContext from "./context/AuthContext";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Navbar from "./components/Navbar";
+import Home from "./pages/Home";
+import Photography from "./pages/Photography";
+import Store from "./pages/Store";
+import Blog from "./pages/Blog";
+import Coding from "./pages/Coding";
+import Contact from "./pages/Contact";
+import Dashboard from "./pages/Dashboard";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
-import Dashboard from "./pages/Dashboard";
-import ProtectedRoute from "./components/ProtectedRoute";
-import Navbar from "./components/Navbar";
+import AuthContext from "./context/AuthContext";
+import { useContext } from "react";
 
 function App() {
+  const { user } = useContext(AuthContext);
+
   return (
     <Router>
-      <AppContent />
-    </Router>
-  );
-}
-
-function AppContent() {
-  const { user, logout } = useContext(AuthContext);
-  const navigate = useNavigate();  // ✅ Use navigate here
-
-  return (
-    <>
       <Navbar />
       <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/photography" element={<Photography />} />
+        <Route path="/store" element={<Store />} />
+        <Route path="/blog" element={<Blog />} />
+        <Route path="/coding" element={<Coding />} />
+        <Route path="/contact" element={<Contact />} />
+        {user && <Route path="/dashboard" element={<Dashboard />} />}
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
-        <Route path="/" element={<h1>Welcome {user ? user.username : "Guest"}!</h1>} />
-        <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
       </Routes>
-    </>
+    </Router>
   );
 }
 
