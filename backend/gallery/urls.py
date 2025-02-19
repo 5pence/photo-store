@@ -1,6 +1,6 @@
 from django.urls import path
-from .views import ImageListView
+from .views import ImageListCreateView
 
 urlpatterns = [
-    path('images/', ImageListView.as_view(), name='image-list'),
+    path("images/", ImageListCreateView.as_view(), name="image-list-create"),
 ]

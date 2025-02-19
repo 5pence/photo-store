@@ -1,12 +1,29 @@
+import { useState, useEffect } from "react";
 import Masonry from "react-masonry-css";
 import PropTypes from "prop-types";
+import axios from "axios";
 
-const MasonryGrid = ({ images }) => {
-  const breakpointColumns = {
-    default: 3, // 3 columns for large screens
-    1024: 2,   // 2 columns for tablets
-    768: 1,    // 1 column for mobile
-  };
+
+const MasonryGrid = () => {
+
+    const API_URL = "http://localhost:8000/api/images/"; // Change this to match your actual API endpoint
+    const [images, setImages] = useState([]);
+
+    useEffect(() => {
+        axios.get(API_URL)
+          .then((response) => {
+            setImages(response.data);
+          })
+          .catch((error) => {
+            console.error("Error fetching images:", error);
+          });
+      }, []);
+
+    const breakpointColumns = {
+        default: 3, // 3 columns for large screens
+        1024: 2,   // 2 columns for tablets
+        768: 1,    // 1 column for mobile
+    };
 
   return (
     <Masonry
@@ -17,8 +34,8 @@ const MasonryGrid = ({ images }) => {
         {images.map((image) => (
             <div key={image.id} className="relative group overflow-hidden rounded-lg shadow-md">
                 <img
-                    src={image.src}
-                    alt={image.title}
+                    src={image.image_url}
+                    alt={image.title || "untitled"}
                     className="w-full h-auto transition-transform duration-300 ease-in-out transform group-hover:scale-105"
                 />
                 {/* Dark Overlay */}
@@ -27,9 +44,8 @@ const MasonryGrid = ({ images }) => {
                 {/* Image Title */}
                 {/* Image Title with Delay */}
                 <div className="absolute bottom-4 left-4 right-4 text-white text-lg font-bold opacity-0 group-hover:opacity-100 transition-opacity duration-300 delay-300 bg-black bg-opacity-60 p-2 rounded">
-                    {image.title ? image.title : "untitled"}
+                    {image.title || "untitled"}
                 </div>
-
             </div>
         ))}
     </Masonry>
