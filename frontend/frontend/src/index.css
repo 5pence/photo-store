@@ -2,3 +2,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.masonry-column {
+    background-clip: padding-box;
+}
