@@ -4,11 +4,11 @@ This is a monorepo project that combines a **Django DRF backend** with a **React
 
 ## 🌐 Domain & Branding
 
-This site is going to be hosted on a url chosen to reflect my diverse creative work across photography, coding, and digital content.
+The site is going to be hosted on **spencers.studio**, reflecting my diverse creative work across photography, coding, and digital content.
 
 ### **Sections of the Site**
 - **Home** – Introduction to the site and its purpose
-- **Photography** – Portfolio showcase & potential sale of prints
+- **Photography** – Portfolio showcase with **Masonry Grid layout** & potential sale of prints
 - **Coding** – Highlights of my coding experience, projects, and services
 - **Blog** – Casual updates, tutorials, and insights into my work
 - **Store** – Digital & physical products (filters, presets, prints, coding tools)
@@ -48,6 +48,12 @@ These choices ensure **strong readability, high contrast, and an inviting feel**
 - JWT Authentication (handled via `localStorage`)
 - API calls to Django backend
 
+### **Photography Showcase**
+- **Masonry Grid Layout** for responsive, dynamic image display
+- **Image Titles** with smooth hover effects
+- **Dark Overlay & Scaling** on hover for better interactivity
+- **Optimized Spacing** for improved layout aesthetics
+
 ### **Payments & Store**
 - Stripe integration for purchasing images & digital products
 - Secure checkout & transaction handling
@@ -61,6 +67,8 @@ These choices ensure **strong readability, high contrast, and an inviting feel**
 ✔ **Navbar Redesigned** – Improved styling, mobile menu, dropdowns  
 ✔ **Typography Overhaul** – Montserrat applied for clarity and consistency  
 ✔ **JWT Authentication Integrated** – Secure login, registration, token handling  
+✔ **Masonry Grid for Photography** – Improved image layout & spacing  
+✔ **Hover Effects & Image Titles** – Smooth transitions for better user experience  
 
 ---
 
@@ -86,10 +94,11 @@ These choices ensure **strong readability, high contrast, and an inviting feel**
 ---
 
 ## **Next Steps**
-🔜 **Photography Showcase** – Display images in a clean, engaging way  
+🔜 **Finalize Image Categories** – Implement tagging system (possibly with `django-taggit`)  
 🔜 **Store Setup** – Start adding products & payment handling  
 🔜 **Blog System** – Simple post feed with markdown support  
 🔜 **Dashboard Enhancements** – Improve user experience and content management  
+🔜 **Lightbox Feature** – Click to expand images for full view  
 
 ---
 
