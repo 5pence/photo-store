@@ -32,10 +32,11 @@ INSTALLED_APPS = [
     'rest_framework',
     'corsheaders',
     # Authentication
-    "rest_framework_simplejwt",
+    'rest_framework_simplejwt',
     # Custom apps
-    "accounts",
-
+    'accounts',
+    'gallery',
+    'taggit',
 ]
 
 MIDDLEWARE = [
