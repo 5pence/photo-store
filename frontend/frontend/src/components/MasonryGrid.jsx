@@ -1,7 +1,9 @@
 import { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import Masonry from "react-masonry-css";
 import PropTypes from "prop-types";
 import axios from "axios";
+
 
 const MasonryGrid = () => {
   const API_URL = "http://localhost:8000/api/images/";
@@ -113,25 +115,54 @@ const MasonryGrid = () => {
         ))}
       </Masonry>
 
-      {/* Lightbox (Custom) */}
-      {lightboxOpen && images.length > 0 && (
-        <div className="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50">
-          <button className="absolute top-4 right-4 text-white text-2xl" onClick={closeLightbox}>
+    {/* Lightbox (Now with Smooth Transitions) */}
+    <AnimatePresence>
+    {lightboxOpen && images.length > 0 && (
+        <motion.div
+        className="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50"
+        initial={{ opacity: 0, scale: 0.95 }} // Starts slightly smaller & transparent
+        animate={{ opacity: 1, scale: 1 }} // Full visibility
+        exit={{ opacity: 0, scale: 0.95 }} // Fades out
+        transition={{ duration: 0.3, ease: "easeInOut" }}
+        >
+        {/* Close Button */}
+        <button
+            className="absolute top-4 right-4 text-white text-2xl"
+            onClick={closeLightbox}
+        >
             ✖
-          </button>
-          <button className="absolute left-4 text-white text-3xl" onClick={prevImage}>
+        </button>
+
+        {/* Previous Image Button */}
+        <button
+            className="absolute left-4 text-white text-3xl"
+            onClick={prevImage}
+        >
             ◀
-          </button>
-          <img
+        </button>
+
+        {/* Image with Smooth Fade-in */}
+        <motion.img
+            key={images[currentIndex].image_url}
             src={images[currentIndex].image_url}
             alt={images[currentIndex].title || "untitled"}
             className="max-w-[90vw] max-h-[90vh] rounded-lg shadow-lg"
-          />
-          <button className="absolute right-4 text-white text-3xl" onClick={nextImage}>
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.95 }}
+            transition={{ duration: 0.3, ease: "easeInOut" }}
+        />
+
+        {/* Next Image Button */}
+        <button
+            className="absolute right-4 text-white text-3xl"
+            onClick={nextImage}
+        >
             ▶
-          </button>
-        </div>
-      )}
+        </button>
+        </motion.div>
+    )}
+    </AnimatePresence>
     </div>
   );
 };

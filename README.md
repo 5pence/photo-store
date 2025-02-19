@@ -4,10 +4,10 @@ This is a monorepo project that combines a **Django DRF backend** with a **React
 
 ---
 
-## 🌐 **Domain & Branding**
+## 🌐 Domain & Branding
 The site is hosted on **spencers.studio**, chosen to reflect my diverse creative work across **photography, coding, and digital content**.
 
-### **Sections of the Site**
+### Sections of the Site
 - **Home** – Introduction to the site and its purpose
 - **Photography** – Portfolio showcase & potential sale of prints
 - **Coding** – Highlights of my coding experience, projects, and services
@@ -18,7 +18,7 @@ The site is hosted on **spencers.studio**, chosen to reflect my diverse creative
 
 ---
 
-## 🎨 **Design & UI**
+## 🎨 Design & UI
 This project follows a **modern, professional aesthetic** while keeping usability in mind.
 
 - **Frameworks**: Tailwind CSS + DaisyUI for streamlined styling
@@ -35,31 +35,33 @@ These choices ensure **strong readability, high contrast, and an inviting feel**
 
 ---
 
-## **Tech Stack**
-### **Backend (Django DRF)**
+## 🛠 Tech Stack
+
+### Backend (Django DRF)
 - Django & Django REST Framework
 - JWT Authentication (`djangorestframework-simplejwt`)
 - PostgreSQL (Planned)
 - CORS handling (`django-cors-headers`)
 - Environment variables (`django-environ`)
 
-### **Frontend (React)**
+### Frontend (React)
 - React with Vite for fast development
 - **Tailwind CSS + DaisyUI** for styling
 - JWT Authentication (handled via `localStorage`)
 - API calls to Django backend
 
-### **Media & File Handling**
+### Media & File Handling
 - Django serves images via **media storage** (now correctly configured)
 - Future integration with **Cloudinary or S3** for production-ready media handling
 
-### **Payments & Store**
+### Payments & Store
 - Stripe integration for purchasing images & digital products (coming soon)
 - Secure checkout & transaction handling
 
 ---
 
-## **Recent Progress**
+## 🚀 Recent Progress
+
 ✔ **Domain Secured** – **spencers.studio** is now the main domain  
 ✔ **Navigation Setup** – Fully implemented with responsive design  
 ✔ **Authentication Updated** – Login & Signup with enhanced styling  
@@ -69,14 +71,21 @@ These choices ensure **strong readability, high contrast, and an inviting feel**
 ✔ **Image API Implemented** – Django now serves images via a proper API  
 ✔ **Photography Gallery (Masonry Layout)** – Beautifully displays images dynamically  
 ✔ **Image Titles & Overlays** – Subtle hover effects with delayed transitions for smooth UI  
+✔ **Tag-based Filtering** – Users can now filter images by categories such as **Portrait, Surreal, Monochrome, and Landscape**  
+✔ **Lightbox Feature** – Clicking an image opens it in a **full-screen lightbox with navigation controls**  
+✔ **Animations & Transitions** –  
+  - **Page transitions** now have smooth fade-ins  
+  - **Buttons animate subtly on hover and click**  
+  - **Lightbox has a smooth transition instead of an instant pop-up**  
+  - **Images in the gallery slightly scale up on hover for an interactive feel**  
 
 ---
 
-## 🔐 **Authentication (JWT)**
+## 🔐 Authentication (JWT)
 <details>
   <summary>Why JWT?</summary>
 
-- Works well with React (tokens stored in localStorage)
+- Works well with React (tokens stored in `localStorage`)
 - Scalable for API use (mobile apps, third-party clients)
 - No reliance on Django’s built-in session handling
 - Refresh tokens allow extended sessions without re-login
@@ -93,14 +102,15 @@ These choices ensure **strong readability, high contrast, and an inviting feel**
 
 ---
 
-## **Next Steps**
-🔜 **Filters & Categories** – Implement image categories like **Portrait, Landscape, Wildlife, etc.**  
-🔜 **Lightbox Effect** – Clicking an image will open a larger preview with smooth transitions  
-🔜 **Image Details Page** – A dedicated page for each image with purchase options  
-🔜 **Store Setup** – Add products & integrate Stripe for payments  
-🔜 **Dashboard Enhancements** – Improve user experience and content management  
+## 🔜 Next Steps
+
+- **Improve Filtering UX** – Animate transitions when changing categories  
+- **Image Details Page** – Dedicated page for each image with more details & purchase options  
+- **Store Setup** – Add products & integrate Stripe for payments  
+- **Dashboard Enhancements** – Improve user experience and content management  
+- **SEO Optimization** – Improve metadata, alt text, and OpenGraph for better discoverability  
 
 ---
 
-## **Final Notes**
+## 📌 Final Notes
 This project is a **work in progress**, and I'm excited to develop it further. If you're interested in **photography, coding, or digital products**, stay tuned for upcoming updates!
