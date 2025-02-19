@@ -5,6 +5,15 @@ export default {
   content: ["./index.html", "./src/**/*.{js,jsx,ts,tsx}"],
   theme: {
     extend: {
+      keyframes: {
+        fadeIn: {
+          "0%": { opacity: 0, transform: "translateY(10px)" },
+          "100%": { opacity: 1, transform: "translateY(0)" },
+        },
+      },
+      animation: {
+        "fade-in": "fadeIn 1.1s ease-in-out",
+      },
       colors: {
         "rust": "#D64933", // Rusty Red
         "muted-blue": "#7E7F9A", // Muted Blue
