@@ -90,6 +90,7 @@ These choices ensure **strong readability, high contrast, and an inviting feel**
 ✔ **Cart Persistence** – The cart is stored per user, ensuring items are retained  
 ✔ **Cart API Endpoints** – Fully functional API for managing the cart (add, remove, list)
 ✔ **Cart System Added** – Users can add/remove items, and cart persists after refresh  
+✔ **Cart Page UI Enhancements** – Improve the design and user experience
 
 ---
 
@@ -136,9 +137,9 @@ python manage.py test store
 ## **Next Steps**
 
 - **Checkout & Payments** – Integrate **Stripe** for handling transactions  
-- **Cart Page UI Enhancements** – Improve the design and user experience  
 - **Image Details Page** – A dedicated page for each image with purchase options  
 - **Dashboard Enhancements** – Improve user experience and content management  
+- **The Blog** – Add a blog with easy markdown updates
 
 ---
 
