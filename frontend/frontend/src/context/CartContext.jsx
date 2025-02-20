@@ -9,6 +9,10 @@ export const CartProvider = ({ children }) => {
   const [cart, setCart] = useState([]);
   const { user, token } = useAuth(); // ✅ Get user & auth token
 
+  // Check if cart contains digital products
+  const hasDigitalProducts = cart.some(item => item.product_type === "digital");
+
+
   // 🛒 **Load cart from localStorage initially**
   useEffect(() => {
     const savedCart = localStorage.getItem("cart");
@@ -114,7 +118,7 @@ export const CartProvider = ({ children }) => {
   };
 
   return (
-    <CartContext.Provider value={{ cart, addToCart, removeFromCart, updateQuantity, clearCart }}>
+    <CartContext.Provider value={{ cart, addToCart, removeFromCart, updateQuantity, clearCart, hasDigitalProducts }}>
       {children}
     </CartContext.Provider>
   );

@@ -1,11 +1,16 @@
 import { useContext, useState, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
+import { motion } from "framer-motion";
 import AuthContext from "../context/AuthContext";
 
 const Login = () => {
   const { login, user } = useContext(AuthContext);
   const navigate = useNavigate();
+  const location = useLocation(); // ✅ Detect where the user came from
   const [userData, setUserData] = useState({ username: "", password: "" });
+
+  // ✅ Check if redirected from checkout
+  const fromCheckout = location.state?.fromCheckout;
 
   useEffect(() => {
     if (user) {
@@ -26,9 +31,39 @@ const Login = () => {
     <div className="flex items-center justify-center min-h-screen bg-gray-200 px-4">
       <div className="bg-white p-8 rounded-2xl shadow-lg w-full max-w-md">
         <h2 className="text-3xl font-heading font-extrabold text-center text-[#d64933] mb-6">Login</h2>
+
+        {/* ✅ Show message only if redirected from checkout */}
+        {fromCheckout && (
+        <motion.div
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, ease: "easeOut", delay: 0.5 }}
+            className="bg-warm-cream border-l-4 border-rust p-4 rounded-lg shadow-md"
+        >
+      
+            <h3 className="text-lg font-bold text-[#d64933] flex items-center">
+            🚢 <span className="ml-2">Important Notice</span>
+            </h3>
+            <p className="mt-2 text-gray-700">
+            Your order contains <strong>digital products</strong>. To ensure secure access, we require an account.
+            </p>
+            <ul className="mt-2 space-y-1 text-gray-600">
+            <li>📂 Access your purchases anytime</li>
+            <li>🖼️ Re-download files whenever needed</li>
+            <li>🔒 Keep your downloads safe</li>
+            </ul>
+            <p className="mt-3 text-gray-700">
+            Please log in or <Link to="/signup" className="text-[#d64933] font-medium hover:underline">sign up</Link> to continue.
+            </p>
+        </motion.div>
+      
+        )}
+
+
+
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label className="block text-sm font-sans font-medium text-gray-700">Username</label>
+            <label className="block text-sm font-sans font-medium text-gray-700 mt-6">Username</label>
             <input
               type="text"
               name="username"
