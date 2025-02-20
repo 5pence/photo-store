@@ -10,13 +10,13 @@ The site is hosted on **spencers.studio**, chosen to reflect my diverse creative
 
 ### **Sections of the Site**
 
-- **Home** – Introduction to the site and its purpose
-- **Photography** – Portfolio showcase & potential sale of prints
-- **Coding** – Highlights of my coding experience, projects, and services
-- **Blog** – Casual updates, tutorials, and insights into my work
-- **Store** – Digital & physical products (filters, presets, prints, coding tools)
-- **Dashboard** – User profile & management panel for logged-in users
-- **Contact** – A way for visitors to reach out for inquiries or services
+- **Home** – Introduction to the site and its purpose  
+- **Photography** – Portfolio showcase & potential sale of prints  
+- **Coding** – Highlights of my coding experience, projects, and services  
+- **Blog** – Casual updates, tutorials, and insights into my work  
+- **Store** – Digital & physical products (filters, presets, prints, coding tools)  
+- **Dashboard** – User profile & management panel for logged-in users  
+- **Contact** – A way for visitors to reach out for inquiries or services  
 
 ---
 
@@ -24,15 +24,15 @@ The site is hosted on **spencers.studio**, chosen to reflect my diverse creative
 
 This project follows a **modern, professional aesthetic** while keeping usability in mind.
 
-- **Frameworks**: Tailwind CSS + DaisyUI for streamlined styling
+- **Frameworks**: Tailwind CSS + DaisyUI for streamlined styling  
 - **Typography**:  
-  - **Montserrat** – Used across the site for clarity and a clean, modern look
+  - **Montserrat** – Used across the site for clarity and a clean, modern look  
 - **Color Palette**:
-  - **Rust Red** (`#d64933`) – Primary accent (buttons, headers, calls to action)
-  - **Slate Gray** (`#7e7f9a`) – Secondary color for contrast
-  - **Warm White** (`#f8f6f2`) – Background & text contrast
-  - **Neutral Gray** (`#e5e5e5`) – Form backgrounds, muted sections
-  - **Dark Gray** (`#1c1c1c`) – Footer & darker UI elements
+  - **Rust Red** (`#d64933`) – Primary accent (buttons, headers, calls to action)  
+  - **Slate Gray** (`#7e7f9a`) – Secondary color for contrast  
+  - **Warm White** (`#f8f6f2`) – Background & text contrast  
+  - **Neutral Gray** (`#e5e5e5`) – Form backgrounds, muted sections  
+  - **Dark Gray** (`#1c1c1c`) – Footer & darker UI elements  
 
 These choices ensure **strong readability, high contrast, and an inviting feel** for users.
 
@@ -42,28 +42,28 @@ These choices ensure **strong readability, high contrast, and an inviting feel**
 
 ### **Backend (Django DRF)**
 
-- Django & Django REST Framework
-- JWT Authentication (`djangorestframework-simplejwt`)
-- PostgreSQL (Planned)
-- CORS handling (`django-cors-headers`)
-- Environment variables (`django-environ`)
+- Django & Django REST Framework  
+- JWT Authentication (`djangorestframework-simplejwt`)  
+- PostgreSQL (Planned)  
+- CORS handling (`django-cors-headers`)  
+- Environment variables (`django-environ`)  
 
 ### **Frontend (React)**
 
-- React with Vite for fast development
-- **Tailwind CSS + DaisyUI** for styling
-- JWT Authentication (handled via `localStorage`)
-- API calls to Django backend
+- React with Vite for fast development  
+- **Tailwind CSS + DaisyUI** for styling  
+- JWT Authentication (handled via `localStorage`)  
+- API calls to Django backend  
 
 ### **Media & File Handling**
 
-- Django serves images via **media storage** (now correctly configured)
-- Future integration with **Cloudinary or S3** for production-ready media handling
+- Django serves images via **media storage** (now correctly configured)  
+- Future integration with **Cloudinary or S3** for production-ready media handling  
 
 ### **Payments & Store**
 
-- Stripe integration for purchasing images & digital products (coming soon)
-- Secure checkout & transaction handling
+- Stripe integration for purchasing images & digital products (coming soon)  
+- Secure checkout & transaction handling  
 
 ---
 
@@ -78,36 +78,59 @@ These choices ensure **strong readability, high contrast, and an inviting feel**
 ✔ **Store Models Implemented** – Django models for **products, categories, and images** have been created  
 ✔ **Admin Panel for Store** – Products and categories can now be managed from Django admin  
 ✔ **Multiple Image Support for Products** – Products can now have multiple images stored  
+✔ **Cart Functionality (Backend)** – Users can add/remove items from their cart  
+✔ **Cart Persistence** – The cart is stored per user, ensuring items are retained  
+✔ **Cart API Endpoints** – Fully functional API for managing the cart (add, remove, list)  
 
 ---
 
-## 🔐 **Authentication (JWT)**
+## 🧪 **Testing: Store & Cart API**
 
-### **Why JWT?**
+To ensure everything functions as expected, automated tests have been added:
 
-- Works well with React (tokens stored in `localStorage`)
+ **Category & Product Retrieval Tests**  
+
+- Tests ensure that categories and products are correctly retrieved via API  
+
+ **Cart Functionality Tests**  
+
+- Adding a product to the cart  
+- Removing a product from the cart  
+- Updating cart item quantity  
+
+Tests can be run with:
+
+```bash
+python manage.py test store
+
+--- 
+
+## 🔐 Authentication (JWT)
+
+### Why JWT?
+
+- Works well with React (tokens stored in localStorage)
 - Scalable for API use (mobile apps, third-party clients)
 - No reliance on Django’s built-in session handling
 - Refresh tokens allow extended sessions without re-login
 
-### **How It Works**
+### How It Works
 
-1. User logs in → Receives **access token** + **refresh token**  
-2. Access token is stored in `localStorage` and used for authentication  
-3. If the token expires, the frontend requests a new one using the refresh token  
-4. Protected routes (e.g., **Dashboard**) require authentication  
+- User logs in → Receives access token + refresh token
+- Access token is stored in localStorage and used for authentication
+- If the token expires, the frontend requests a new one using the refresh token
+- Protected routes (e.g., Dashboard) require authentication
+
+--- 
+
+### Next Steps
+
+- Frontend Cart UI – Display cart items dynamically in the frontend
+- Add/Remove from Cart (Frontend) – Enable user interaction with the cart
+- Checkout and Payments – Implement Stripe for handling transactions
+- Dashboard Enhancements – Improve user experience and content management
 
 ---
 
-## **Next Steps**
-
-🔜 **Image Details Page** – A dedicated page for each image with purchase options  
-🔜 **Cart System** – Allow users to add/remove items from their cart  
-🔜 **Checkout & Payments** – Integrate **Stripe** for handling transactions  
-🔜 **Dashboard Enhancements** – Improve user experience and content management  
-
----
-
-## **Final Notes**
-
-This project is a **work in progress**, and I'm excited to develop it further. If you're interested in **photography, coding, or digital products**, stay tuned for upcoming updates!
+## Final Notes
+This project is a work in progress, and I'm excited to develop it further. If you're interested in photography, coding, or digital products, stay tuned for upcoming updates!
