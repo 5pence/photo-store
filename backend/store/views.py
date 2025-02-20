@@ -1,9 +1,14 @@
+import stripe
+from django.conf import settings
 from rest_framework import generics, status
+from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
-from .models import Category, Product, Cart, CartItem
+from .models import Category, Product, Cart, CartItem, Order, OrderItem
 from .serializers import CategorySerializer, ProductSerializer
-from .serializers import CartSerializer, CartItemSerializer
+from .serializers import CartSerializer, CartItemSerializer, OrderSerializer
+
+stripe.api_key = settings.STRIPE_SECRET_KEY
 
 
 # Category List View (GET All Categories)
@@ -71,3 +76,52 @@ class RemoveFromCartView(generics.DestroyAPIView):
         except CartItem.DoesNotExist:
             return Response({"error": "Item not found in cart"},
                             status=status.HTTP_404_NOT_FOUND)
+
+
+class CreateCheckoutSession(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def post(self, request):
+        user = request.user
+        cart_items = request.data.get("cart", [])
+
+        if not cart_items:
+            return Response({"error": "Cart is empty"}, status=400)
+
+        # Create order
+        order = Order.objects.create(user=user, total_price=0)
+
+        line_items = []
+        total_price = 0
+
+        for item in cart_items:
+            product = Product.objects.get(id=item["id"])
+            order_item = OrderItem.objects.create(
+                order=order, product=product, quantity=item["quantity"],
+                price=product.price
+            )
+            total_price += product.price * item["quantity"]
+
+            line_items.append({
+                "price_data": {
+                    "currency": "usd",
+                    "product_data": {
+                        "name": product.name,
+                    },
+                    "unit_amount": int(product.price * 100),
+                },
+                "quantity": item["quantity"],
+            })
+
+        order.total_price = total_price
+        order.save()
+
+        checkout_session = stripe.checkout.Session.create(
+            payment_method_types=["card"],
+            line_items=line_items,
+            mode="payment",
+            success_url="http://localhost:5173/checkout/success",
+            cancel_url="http://localhost:5173/checkout/cancel",
+        )
+
+        return Response({"id": checkout_session.id, "url": checkout_session.url})
