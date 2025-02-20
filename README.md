@@ -100,26 +100,27 @@ These choices ensure **strong readability, high contrast, and an inviting feel**
 
 ## 🚀 **Latest Features & Enhancements**
 
-✔ **Keyboard Navigation in Lightbox** – Use **Arrow Left/Right** to navigate images, **Esc** to close  
-✔ **Swipe Gestures for Mobile** – Swipe left/right to navigate, swipe down to close the lightbox  
-✔ **Lazy Loading for Images** – Improves performance by loading images only when they come into view  
-✔ **Smooth Tag Filtering Animation** – Images now fade in/out smoothly when changing categories  
-✔ **Improved Lightbox UI** – Button styling refined for consistency & better visibility  
-✔ **Loading Spinner** – Displays a spinner while images are being fetched  
-✔ **Store Models Implemented** – Django models for **products, categories, and images** have been created  
-✔ **Admin Panel for Store** – Products and categories can now be managed from Django admin  
-✔ **Multiple Image Support for Products** – Products can now have multiple images stored  
-✔ **Cart Functionality (Backend)** – Users can add/remove items from their cart  
-✔ **Cart Persistence** – The cart is stored per user, ensuring items are retained  
-✔ **Cart API Endpoints** – Fully functional API for managing the cart (add, remove, list)
-✔ **Cart System Added** – Users can add/remove items, and cart persists after refresh  
-✔ **Cart Page UI Enhancements** – Improve the design and user experience
-✔ **Stripe Integratio** – Secure checkout for digital & physical products
-✔ **Order System** – Orders are created, tracked, and marked as paid
-✔ **Cart Icon Sync** – Cart count updates dynamically after checkout
-✔ **Admin Order Management** – Orders can be viewed and managed via Django Admin
-✔ **Success Page with Auto-Redirect** – After payment, users are redirected and the cart is cleared
-✔ **Clear Cart After Payment** – Cart is cleared on success (both frontend & backend)
+- ✔ **Keyboard Navigation in Lightbox** – Use **Arrow Left/Right** to navigate images, **Esc** to close  
+- ✔ **Swipe Gestures for Mobile** – Swipe left/right to navigate, swipe down to close the lightbox  
+- ✔ **Lazy Loading for Images** – Improves performance by loading images only when they come into view  
+- ✔ **Smooth Tag Filtering Animation** – Images now fade in/out smoothly when changing categories  
+- ✔ **Improved Lightbox UI** – Button styling refined for consistency & better visibility  
+- ✔ **Loading Spinner** – Displays a spinner while images are being fetched  
+- ✔ **Store Models Implemented** – Django models for **products, categories, and images** have been created  
+- ✔ **Admin Panel for Store** – Products and categories can now be managed from Django admin  
+- ✔ **Multiple Image Support for Products** – Products can now have multiple images stored  
+- ✔ **Cart Functionality (Backend)** – Users can add/remove items from their cart  
+- ✔ **Cart Persistence** – The cart is stored per user, ensuring items are retained  
+- ✔ **Cart API Endpoints** – Fully functional API for managing the cart (add, remove, list)
+- ✔ **Cart System Added** – Users can add/remove items, and cart persists after refresh  
+- ✔ **Cart Page UI Enhancements** – Improve the design and user experience
+- ✔ **Stripe Integratio** – Secure checkout for digital & physical products
+- ✔ **Order System** – Orders are created, tracked, and marked as paid
+- ✔ **Cart Icon Sync** – Cart count updates dynamically after checkout
+- ✔ **Admin Order Management** – Orders can be viewed and managed via Django Admin
+- ✔ **Success Page with Auto-Redirect** – After payment, users are redirected and the cart is cleared
+- ✔ **Clear Cart After Payment** – Cart is cleared on success (both frontend & backend)
+
 ---
 
 ## 🧪 **Testing: Store & Cart API**
