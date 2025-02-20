@@ -31,12 +31,13 @@ INSTALLED_APPS = [
     # Third-party apps
     'rest_framework',
     'corsheaders',
+    'taggit',
     # Authentication
     'rest_framework_simplejwt',
     # Custom apps
     'accounts',
     'gallery',
-    'taggit',
+    'store',
 ]
 
 MIDDLEWARE = [
