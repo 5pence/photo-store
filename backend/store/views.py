@@ -6,7 +6,8 @@ from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 from .models import Category, Product, Cart, CartItem, Order, OrderItem
 from .serializers import CategorySerializer, ProductSerializer
-from .serializers import CartSerializer, CartItemSerializer, OrderSerializer
+from .serializers import CartSerializer, CartItemSerializer
+
 
 stripe.api_key = settings.STRIPE_SECRET_KEY
 
@@ -104,7 +105,7 @@ class CreateCheckoutSession(APIView):
 
             line_items.append({
                 "price_data": {
-                    "currency": "usd",
+                    "currency": "gbp",
                     "product_data": {
                         "name": product.name,
                     },
@@ -124,4 +125,30 @@ class CreateCheckoutSession(APIView):
             cancel_url="http://localhost:5173/checkout/cancel",
         )
 
-        return Response({"id": checkout_session.id, "url": checkout_session.url})
+        return Response(
+            {"id": checkout_session.id, "url": checkout_session.url})
+
+
+class ConfirmOrderView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def post(self, request):
+        user = request.user
+
+        try:
+            # ✅ Get the most recent unpaid order and mark as paid
+            order = Order.objects.filter(
+                user=user, payment_status="pending").latest("created_at")
+            order.payment_status = "paid"
+            order.save()
+
+            # ✅ Clear the cart after payment
+            cart = Cart.objects.filter(user=user).first()
+            if cart:
+                cart.items.all().delete()  # ✅ Remove all cart items
+                cart.save()
+
+            return Response({"message": "Order confirmed and cart cleared!"}, status=200)
+
+        except Order.DoesNotExist:
+            return Response({"error": "No pending order found"}, status=404)

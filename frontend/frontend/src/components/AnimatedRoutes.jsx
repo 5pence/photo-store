@@ -13,6 +13,8 @@ import Login from "../pages/Login";
 import Signup from "../pages/Signup";
 import Cart from "../pages/Cart";
 import Checkout from "../pages/Checkout";
+import Success from "../pages/Success";
+
 
 const AnimatedRoutes = ({ user }) => {
   const location = useLocation();
@@ -31,6 +33,7 @@ const AnimatedRoutes = ({ user }) => {
         <Route path="/signup" element={<AnimatedPage><Signup /></AnimatedPage>} />
         <Route path="/cart" element={<AnimatedPage><Cart /></AnimatedPage>} />
         <Route path="/checkout" element={<AnimatedPage><Checkout /></AnimatedPage>} />
+        <Route path="/checkout/success" element={<AnimatedPage><Success /></AnimatedPage>} />
       </Routes>
     </AnimatePresence>
   );

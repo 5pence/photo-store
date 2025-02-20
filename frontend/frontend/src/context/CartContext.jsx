@@ -111,7 +111,7 @@ export const CartProvider = ({ children }) => {
     }
   };
 
-  // ✅ **Clear cart**
+  // **Clear cart**
   const clearCart = () => {
     setCart([]);
     localStorage.removeItem("cart");

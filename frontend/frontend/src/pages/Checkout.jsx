@@ -12,6 +12,7 @@ const Checkout = () => {
   const [error, setError] = useState("");
 
   const totalPrice = cart.reduce((total, item) => total + (item.price || 0) * item.quantity, 0);
+  const validCart = cart.filter(item => item && item.name && item.price);
 
   // Redirect to login if user tries to buy digital products and is not logged in
   useEffect(() => {
@@ -23,19 +24,23 @@ const Checkout = () => {
   const handleCheckout = async () => {
     setLoading(true);
     setError("");
-
+  
     try {
+      // Setup headers only if the user is logged in
+      const headers = user && token ? { Authorization: `Bearer ${token}` } : {};
+  
       const response = await axios.post(
         "http://127.0.0.1:8000/api/checkout/",
         {
-          items: cart.map((item) => ({
-            product_id: item.id,
+          cart: cart.map((item) => ({
+            id: item.id, // ✅ Match API expectation (not "product_id")
             quantity: item.quantity,
           })),
         },
-        user && token ? { headers: { Authorization: `Bearer ${token}` } } : {}
+        { headers } // ✅ Pass headers here
       );
-
+  
+      // Redirect to Stripe checkout
       window.location.href = response.data.url;
     } catch (err) {
       console.error("Checkout Error:", err);
@@ -44,17 +49,18 @@ const Checkout = () => {
       setLoading(false);
     }
   };
+  
 
   return (
     <div className="container mx-auto px-4 py-6">
       <h1 className="text-2xl font-bold mb-4">💳 Checkout</h1>
 
-      {cart.length === 0 ? (
+      {validCart.length === 0 ? (
         <p className="text-gray-600">Your cart is empty.</p>
       ) : (
         <>
           <div className="space-y-4">
-            {cart.map((item) => (
+            {validCart.map((item) => (
               <div key={item.id} className="flex justify-between p-4 bg-gray-100 rounded-lg">
                 <span>{item.name} (x{item.quantity})</span>
                 <span>£{item.price ? (item.price * item.quantity).toFixed(2) : "0.00"}</span>

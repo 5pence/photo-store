@@ -66,12 +66,35 @@ These choices ensure **strong readability, high contrast, and an inviting feel**
 - **Cart Context & `useCart` Hook** – Provides global cart state management  
 - **Persistent Cart (localStorage)** – Items remain in the cart after page refresh  
 - **Add/Remove Items** – Users can now manage their cart contents  
-- **Dynamic Cart UI** – The cart icon only appears in the navbar when it contains items  
+- **Dynamic Cart UI** – The cart icon only appears in the navbar when it contains items
+- **Cart and Checkout** - Fully functional
+- **Cart syncs with backend** when user logs in  
 
 ### **Payments**
 
-- Stripe integration for purchasing images & digital products (coming soon)  
-- Secure checkout & transaction handling  
+- **Stripe is fully integrated and working**
+- **Both digital and physical products are supported**
+- **Secure checkout & transaction handling**
+- **Order status updates in the admin panel after payment**  
+
+### **Order Management**
+
+- Django Admin now tracks all orders with Pending, Paid, and Failed statuses.
+- Users can see their order history (future feature).
+- The system prevents duplicate unpaid orders from being created.
+
+### **Digital vs Physical Products**
+
+- Digital products require login (for security & access).
+- Physical products can be purchased without an account.
+- Digital purchases are available for re-download in the user’s account.
+
+### **Future Plans**
+
+- Automated Email Receipts (Post-payment confirmation)
+- User Order History Page (Show past purchases)
+- Stripe Webhooks (Ensure payment verification)
+- Product Reviews & Ratings (Let customers leave feedback)
 
 ---
 
@@ -91,7 +114,12 @@ These choices ensure **strong readability, high contrast, and an inviting feel**
 ✔ **Cart API Endpoints** – Fully functional API for managing the cart (add, remove, list)
 ✔ **Cart System Added** – Users can add/remove items, and cart persists after refresh  
 ✔ **Cart Page UI Enhancements** – Improve the design and user experience
-
+✔ **Stripe Integratio** – Secure checkout for digital & physical products
+✔ **Order System** – Orders are created, tracked, and marked as paid
+✔ **Cart Icon Sync** – Cart count updates dynamically after checkout
+✔ **Admin Order Management** – Orders can be viewed and managed via Django Admin
+✔ **Success Page with Auto-Redirect** – After payment, users are redirected and the cart is cleared
+✔ **Clear Cart After Payment** – Cart is cleared on success (both frontend & backend)
 ---
 
 ## 🧪 **Testing: Store & Cart API**
@@ -107,6 +135,12 @@ To ensure everything functions as expected, automated tests have been added:
 - Adding a product to the cart  
 - Removing a product from the cart  
 - Updating cart item quantity  
+
+  **Order Processing Tests (Manual tests)**
+
+- Creating an order
+- Updating order status after payment
+- Clearing cart after successful payment
 
 Tests can be run with:
 
