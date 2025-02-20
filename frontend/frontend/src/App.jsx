@@ -3,15 +3,18 @@ import Navbar from "./components/Navbar";
 import AnimatedRoutes from "./components/AnimatedRoutes";
 import AuthContext from "./context/AuthContext";
 import { useContext } from "react";
+import { CartProvider } from "./context/CartContext";
 
 const App = () => {
   const { user } = useContext(AuthContext);
 
   return (
-    <Router>
-      <Navbar />
-      <AnimatedRoutes user={user} />
-    </Router>
+    <CartProvider>
+        <Router>
+            <Navbar />
+            <AnimatedRoutes user={user} />
+        </Router>
+    </CartProvider>
   );
 };
 

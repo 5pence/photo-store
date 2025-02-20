@@ -11,6 +11,8 @@ import Contact from "../pages/Contact";
 import Dashboard from "../pages/Dashboard";
 import Login from "../pages/Login";
 import Signup from "../pages/Signup";
+import Cart from "../pages/Cart";
+import Checkout from "../pages/Checkout";
 
 const AnimatedRoutes = ({ user }) => {
   const location = useLocation();
@@ -27,6 +29,8 @@ const AnimatedRoutes = ({ user }) => {
         {user && <Route path="/dashboard" element={<AnimatedPage><Dashboard /></AnimatedPage>} />}
         <Route path="/login" element={<AnimatedPage><Login /></AnimatedPage>} />
         <Route path="/signup" element={<AnimatedPage><Signup /></AnimatedPage>} />
+        <Route path="/cart" element={<AnimatedPage><Cart /></AnimatedPage>} />
+        <Route path="/checkout" element={<AnimatedPage><Checkout /></AnimatedPage>} />
       </Routes>
     </AnimatePresence>
   );

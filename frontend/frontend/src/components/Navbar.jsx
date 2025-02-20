@@ -1,9 +1,12 @@
 import { NavLink } from "react-router-dom";
 import { useContext, useState } from "react";
 import AuthContext from "../context/AuthContext";
+import useCart from "../context/useCart";
+
 
 const Navbar = () => {
   const { user, logout } = useContext(AuthContext);
+  const { cart } = useCart();
   const [menuOpen, setMenuOpen] = useState(false);
 
   return (
@@ -54,6 +57,14 @@ const Navbar = () => {
             </NavLink>
           )}
         </div>
+
+        {/* Cart Icon (Only Show if Cart Has Items) */}
+        {cart.length > 0 && (
+          <NavLink to="/cart" className="relative text-white hover:text-gray-200">
+            🛒 <span className="absolute -top-1 -right-2 bg-red-500 text-white text-xs px-1 rounded-full">{cart.length}</span>
+          </NavLink>
+        )}
+
 
         {/* Login/Signup (Desktop) */}
         <div className="hidden md:flex space-x-4">

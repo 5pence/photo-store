@@ -17,6 +17,7 @@ The site is hosted on **spencers.studio**, chosen to reflect my diverse creative
 - **Store** – Digital & physical products (filters, presets, prints, coding tools)  
 - **Dashboard** – User profile & management panel for logged-in users  
 - **Contact** – A way for visitors to reach out for inquiries or services  
+- **Cart** – Users can now add products to their cart and manage their orders
 
 ---
 
@@ -60,7 +61,14 @@ These choices ensure **strong readability, high contrast, and an inviting feel**
 - Django serves images via **media storage** (now correctly configured)  
 - Future integration with **Cloudinary or S3** for production-ready media handling  
 
-### **Payments & Store**
+### **🛒 Store & Cart System**
+
+- **Cart Context & `useCart` Hook** – Provides global cart state management  
+- **Persistent Cart (localStorage)** – Items remain in the cart after page refresh  
+- **Add/Remove Items** – Users can now manage their cart contents  
+- **Dynamic Cart UI** – The cart icon only appears in the navbar when it contains items  
+
+### **Payments**
 
 - Stripe integration for purchasing images & digital products (coming soon)  
 - Secure checkout & transaction handling  
@@ -80,7 +88,8 @@ These choices ensure **strong readability, high contrast, and an inviting feel**
 ✔ **Multiple Image Support for Products** – Products can now have multiple images stored  
 ✔ **Cart Functionality (Backend)** – Users can add/remove items from their cart  
 ✔ **Cart Persistence** – The cart is stored per user, ensuring items are retained  
-✔ **Cart API Endpoints** – Fully functional API for managing the cart (add, remove, list)  
+✔ **Cart API Endpoints** – Fully functional API for managing the cart (add, remove, list)
+✔ **Cart System Added** – Users can add/remove items, and cart persists after refresh  
 
 ---
 
@@ -124,12 +133,12 @@ python manage.py test store
 
 ---
 
-### Next Steps
+## **Next Steps**
 
-- Frontend Cart UI – Display cart items dynamically in the frontend
-- Add/Remove from Cart (Frontend) – Enable user interaction with the cart
-- Checkout and Payments – Implement Stripe for handling transactions
-- Dashboard Enhancements – Improve user experience and content management
+- **Checkout & Payments** – Integrate **Stripe** for handling transactions  
+- **Cart Page UI Enhancements** – Improve the design and user experience  
+- **Image Details Page** – A dedicated page for each image with purchase options  
+- **Dashboard Enhancements** – Improve user experience and content management  
 
 ---
 
