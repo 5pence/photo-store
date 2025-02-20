@@ -102,8 +102,9 @@ Tests can be run with:
 
 ```bash
 python manage.py test store
+```
 
---- 
+---
 
 ## 🔐 Authentication (JWT)
 
@@ -121,7 +122,7 @@ python manage.py test store
 - If the token expires, the frontend requests a new one using the refresh token
 - Protected routes (e.g., Dashboard) require authentication
 
---- 
+---
 
 ### Next Steps
 
@@ -133,4 +134,5 @@ python manage.py test store
 ---
 
 ## Final Notes
+
 This project is a work in progress, and I'm excited to develop it further. If you're interested in photography, coding, or digital products, stay tuned for upcoming updates!
