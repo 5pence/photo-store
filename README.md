@@ -38,7 +38,7 @@ These choices ensure **strong readability, high contrast, and an inviting feel**
 
 ---
 
-## **Tech Stack**
+## 📦 **Tech Stack**
 
 ### **Backend (Django DRF)**
 
