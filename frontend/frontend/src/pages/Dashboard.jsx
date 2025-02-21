@@ -1,25 +1,21 @@
 import { useContext } from "react";
 import AuthContext from "../context/AuthContext";
+import Orders from "../components/Orders";
 
 const Dashboard = () => {
   const { user } = useContext(AuthContext);
 
   return (
-    <div>
-      <h1>Dashboard</h1>
+    <div className="container mx-auto px-4 py-6">
+      {/* Welcome Section */}
       {user ? (
-        <div>
-          <img
-            src="https://www.w3schools.com/howto/img_avatar.png"
-            alt="Profile"
-            style={{ borderRadius: "50%", width: "100px" }}
-          />
-          <p>Welcome, <strong>{user.username}</strong>!</p>
-          <p>Email: {user.email}</p>
-        </div>
+      <div className="mb-6 border-b pb-4">
+        <h1 className="text-3xl font-bold text-center mb-6 text-[#d64933]">Welcome back, {user?.username}!</h1>
+      </div>
       ) : (
-        <p>Loading user info...</p>
+        <p>Loading your details...</p>
       )}
+      <Orders />
     </div>
   );
 };

@@ -5,6 +5,9 @@ export default {
   content: ["./index.html", "./src/**/*.{js,jsx,ts,tsx}"],
   theme: {
     extend: {
+      screens: {
+        xs: "400px",
+      },
       keyframes: {
         fadeIn: {
           "0%": { opacity: 0, transform: "translateY(10px)" },
@@ -47,6 +50,3 @@ export default {
     ],
   },
 };
-
-  
-  

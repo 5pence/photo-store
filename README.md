@@ -92,8 +92,6 @@ These choices ensure **strong readability, high contrast, and an inviting feel**
 ### **Future Plans**
 
 - Automated Email Receipts (Post-payment confirmation)
-- User Order History Page (Show past purchases)
-- Stripe Webhooks (Ensure payment verification)
 - Product Reviews & Ratings (Let customers leave feedback)
 
 ---
@@ -120,6 +118,9 @@ These choices ensure **strong readability, high contrast, and an inviting feel**
 - ✔ **Admin Order Management** – Orders can be viewed and managed via Django Admin
 - ✔ **Success Page with Auto-Redirect** – After payment, users are redirected and the cart is cleared
 - ✔ **Clear Cart After Payment** – Cart is cleared on success (both frontend & backend)
+- ✔ **Checkout & Payments** – Integrate **Stripe** for handling transactions
+- ✔ **User Order History Embedded on Dashboard Page** - Show past purchases
+- ✔ **Stripe Webhooks** - Ensure payment verification
 
 ---
 
@@ -171,7 +172,6 @@ python manage.py test store
 
 ## **Next Steps**
 
-- **Checkout & Payments** – Integrate **Stripe** for handling transactions  
 - **Image Details Page** – A dedicated page for each image with purchase options  
 - **Dashboard Enhancements** – Improve user experience and content management  
 - **The Blog** – Add a blog with easy markdown updates

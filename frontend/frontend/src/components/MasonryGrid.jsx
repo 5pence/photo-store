@@ -88,9 +88,10 @@ const MasonryGrid = () => {
   });
 
   const breakpointColumns = {
-    default: 3,
-    1024: 2,
-    768: 1,
+    default: 4,
+    1024: 3,
+    768: 2,
+    400: 1,
   };
 
   return (
