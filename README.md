@@ -128,17 +128,17 @@ These choices ensure **strong readability, high contrast, and an inviting feel**
 
 To ensure everything functions as expected, automated tests have been added:
 
- **Category & Product Retrieval Tests**  
+#### Category & Product Retrieval Tests  
 
 - Tests ensure that categories and products are correctly retrieved via API  
 
- **Cart Functionality Tests**  
+#### Cart Functionality Tests**  
 
 - Adding a product to the cart  
 - Removing a product from the cart  
 - Updating cart item quantity  
 
-  **Order Processing Tests (Manual tests)**
+#### Order Processing Tests (Manual tests)
 
 - Creating an order
 - Updating order status after payment
