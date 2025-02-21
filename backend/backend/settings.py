@@ -1,3 +1,4 @@
+import ssl
 import os
 import environ
 from pathlib import Path
@@ -147,3 +148,17 @@ SIMPLE_JWT = {
     "BLACKLIST_AFTER_ROTATION": True,
     "AUTH_HEADER_TYPES": ("Bearer",),
 }
+
+
+EMAIL_BACKEND = os.environ.get(
+    "EMAIL_BACKEND", "django.core.mail.backends.smtp.EmailBackend")
+
+# Later on when i switch to SendGrid I get API Key and update env
+
+# EMAIL_BACKEND=django.core.mail.backends.smtp.EmailBackend
+# EMAIL_HOST=smtp.sendgrid.net
+# EMAIL_PORT=587
+# EMAIL_USE_TLS=True
+# EMAIL_HOST_USER=apikey  # This stays as "apikey" for SendGrid
+# EMAIL_HOST_PASSWORD=your_sendgrid_api_key
+# DEFAULT_FROM_EMAIL=your-email@example.com

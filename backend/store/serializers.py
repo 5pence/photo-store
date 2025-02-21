@@ -56,6 +56,7 @@ class CartSerializer(serializers.ModelSerializer):
 
 class OrderItemSerializer(serializers.ModelSerializer):
     """ Serializer for Order Items """
+    product = ProductSerializer()
 
     class Meta:
         model = OrderItem
@@ -70,7 +71,7 @@ class OrderSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Order
-        fields = ["id", "user", "total_price", "status",
-                  "created_at", "updated_at", "items"]
+        fields = ["id", "user", "total_price", "payment_status",
+                  "created_at", "items"]
         read_only_fields = ["id", "user",
-                            "total_price", "created_at", "updated_at"]
+                            "total_price", "created_at"]

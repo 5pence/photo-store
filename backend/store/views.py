@@ -5,7 +5,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 from .models import Category, Product, Cart, CartItem, Order, OrderItem
-from .serializers import CategorySerializer, ProductSerializer
+from .serializers import CategorySerializer, OrderSerializer, ProductSerializer
 from .serializers import CartSerializer, CartItemSerializer
 
 
@@ -152,3 +152,27 @@ class ConfirmOrderView(APIView):
 
         except Order.DoesNotExist:
             return Response({"error": "No pending order found"}, status=404)
+
+
+# Fetch all orders for the logged-in user
+class UserOrderListView(generics.ListAPIView):
+    serializer_class = OrderSerializer
+    permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        return Order.objects.filter(
+            user=self.request.user).order_by('-created_at')
+
+
+# Fetch details for a specific order
+class OrderDetailView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request, order_id):
+        try:
+            order = Order.objects.get(id=order_id, user=request.user)
+            serializer = OrderSerializer(order)
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        except Order.DoesNotExist:
+            return Response(
+                {"error": "Order not found"}, status=status.HTTP_404_NOT_FOUND)
