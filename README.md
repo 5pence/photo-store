@@ -132,7 +132,7 @@ To ensure everything functions as expected, automated tests have been added:
 
 - Tests ensure that categories and products are correctly retrieved via API  
 
-#### Cart Functionality Tests**  
+#### Cart Functionality Tests
 
 - Adding a product to the cart  
 - Removing a product from the cart  
