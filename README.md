@@ -132,13 +132,13 @@ To ensure everything functions as expected, automated tests have been added:
 
 - Tests ensure that categories and products are correctly retrieved via API  
 
-#### Cart Functionality Tests
+### Cart Functionality Tests
 
 - Adding a product to the cart  
 - Removing a product from the cart  
 - Updating cart item quantity  
 
-#### Order Processing Tests (Manual tests)
+### Order Processing Tests (Manual tests)
 
 - Creating an order
 - Updating order status after payment
