@@ -62,6 +62,28 @@ class AddToCartView(generics.CreateAPIView):
         return Response(CartSerializer(cart).data, status=status.HTTP_200_OK)
 
 
+class UpdateCartItemView(generics.UpdateAPIView):
+    serializer_class = CartItemSerializer
+    permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        return CartItem.objects.filter(cart__user=self.request.user)
+
+    def update(self, request, *args, **kwargs):
+        cart_item = self.get_object()
+        if not cart_item:
+            return Response({"error": "Cart item not found or does not belong to this user"},
+                            status=status.HTTP_404_NOT_FOUND)
+
+        new_quantity = request.data.get("quantity")
+        if not isinstance(new_quantity, int) or new_quantity <= 0:
+            return Response({"error": "Invalid quantity"}, status=status.HTTP_400_BAD_REQUEST)
+
+        cart_item.quantity = new_quantity
+        cart_item.save()
+        return Response(CartItemSerializer(cart_item).data, status=status.HTTP_200_OK)
+
+
 class RemoveFromCartView(generics.DestroyAPIView):
     permission_classes = [IsAuthenticated]
 

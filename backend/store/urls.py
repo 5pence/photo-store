@@ -2,7 +2,7 @@ from django.urls import path
 from .views import CategoryListView, ProductListView
 from .views import CartDetailView, AddToCartView, RemoveFromCartView
 from .views import CreateCheckoutSession, ConfirmOrderView
-from .views import UserOrderListView, OrderDetailView
+from .views import UserOrderListView, OrderDetailView, UpdateCartItemView
 
 
 urlpatterns = [
@@ -10,6 +10,7 @@ urlpatterns = [
     path("products/", ProductListView.as_view(), name="product-list"),
     path("cart/", CartDetailView.as_view(), name="cart-detail"),
     path("cart/add/", AddToCartView.as_view(), name="cart-add"),
+    path("cart/update/<int:pk>/", UpdateCartItemView.as_view(), name="cart-update"),
     path("cart/remove/", RemoveFromCartView.as_view(), name="cart-remove"),
     path("checkout/", CreateCheckoutSession.as_view(), name="checkout"),
     path("orders/", UserOrderListView.as_view(), name="user-orders"),
