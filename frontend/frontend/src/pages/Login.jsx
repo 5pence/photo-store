@@ -1,22 +1,18 @@
-import { useContext, useState, useEffect } from "react";
+import { useContext, useState } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
 import AuthContext from "../context/AuthContext";
+import useCart from "../context/useCart";
 
 const Login = () => {
-  const { login, user } = useContext(AuthContext);
+  const { login } = useContext(AuthContext);
   const navigate = useNavigate();
-  const location = useLocation(); // ✅ Detect where the user came from
+  const location = useLocation();
   const [userData, setUserData] = useState({ username: "", password: "" });
+  const { addToCart } = useCart();
 
-  // ✅ Check if redirected from checkout
+  // ✅ Detect if redirected from checkout
   const fromCheckout = location.state?.fromCheckout;
-
-  useEffect(() => {
-    if (user) {
-      navigate("/dashboard");
-    }
-  }, [user, navigate]);
 
   const handleChange = (e) => {
     setUserData({ ...userData, [e.target.name]: e.target.value });
@@ -24,7 +20,16 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await login(userData);
+    await login(userData, navigate); // ✅ Pass navigate here
+
+    // ✅ Restore cart item if it was saved before login
+    const pendingItem = sessionStorage.getItem("pendingCartItem");
+    if (pendingItem) {
+      const { product, quantity } = JSON.parse(pendingItem);
+      console.log("🛒 Adding pending item to cart:", product);
+      addToCart(product, quantity);
+      sessionStorage.removeItem("pendingCartItem");
+    }
   };
 
   return (
@@ -32,38 +37,34 @@ const Login = () => {
       <div className="bg-white p-8 rounded-2xl shadow-lg w-full max-w-md">
         <h2 className="text-3xl font-heading font-extrabold text-center text-[#d64933] mb-6">Login</h2>
 
-        {/* ✅ Show message only if redirected from checkout */}
+        {/* ✅ Friendly notification if redirected from checkout */}
         {fromCheckout && (
-        <motion.div
+          <motion.div
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, ease: "easeOut", delay: 0.5 }}
-            className="bg-warm-cream border-l-4 border-rust p-4 rounded-lg shadow-md"
-        >
-      
+            transition={{ duration: 0.5, ease: "easeOut", delay: 0.3 }}
+            className="bg-orange-100 border-l-4 border-[#d64933] p-4 rounded-lg shadow-md"
+          >
             <h3 className="text-lg font-bold text-[#d64933] flex items-center">
-            🚢 <span className="ml-2">Important Notice</span>
+              🛍️ <span className="ml-2">Almost there!</span>
             </h3>
             <p className="mt-2 text-gray-700">
-            Your order contains <strong>digital products</strong>. To ensure secure access, we require an account.
+              To complete your purchase and access your <strong>digital products</strong>, please log in to your account.
             </p>
             <ul className="mt-2 space-y-1 text-gray-600">
-            <li>📂 Access your purchases anytime</li>
-            <li>🖼️ Re-download files whenever needed</li>
-            <li>🔒 Keep your downloads safe</li>
+              <li>📂 Instant access to your purchases</li>
+              <li>🖼️ Re-download your items anytime</li>
+              <li>🔒 Keep your downloads secure</li>
             </ul>
             <p className="mt-3 text-gray-700">
-            Please log in or <Link to="/signup" className="text-[#d64933] font-medium hover:underline">sign up</Link> to continue.
+              Don't have an account? <Link to="/signup" className="text-[#d64933] font-medium hover:underline">Sign up here</Link>.
             </p>
-        </motion.div>
-      
+          </motion.div>
         )}
 
-
-
-        <form onSubmit={handleSubmit} className="space-y-4">
+        <form onSubmit={handleSubmit} className="space-y-4 mt-6">
           <div>
-            <label className="block text-sm font-sans font-medium text-gray-700 mt-6">Username</label>
+            <label className="block text-sm font-medium text-gray-700">Username</label>
             <input
               type="text"
               name="username"
@@ -71,12 +72,12 @@ const Login = () => {
               autoComplete="username"
               onChange={handleChange}
               required
-              className="border border-gray-400 shadow-sm input input-bordered font-sans w-full mt-1"
+              className="input input-bordered w-full mt-1"
             />
           </div>
 
           <div>
-            <label className="block text-sm font-sans font-medium text-gray-700">Password</label>
+            <label className="block text-sm font-medium text-gray-700">Password</label>
             <input
               type="password"
               name="password"
@@ -84,7 +85,7 @@ const Login = () => {
               autoComplete="current-password"
               onChange={handleChange}
               required
-              className="border border-gray-400 shadow-sm input font-sans input-bordered w-full mt-1"
+              className="input input-bordered w-full mt-1"
             />
           </div>
 
@@ -93,10 +94,10 @@ const Login = () => {
           </button>
         </form>
 
-        <p className="font-body text-center text-sm text-gray-600 mt-4">
-          Don’t have an account?{" "}
+        <p className="text-center text-sm text-gray-600 mt-4">
+          New here?{" "}
           <Link to="/signup" className="text-[#d64933] font-medium hover:underline">
-            Sign up
+            Create an account
           </Link>
         </p>
       </div>

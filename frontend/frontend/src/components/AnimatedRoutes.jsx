@@ -1,4 +1,4 @@
-import { Routes, Route, useLocation } from "react-router-dom";
+import { Routes, Route, useLocation, Navigate } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
 import PropTypes from "prop-types";
 import AnimatedPage from "./AnimatedPage"; // ✅ This should now exist
@@ -14,6 +14,7 @@ import Signup from "../pages/Signup";
 import Cart from "../pages/Cart";
 import Checkout from "../pages/Checkout";
 import Success from "../pages/Success";
+import CheckoutCancel from "../pages/CheckoutCancel";
 
 
 const AnimatedRoutes = ({ user }) => {
@@ -28,12 +29,24 @@ const AnimatedRoutes = ({ user }) => {
         <Route path="/blog" element={<AnimatedPage><Blog /></AnimatedPage>} />
         <Route path="/coding" element={<AnimatedPage><Coding /></AnimatedPage>} />
         <Route path="/contact" element={<AnimatedPage><Contact /></AnimatedPage>} />
-        {user && <Route path="/dashboard" element={<AnimatedPage><Dashboard /></AnimatedPage>} />}
+        <Route
+            path="/dashboard"
+            element={
+                user === null ? (
+                <Navigate to="/login" replace state={{ from: "/dashboard" }} />
+                ) : (
+                <AnimatedPage><Dashboard /></AnimatedPage>
+                )
+            }
+        />
+
+
         <Route path="/login" element={<AnimatedPage><Login /></AnimatedPage>} />
         <Route path="/signup" element={<AnimatedPage><Signup /></AnimatedPage>} />
         <Route path="/cart" element={<AnimatedPage><Cart /></AnimatedPage>} />
         <Route path="/checkout" element={<AnimatedPage><Checkout /></AnimatedPage>} />
         <Route path="/checkout/success" element={<AnimatedPage><Success /></AnimatedPage>} />
+        <Route path="/checkout/cancel" element={<CheckoutCancel />} />
       </Routes>
     </AnimatePresence>
   );

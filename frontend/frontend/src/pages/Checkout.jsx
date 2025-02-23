@@ -26,21 +26,23 @@ const Checkout = () => {
     setError("");
   
     try {
-      // Setup headers only if the user is logged in
       const headers = user && token ? { Authorization: `Bearer ${token}` } : {};
   
       const response = await axios.post(
         "http://127.0.0.1:8000/api/checkout/",
         {
           cart: cart.map((item) => ({
-            id: item.id, // ✅ Match API expectation (not "product_id")
+            id: item.id,
             quantity: item.quantity,
           })),
         },
-        { headers } // ✅ Pass headers here
+        { headers }
       );
   
-      // Redirect to Stripe checkout
+      // ✅ Store checkout session ID in sessionStorage (for handling cancel cases)
+      sessionStorage.setItem("checkoutSession", "active");
+  
+      // ✅ Redirect to Stripe checkout
       window.location.href = response.data.url;
     } catch (err) {
       console.error("Checkout Error:", err);
@@ -49,6 +51,7 @@ const Checkout = () => {
       setLoading(false);
     }
   };
+  
   
 
   return (

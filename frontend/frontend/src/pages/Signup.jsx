@@ -1,10 +1,12 @@
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import AuthContext from "../context/AuthContext";
 import axios from "axios";
+import useCart from "../context/useCart";
 
 const Signup = () => {
-  const { login } = useContext(AuthContext);
+  const { login, user, token } = useContext(AuthContext); // ✅ Ensure we check token too
+  const { addToCart } = useCart();
   const navigate = useNavigate();
   const [userData, setUserData] = useState({
     username: "",
@@ -14,6 +16,23 @@ const Signup = () => {
   });
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const [cartRestored, setCartRestored] = useState(false); // ✅ Prevent infinite loop
+
+  useEffect(() => {
+    if (user && token && !cartRestored) {
+      // ✅ Ensure this runs only ONCE when user is logged in
+      const pendingItem = sessionStorage.getItem("pendingCartItem");
+      if (pendingItem) {
+        const { product, quantity } = JSON.parse(pendingItem);
+        console.log("🛒 Restoring pending cart item:", product);
+        addToCart(product, quantity); // ✅ Add to cart AFTER user logs in
+        sessionStorage.removeItem("pendingCartItem"); // ✅ Clear after adding
+        setCartRestored(true); // ✅ Prevent infinite loop
+      }
+
+      navigate("/store"); // ✅ Move after cart is restored
+    }
+  }, [user, token, cartRestored, addToCart, navigate]); // ✅ Depend on `cartRestored` to prevent loops
 
   const handleChange = (e) => {
     setUserData({ ...userData, [e.target.name]: e.target.value });
@@ -50,23 +69,22 @@ const Signup = () => {
     setLoading(true);
 
     try {
-        // Send registration request to Django API
-        const res = await axios.post("http://127.0.0.1:8000/api/auth/register/", {
-          username: userData.username,
-          email: userData.email,
-          password: userData.password,
-        });
-  
-        // Auto-login the user after successful signup
-        await login({ username: userData.username, password: userData.password });
-  
-        navigate("/dashboard"); // Redirect after login
-      } catch (error) {
-        console.error("Signup failed:", error.response?.data || error.message);
-        setError(error.response?.data?.detail || "Signup failed. Try again.");
-      } finally {
-        setLoading(false);
-      }
+      // ✅ Send registration request to Django API
+      const res = await axios.post("http://127.0.0.1:8000/api/auth/register/", {
+        username: userData.username,
+        email: userData.email,
+        password: userData.password,
+      });
+
+      // ✅ Auto-login after successful signup
+      await login({ username: userData.username, password: userData.password });
+
+    } catch (error) {
+      console.error("Signup failed:", error.response?.data || error.message);
+      setError(error.response?.data?.detail || "Signup failed. Try again.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (

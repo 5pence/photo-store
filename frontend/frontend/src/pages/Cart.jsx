@@ -13,6 +13,9 @@ const Cart = () => {
     0
   );
 
+  console.log("🔍 Cart data on render:", cart);
+  console.log("🖼️ Cart Item Image:", validCart);
+
   return (
     <div className="container mx-auto px-4 py-6">
       <h1 className="text-2xl font-bold mb-4">🛒 Your Cart</h1>
@@ -32,7 +35,7 @@ const Cart = () => {
               <div key={item.id} className="flex items-center justify-between p-4 bg-gray-100 rounded-lg">
                 
                 <img 
-                  src={item.images?.[0]?.image || "/placeholder.jpg"} 
+                  src={item.image || "/placeholder.jpg"} 
                   alt={item.name || "Product"} 
                   className="w-16 h-16 rounded-lg"
                 />

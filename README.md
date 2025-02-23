@@ -17,7 +17,8 @@ The site is hosted on **spencers.studio**, chosen to reflect my diverse creative
 - **Store** – Digital & physical products (filters, presets, prints, coding tools)  
 - **Dashboard** – User profile & management panel for logged-in users  
 - **Contact** – A way for visitors to reach out for inquiries or services  
-- **Cart** – Users can now add products to their cart and manage their orders
+- **Cart** – Users can now add products to their cart and manage their orders  
+- **Checkout** – Fully integrated Stripe payment system  
 
 ---
 
@@ -65,94 +66,46 @@ These choices ensure **strong readability, high contrast, and an inviting feel**
 
 - **Cart Context & `useCart` Hook** – Provides global cart state management  
 - **Persistent Cart (localStorage)** – Items remain in the cart after page refresh  
-- **Add/Remove Items** – Users can now manage their cart contents  
-- **Dynamic Cart UI** – The cart icon only appears in the navbar when it contains items
-- **Cart and Checkout** - Fully functional
-- **Cart syncs with backend** when user logs in  
+- **Cart Syncs with Backend** – When logged in, the cart is stored per user  
+- **Full Checkout & Payment Flow** – Secure Stripe integration  
 
-### **Payments**
+### **Payments & Order Flow**
 
-- **Stripe is fully integrated and working**
-- **Both digital and physical products are supported**
-- **Secure checkout & transaction handling**
-- **Order status updates in the admin panel after payment**  
+#### **Checkout Process**
 
-### **Order Management**
+1. **User adds items to cart** (persistent via localStorage)
+2. **Proceed to Checkout** → Creates an order in Django backend (status: `pending`)
+3. **Redirect to Stripe Payment Page**
+4. **Successful Payment** → Redirects to `/checkout/success/` and:
+   - Confirms the order as `paid`
+   - Clears the user's cart (both frontend & backend)
+   - Redirects to **Dashboard** after 5 seconds
+5. **Cancelled Payment** → Redirects to `/checkout/cancel/` and:
+   - Clears the user's cart (both frontend & backend)
+   - Redirects back to **Cart** page
 
-- Django Admin now tracks all orders with Pending, Paid, and Failed statuses.
-- Users can see their order history (future feature).
-- The system prevents duplicate unpaid orders from being created.
+#### **Handling Digital vs Physical Products**
 
-### **Digital vs Physical Products**
-
-- Digital products require login (for security & access).
-- Physical products can be purchased without an account.
-- Digital purchases are available for re-download in the user’s account.
-
-### **Future Plans**
-
-- Automated Email Receipts (Post-payment confirmation)
-- Product Reviews & Ratings (Let customers leave feedback)
+- **Digital products require login** (to prevent unauthorized access)
+- **Physical products can be bought without an account**
+- **User Dashboard displays past orders**
+- **Cart is fully synced across devices when logged in**
 
 ---
 
 ## 🚀 **Latest Features & Enhancements**
 
-- ✔ **Keyboard Navigation in Lightbox** – Use **Arrow Left/Right** to navigate images, **Esc** to close  
-- ✔ **Swipe Gestures for Mobile** – Swipe left/right to navigate, swipe down to close the lightbox  
-- ✔ **Lazy Loading for Images** – Improves performance by loading images only when they come into view  
-- ✔ **Smooth Tag Filtering Animation** – Images now fade in/out smoothly when changing categories  
-- ✔ **Improved Lightbox UI** – Button styling refined for consistency & better visibility  
-- ✔ **Loading Spinner** – Displays a spinner while images are being fetched  
-- ✔ **Store Models Implemented** – Django models for **products, categories, and images** have been created  
-- ✔ **Admin Panel for Store** – Products and categories can now be managed from Django admin  
-- ✔ **Multiple Image Support for Products** – Products can now have multiple images stored  
-- ✔ **Cart Functionality (Backend)** – Users can add/remove items from their cart  
-- ✔ **Cart Persistence** – The cart is stored per user, ensuring items are retained  
-- ✔ **Cart API Endpoints** – Fully functional API for managing the cart (add, remove, list)
-- ✔ **Cart System Added** – Users can add/remove items, and cart persists after refresh  
-- ✔ **Cart Page UI Enhancements** – Improve the design and user experience
-- ✔ **Stripe Integratio** – Secure checkout for digital & physical products
-- ✔ **Order System** – Orders are created, tracked, and marked as paid
-- ✔ **Cart Icon Sync** – Cart count updates dynamically after checkout
-- ✔ **Admin Order Management** – Orders can be viewed and managed via Django Admin
-- ✔ **Success Page with Auto-Redirect** – After payment, users are redirected and the cart is cleared
-- ✔ **Clear Cart After Payment** – Cart is cleared on success (both frontend & backend)
-- ✔ **Checkout & Payments** – Integrate **Stripe** for handling transactions
-- ✔ **User Order History Embedded on Dashboard Page** - Show past purchases
-- ✔ **Stripe Webhooks** - Ensure payment verification
+- ✔ **Stripe Checkout Fully Implemented** – Secure payments for digital & physical products  
+- ✔ **Order System Overhauled** – Pending orders now clear on failed payments  
+- ✔ **Cart Clears After Payment or Cancellation** – Prevents duplicate stacking  
+- ✔ **Backend Cart API Extended** – Added `/cart/clear/` endpoint for syncing cart  
+- ✔ **Order History Now Visible on Dashboard** – Users can track purchases  
+- ✔ **AuthContext Fixes** – Improved login state management & session persistence  
+- ✔ **Cart & Checkout State Fully Synced** – Ensures a seamless buying experience  
 
 ---
 
-## 🧪 **Testing: Store & Cart API**
-
-To ensure everything functions as expected, automated tests have been added:
-
-### Category & Product Retrieval Tests
-
-- Tests ensure that categories and products are correctly retrieved via API  
-
-### Cart Functionality Tests
-
-- Adding a product to the cart  
-- Removing a product from the cart  
-- Updating cart item quantity  
-
-### Order Processing Tests (Manual tests)
-
-- Creating an order
-- Updating order status after payment
-- Clearing cart after successful payment
-
-Tests can be run with:
-
-```bash
-python manage.py test store
-```
-
----
-
-## 🔐 Authentication (JWT)
+## 🔐 **Authentication (JWT)**
 
 ### Why JWT?
 
@@ -170,14 +123,32 @@ python manage.py test store
 
 ---
 
-## **Next Steps**
+## 🛠 **Next Steps & Planned Features**
 
 - **Image Details Page** – A dedicated page for each image with purchase options  
-- **Dashboard Enhancements** – Improve user experience and content management  
-- **The Blog** – Add a blog with easy markdown updates
+- **Email Notifications** – Order confirmations & payment receipts  
+- **Product Reviews & Ratings** – Customers can leave feedback  
+- **Discount Codes & Promotions** – Future marketing features  
+- **Wishlist & Favorites** – Allow users to save products for later  
 
 ---
 
-## Final Notes
+## 🧪 **Testing: Store & Cart API**
+
+### **Automated Tests Added:**
+
+- ✅ **Cart Functionality Tests** – Add, remove, and update cart items  
+- ✅ **Order Processing Tests** – Verify order status changes and Stripe payments  
+- ✅ **JWT Auth Tests** – Ensure users remain logged in across sessions  
+
+Tests can be run with:
+
+```bash
+python manage.py test store
+```
+
+---
+
+## **Final Notes**
 
 This project is a work in progress, and I'm excited to develop it further. If you're interested in photography, coding, or digital products, stay tuned for upcoming updates!

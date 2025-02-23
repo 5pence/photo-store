@@ -1,13 +1,20 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { useContext, useState } from "react";
 import AuthContext from "../context/AuthContext";
 import useCart from "../context/useCart";
 
-
 const Navbar = () => {
   const { user, logout } = useContext(AuthContext);
-  const { cart } = useCart();
+  const { cart, clearCart } = useCart();
   const [menuOpen, setMenuOpen] = useState(false);
+  const navigate = useNavigate();
+
+  // ✅ Logout function that clears the cart before logging out
+  const handleLogout = () => {
+    clearCart();  // ✅ Clear cart first
+    logout();     // ✅ Then log out
+    navigate("/login");  // ✅ Redirect to login
+  };
 
   return (
     <nav className="bg-rust p-4 shadow-md text-warm-white border-b border-gray-300">
@@ -65,7 +72,6 @@ const Navbar = () => {
           </NavLink>
         )}
 
-
         {/* Login/Signup (Desktop) */}
         <div className="hidden md:flex space-x-4">
           {!user ? (
@@ -74,7 +80,7 @@ const Navbar = () => {
               <NavLink to="/signup" className="btn btn-outline border-white text-white hover:bg-white hover:text-red-600 px-4 py-2">Signup</NavLink>
             </>
           ) : (
-            <button onClick={logout} className="btn btn-accent px-4 py-2">Logout</button>
+            <button onClick={handleLogout} className="btn btn-accent px-4 py-2">Logout</button>
           )}
         </div>
 
@@ -100,7 +106,7 @@ const Navbar = () => {
                 <NavLink to="/signup" className="btn btn-outline border-white text-white hover:bg-white hover:text-red-600 w-full py-2" onClick={() => setMenuOpen(false)}>Signup</NavLink>
               </>
             ) : (
-              <button onClick={logout} className="btn btn-accent w-full py-2">Logout</button>
+              <button onClick={handleLogout} className="btn btn-accent w-full py-2">Logout</button>
             )}
           </div>
         )}

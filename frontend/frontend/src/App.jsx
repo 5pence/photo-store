@@ -1,21 +1,20 @@
 import { BrowserRouter as Router } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import AnimatedRoutes from "./components/AnimatedRoutes";
-import AuthContext from "./context/AuthContext";
-import { useContext } from "react";
+import { AuthProvider } from "./context/AuthContext";  
 import { CartProvider } from "./context/CartContext";
 
 const App = () => {
-  const { user } = useContext(AuthContext);
-
-  return (
-    <CartProvider>
+    return (
         <Router>
-            <Navbar />
-            <AnimatedRoutes user={user} />
+            <AuthProvider> {/* ✅ Now AuthProvider has access to Cart */}
+                <CartProvider> {/* ✅ CartProvider goes first */}
+                    <Navbar />
+                    <AnimatedRoutes />
+                </CartProvider>
+            </AuthProvider>        
         </Router>
-    </CartProvider>
-  );
+    );
 };
 
 export default App;
