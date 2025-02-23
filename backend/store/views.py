@@ -143,8 +143,9 @@ class CreateCheckoutSession(APIView):
             payment_method_types=["card"],
             line_items=line_items,
             mode="payment",
-            success_url="http://localhost:5173/checkout/success",
+            success_url=f"http://localhost:5173/checkout/success?order_id={order.id}",
             cancel_url="http://localhost:5173/checkout/cancel",
+            metadata={"order_id": str(order.id)}
         )
 
         return Response(
@@ -156,21 +157,28 @@ class ConfirmOrderView(APIView):
 
     def post(self, request):
         user = request.user
+        order_id = request.data.get("order_id")
 
         try:
-            # ✅ Get the most recent unpaid order and mark as paid
-            order = Order.objects.filter(
-                user=user, payment_status="pending").latest("created_at")
+            if order_id:  # ✅ Use order_id if provided
+                order = Order.objects.get(
+                    id=order_id, user=user, payment_status="pending")
+            else:  # ✅ Fallback to latest pending order if no order_id
+                order = Order.objects.filter(
+                    user=user, payment_status="pending").latest("created_at")
+
             order.payment_status = "paid"
             order.save()
 
             # ✅ Clear the cart after payment
             cart = Cart.objects.filter(user=user).first()
             if cart:
-                cart.items.all().delete()  # ✅ Remove all cart items
+                cart.items.all().delete()
                 cart.save()
 
-            return Response({"message": "Order confirmed and cart cleared!"}, status=200)
+            return Response(
+                {"message": f"Order {order.id} confirmed and cart cleared!"},
+                status=200)
 
         except Order.DoesNotExist:
             return Response({"error": "No pending order found"}, status=404)
@@ -198,3 +206,20 @@ class OrderDetailView(APIView):
         except Order.DoesNotExist:
             return Response(
                 {"error": "Order not found"}, status=status.HTTP_404_NOT_FOUND)
+
+
+class ClearCartView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def delete(self, request):
+        try:
+            cart = Cart.objects.get(user=request.user)
+            serializer = CartSerializer(cart)
+            serializer.clear_cart() 
+            return Response(
+                {"message": "Cart cleared successfully"},
+                status=status.HTTP_200_OK)
+        except Cart.DoesNotExist:
+            return Response(
+                {"error": "Cart not found"},
+                status=status.HTTP_404_NOT_FOUND)

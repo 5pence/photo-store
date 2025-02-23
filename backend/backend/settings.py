@@ -33,6 +33,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'corsheaders',
     'taggit',
+    'django_extensions',
     # Authentication
     'rest_framework_simplejwt',
     # Custom apps

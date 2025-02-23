@@ -37,14 +37,19 @@ class CartItemSerializer(serializers.ModelSerializer):
     product_name = serializers.ReadOnlyField(source="product.name")
     product_price = serializers.ReadOnlyField(source="product.price")
     total_price = serializers.SerializerMethodField()
+    image = serializers.SerializerMethodField()
 
     class Meta:
         model = CartItem
         fields = ["cart_item_id", "product", "product_name", "product_price",
-                  "quantity", "total_price"]
+                  "quantity", "total_price", "image"]
 
     def get_total_price(self, obj):
         return obj.get_total_price()
+
+    def get_image(self, obj):  # ✅ Return only one image
+        first_image = obj.product.images.first()
+        return first_image.image.url if first_image else None
 
 
 class CartSerializer(serializers.ModelSerializer):
@@ -53,6 +58,11 @@ class CartSerializer(serializers.ModelSerializer):
     class Meta:
         model = Cart
         fields = ["id", "user", "items", "created_at"]
+
+    def clear_cart(self):
+        """Helper method to clear all cart items."""
+        self.instance.items.all().delete()  # ✅ Deletes all items in the cart
+        return {"message": "Cart cleared successfully"}
 
 
 class OrderItemSerializer(serializers.ModelSerializer):
