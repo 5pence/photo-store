@@ -125,11 +125,14 @@ These choices ensure **strong readability, high contrast, and an inviting feel**
 
 ## 🛠 **Next Steps & Planned Features**
 
+- **Address Collection** – Shipping details need to be collected at checkout.
+- **Process Payment Button** – If an order is pending, users should have an option to complete payment from their dashboard.
+- **Proper Invoice Generation** – Automatically generate invoices for completed purchases.
+- **Order History UI** – A better dashboard experience for managing past orders.
 - **Image Details Page** – A dedicated page for each image with purchase options  
 - **Email Notifications** – Order confirmations & payment receipts  
-- **Product Reviews & Ratings** – Customers can leave feedback  
-- **Discount Codes & Promotions** – Future marketing features  
-- **Wishlist & Favorites** – Allow users to save products for later  
+- **Product Reviews & Ratings** – Customers that have purchased can leave feedback  
+- **Discount Codes & Promotions** – Future marketing features
 
 ---
 
