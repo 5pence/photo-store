@@ -80,9 +80,21 @@ class OrderSerializer(serializers.ModelSerializer):
     """ Serializer for Orders """
     items = OrderItemSerializer(many=True, read_only=True)
 
+    # Shipping fields
+    full_name = serializers.CharField(required=True)
+    address = serializers.CharField(required=True)
+    city = serializers.CharField(required=True)
+    postcode = serializers.CharField(required=True)
+    country = serializers.CharField(required=True)
+
     class Meta:
         model = Order
         fields = ["id", "user", "total_price", "payment_status",
-                  "created_at", "items"]
+                  "created_at", "items", "full_name", "address", "city",
+                  "postcode", "country"]
         read_only_fields = ["id", "user",
                             "total_price", "created_at"]
+
+    def create(self, validated_data):
+        """ ✅ Ensure the shipping fields are saved when an order is created """
+        return Order.objects.create(**validated_data)

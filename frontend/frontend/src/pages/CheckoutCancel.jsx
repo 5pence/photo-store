@@ -11,6 +11,7 @@ const CheckoutCancel = () => {
   const [isClearing, setIsClearing] = useState(true);
 
   useEffect(() => {
+    const sessionActive = sessionStorage.getItem("checkoutSession");
     const handleCancel = async () => {
       if (!sessionStorage.getItem("checkoutSession")) {
         console.warn("⚠️ No active checkout session found. Skipping cart clear.");

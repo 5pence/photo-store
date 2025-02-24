@@ -31,6 +31,8 @@ const SuccessPage = () => {
       clearCart(); // ✅ If guest, still clear cart
       return;
     }
+    console.log("🔍 Confirming Order with ID:", storedOrderId);
+
   
     // ✅ Confirm order with API
     axios.post("http://127.0.0.1:8000/api/orders/confirm/", 

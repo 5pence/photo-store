@@ -1,14 +1,14 @@
 # Spencer's Studio
 
-This is a monorepo project that combines a **Django DRF backend** with a **React frontend**. The primary goal is to **showcase my coding skills for potential employment and contract work** while also allowing me to **sell photography and digital products**. Additionally, the site features a blog for casual updates on my work, projects, and experiences.
+This is a monorepo project that combines a **Django DRF backend** with a **React frontend**. The primary goal is to **showcase my coding skills for potential clients** while also allowing me to **sell photography and digital products**. Additionally, the site features a blog for casual updates on my work, projects, and experiences.
 
 ---
 
-## 🌐 **Domain & Branding**
+## 🌐 Domain & Branding
 
 The site is hosted on **spencers.studio**, chosen to reflect my diverse creative work across **photography, coding, and digital content**.
 
-### **Sections of the Site**
+### Sections of the Site
 
 - **Home** – Introduction to the site and its purpose  
 - **Photography** – Portfolio showcase & potential sale of prints  
@@ -22,7 +22,7 @@ The site is hosted on **spencers.studio**, chosen to reflect my diverse creative
 
 ---
 
-## 🎨 **Design & UI**
+## 🎨 Design & UI
 
 This project follows a **modern, professional aesthetic** while keeping usability in mind.
 
@@ -36,13 +36,15 @@ This project follows a **modern, professional aesthetic** while keeping usabilit
   - **Neutral Gray** (`#e5e5e5`) – Form backgrounds, muted sections  
   - **Dark Gray** (`#1c1c1c`) – Footer & darker UI elements  
 
+![Colour Palette](readme-assets/coolors.jpg)
+
 These choices ensure **strong readability, high contrast, and an inviting feel** for users.
 
 ---
 
-## 📦 **Tech Stack**
+## 📦 Tech Stack
 
-### **Backend (Django DRF)**
+### Backend (Django DRF)
 
 - Django & Django REST Framework  
 - JWT Authentication (`djangorestframework-simplejwt`)  
@@ -50,28 +52,30 @@ These choices ensure **strong readability, high contrast, and an inviting feel**
 - CORS handling (`django-cors-headers`)  
 - Environment variables (`django-environ`)  
 
-### **Frontend (React)**
+### Frontend (React)
 
 - React with Vite for fast development  
 - **Tailwind CSS + DaisyUI** for styling  
 - JWT Authentication (handled via `localStorage`)  
 - API calls to Django backend  
 
-### **Media & File Handling**
+### Media & File Handling
 
 - Django serves images via **media storage** (now correctly configured)  
 - Future integration with **Cloudinary or S3** for production-ready media handling  
 
-### **🛒 Store & Cart System**
+### 🛒 Store & Cart System
 
 - **Cart Context & `useCart` Hook** – Provides global cart state management  
 - **Persistent Cart (localStorage)** – Items remain in the cart after page refresh  
 - **Cart Syncs with Backend** – When logged in, the cart is stored per user  
 - **Full Checkout & Payment Flow** – Secure Stripe integration  
 
-### **Payments & Order Flow**
+---
 
-#### **Checkout Process**
+## 💳 Payments & Order Flow
+
+### Checkout Process
 
 1. **User adds items to cart** (persistent via localStorage)
 2. **Proceed to Checkout** → Creates an order in Django backend (status: `pending`)
@@ -81,31 +85,34 @@ These choices ensure **strong readability, high contrast, and an inviting feel**
    - Clears the user's cart (both frontend & backend)
    - Redirects to **Dashboard** after 5 seconds
 5. **Cancelled Payment** → Redirects to `/checkout/cancel/` and:
-   - Clears the user's cart (both frontend & backend)
-   - Redirects back to **Cart** page
+   - Keeps the order `pending`
+   - Allows users to retry payment from their **Dashboard**
+   - Redirects back to the **Cart** page
 
-#### **Handling Digital vs Physical Products**
+### Handling Digital vs Physical Products
 
 - **Digital products require login** (to prevent unauthorized access)
-- **Physical products can be bought without an account**
-- **User Dashboard displays past orders**
+- **Physical products require shipping details at checkout**
+- **Pending orders can be paid later** via the **Pay Now** button in the **Dashboard**
 - **Cart is fully synced across devices when logged in**
 
 ---
 
-## 🚀 **Latest Features & Enhancements**
+## 🚀 Latest Features & Enhancements
 
 - ✔ **Stripe Checkout Fully Implemented** – Secure payments for digital & physical products  
 - ✔ **Order System Overhauled** – Pending orders now clear on failed payments  
 - ✔ **Cart Clears After Payment or Cancellation** – Prevents duplicate stacking  
 - ✔ **Backend Cart API Extended** – Added `/cart/clear/` endpoint for syncing cart  
 - ✔ **Order History Now Visible on Dashboard** – Users can track purchases  
-- ✔ **AuthContext Fixes** – Improved login state management & session persistence  
-- ✔ **Cart & Checkout State Fully Synced** – Ensures a seamless buying experience  
+- ✔ **"Pay Now" for Pending Orders** – Users can complete pending payments  
+- ✔ **Shipping Details Added** – Required for physical orders at checkout  
+- ✔ **Error Messaging for Checkout** – Improved feedback for missing fields  
+- ✔ **Better UI for Order Management** – Cleaner layout & improved payment flow  
 
 ---
 
-## 🔐 **Authentication (JWT)**
+## 🔐 Authentication (JWT)
 
 ### Why JWT?
 
@@ -123,22 +130,20 @@ These choices ensure **strong readability, high contrast, and an inviting feel**
 
 ---
 
-## 🛠 **Next Steps & Planned Features**
+## 🛠 Next Steps & Planned Features
 
-- **Address Collection** – Shipping details need to be collected at checkout.
-- **Process Payment Button** – If an order is pending, users should have an option to complete payment from their dashboard.
-- **Proper Invoice Generation** – Automatically generate invoices for completed purchases.
-- **Order History UI** – A better dashboard experience for managing past orders.
-- **Image Details Page** – A dedicated page for each image with purchase options  
-- **Email Notifications** – Order confirmations & payment receipts  
-- **Product Reviews & Ratings** – Customers that have purchased can leave feedback  
-- **Discount Codes & Promotions** – Future marketing features
+- **Proper Invoice Generation** – Automatically generate invoices for completed purchases.  
+- **Better Dashboard Order UI** – Improve visibility & management of past orders.  
+- **Image Details Page** – A dedicated page for each image with purchase options.  
+- **Email Notifications** – Order confirmations & payment receipts.  
+- **Product Reviews & Ratings** – Customers that have purchased can leave feedback.  
+- **Discount Codes & Promotions** – Future marketing features.  
 
 ---
 
-## 🧪 **Testing: Store & Cart API**
+## 🧪 Testing: Store & Cart API
 
-### **Automated Tests Added:**
+### Automated Tests Added
 
 - ✅ **Cart Functionality Tests** – Add, remove, and update cart items  
 - ✅ **Order Processing Tests** – Verify order status changes and Stripe payments  
@@ -148,10 +153,3 @@ Tests can be run with:
 
 ```bash
 python manage.py test store
-```
-
----
-
-## **Final Notes**
-
-This project is a work in progress, and I'm excited to develop it further. If you're interested in photography, coding, or digital products, stay tuned for upcoming updates!

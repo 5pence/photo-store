@@ -111,8 +111,25 @@ class CreateCheckoutSession(APIView):
         if not cart_items:
             return Response({"error": "Cart is empty"}, status=400)
 
+        shipping_details = {
+            "full_name": request.data.get("full_name"),
+            "address": request.data.get("address"),
+            "city": request.data.get("city"),
+            "postcode": request.data.get("postcode"),
+            "country": request.data.get("country"),
+        }
+
+        if not all(shipping_details.values()):
+            return Response(
+                {"error": "All shipping fields are required."}, status=400)
+
         # Create order
-        order = Order.objects.create(user=user, total_price=0)
+        order = Order.objects.create(
+            user=user,
+            total_price=0,
+            **shipping_details,
+            payment_status="pending",
+        )
 
         line_items = []
         total_price = 0
@@ -159,29 +176,51 @@ class ConfirmOrderView(APIView):
         user = request.user
         order_id = request.data.get("order_id")
 
+        print(f"🔍 Received order confirmation request: {order_id}")
+
         try:
-            if order_id:  # ✅ Use order_id if provided
+            if not order_id:
+                print("❌ No order_id provided.")
+                return Response({"error": "No order_id provided"}, status=400)
+
+            # ✅ Find the pending order
+            try:
                 order = Order.objects.get(
                     id=order_id, user=user, payment_status="pending")
-            else:  # ✅ Fallback to latest pending order if no order_id
-                order = Order.objects.filter(
-                    user=user, payment_status="pending").latest("created_at")
+                print(f"✅ Found pending order: {order}")
+            except Order.DoesNotExist:
+                print("❌ No matching pending order found!")
+                return Response(
+                    {"error": "No pending order found"}, status=404)
 
+            # ✅ Check for missing shipping details
+            missing_fields = [field for field in ["full_name", "address", "city", "postcode", "country"] if not getattr(order, field)]
+            if missing_fields:
+                print(f"❌ Missing shipping details: {missing_fields}")
+                return Response(
+                    {"error": f"Missing shipping details: {', '.join(missing_fields)}"}, status=400)
+
+            # ✅ Mark order as paid
             order.payment_status = "paid"
             order.save()
+            print(f"✅ Order {order.id} successfully marked as paid.")
 
             # ✅ Clear the cart after payment
             cart = Cart.objects.filter(user=user).first()
             if cart:
                 cart.items.all().delete()
                 cart.save()
+                print(f"🛒 Cart cleared for user {user.username}")
 
             return Response(
                 {"message": f"Order {order.id} confirmed and cart cleared!"},
-                status=200)
+                status=200
+            )
 
-        except Order.DoesNotExist:
-            return Response({"error": "No pending order found"}, status=404)
+        except Exception as e:
+            print(f"❌ Unexpected error: {e}")
+            return Response(
+                {"error": f"Unexpected error: {str(e)}"}, status=500)
 
 
 # Fetch all orders for the logged-in user
@@ -223,3 +262,41 @@ class ClearCartView(APIView):
             return Response(
                 {"error": "Cart not found"},
                 status=status.HTTP_404_NOT_FOUND)
+
+
+class RetryPaymentView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def post(self, request):
+        user = request.user
+        order_id = request.data.get("order_id")
+
+        try:
+            order = Order.objects.get(
+                id=order_id, user=user, payment_status="pending")
+        except Order.DoesNotExist:
+            return Response(
+                {"error": "Order not found or already paid"}, status=404)
+
+        line_items = [
+            {
+                "price_data": {
+                    "currency": "gbp",
+                    "product_data": {"name": item.product.name},
+                    "unit_amount": int(item.price * 100),
+                },
+                "quantity": item.quantity,
+            }
+            for item in order.items.all()
+        ]
+
+        checkout_session = stripe.checkout.Session.create(
+            payment_method_types=["card"],
+            line_items=line_items,
+            mode="payment",
+            success_url=f"http://localhost:5173/checkout/success?order_id={order.id}",
+            cancel_url="http://localhost:5173/checkout/cancel",
+            metadata={"order_id": str(order.id)},
+        )
+
+        return Response({"url": checkout_session.url}, status=200)
