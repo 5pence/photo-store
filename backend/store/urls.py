@@ -3,7 +3,7 @@ from .views import CategoryListView, ProductListView
 from .views import CartDetailView, AddToCartView, RemoveFromCartView
 from .views import CreateCheckoutSession, ConfirmOrderView, ClearCartView
 from .views import UserOrderListView, OrderDetailView, UpdateCartItemView
-from .views import RetryPaymentView
+from .views import RetryPaymentView, InvoiceDownloadView
 
 
 urlpatterns = [
@@ -19,4 +19,5 @@ urlpatterns = [
     path("orders/<int:order_id>/", OrderDetailView.as_view(), name="order-detail"),
     path("orders/confirm/", ConfirmOrderView.as_view(), name="confirm-order"),
     path("orders/retry-payment/", RetryPaymentView.as_view(), name="retry-payment"),
+    path("orders/<int:order_id>/invoice/", InvoiceDownloadView.as_view(), name="download_invoice"),
 ]

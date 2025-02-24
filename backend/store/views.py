@@ -1,5 +1,6 @@
 import stripe
 from django.conf import settings
+from django.http import FileResponse
 from rest_framework import generics, status
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -7,6 +8,7 @@ from rest_framework.permissions import IsAuthenticated
 from .models import Category, Product, Cart, CartItem, Order, OrderItem
 from .serializers import CategorySerializer, OrderSerializer, ProductSerializer
 from .serializers import CartSerializer, CartItemSerializer
+from .utils import generate_invoice
 
 
 stripe.api_key = settings.STRIPE_SECRET_KEY
@@ -300,3 +302,23 @@ class RetryPaymentView(APIView):
         )
 
         return Response({"url": checkout_session.url}, status=200)
+
+
+class InvoiceDownloadView(APIView):
+    """Allow users to download invoices as PDFs"""
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request, order_id):
+        try:
+            order = Order.objects.get(id=order_id, user=request.user)
+        except Order.DoesNotExist:
+            return Response({"error": "Order not found"}, status=404)
+
+        pdf_file = generate_invoice(order_id)
+        if not pdf_file:
+            return Response(
+                {"error": "Failed to generate invoice"}, status=500)
+
+        response = FileResponse(pdf_file, content_type="application/pdf")
+        response["Content-Disposition"] = f'attachment; filename="invoice_{order_id}.pdf"'
+        return response

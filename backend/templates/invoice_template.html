@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Invoice</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 40px; }
+        h1 { color: #d64933; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th, td { border: 1px solid #ddd; padding: 10px; text-align: left; }
+        th { background-color: #f8f6f2; }
+        .total { font-weight: bold; color: #d64933; }
+    </style>
+</head>
+<body>
+    <h1>Invoice #{{ order.id }}</h1>
+    <p><strong>Customer:</strong> {{ order.user.username }}</p>
+    <p><strong>Shipping Address:</strong> {{ order.full_name }}, {{ order.address }}, {{ order.city }}, {{ order.postcode }}, {{ order.country }}</p>
+    <p><strong>Date:</strong> {{ order.created_at }}</p>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Product</th>
+                <th>Quantity</th>
+                <th>Price</th>
+                <th>Subtotal</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in order.items.all %}
+            <tr>
+                <td>{{ item.product.name }}</td>
+                <td>{{ item.quantity }}</td>
+                <td>£{{ item.price }}</td>
+                <td>£{{ item.quantity|floatformat:2 }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <h2 class="total">Total: £{{ order.total_price }}</h2>
+</body>
+</html>
