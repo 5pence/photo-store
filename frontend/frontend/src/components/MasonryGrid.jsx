@@ -97,9 +97,9 @@ const MasonryGrid = () => {
   return (
     <div className="container mx-auto px-4">
       {/* Tag Filters */}
-      <div className="flex flex-wrap justify-center space-x-2 mb-6">
+      <div className="flex flex-wrap justify-center gap-2 mb-8">
         <button
-          className={`px-4 py-2 rounded focus:outline-none ${
+          className={`px-5 py-2 rounded-lg text-base font-medium focus:outline-none ${
             selectedTag === "All" ? "bg-rust text-white" : "bg-gray-200 text-gray-700 hover:bg-gray-300"
           }`}
           onClick={() => setSelectedTag("All")}

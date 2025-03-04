@@ -18,6 +18,7 @@ export default {
         "fade-in": "fadeIn 1.1s ease-in-out",
       },
       colors: {
+        "black-bean": "#220B07",
         "rust": "#D64933", // Rusty Red
         "muted-blue": "#7E7F9A", // Muted Blue
         "dark": "#1C1C1C", // Deep Charcoal
@@ -25,6 +26,7 @@ export default {
         "warm-white": "#F8F6F2" // Warm Off-White
       },
       fontFamily: {
+        proxima: ['proxima-nova', 'sans-serif'],
         heading: ['Montserrat', 'ui-sans-serif', 'system-ui'],
         body: ['Montserrat', 'sans-serif'],
         sans: ['Montserrat', 'ui-sans-serif', 'system-ui'],

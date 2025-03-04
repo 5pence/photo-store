@@ -1,44 +1,49 @@
 # Spencer's Studio
 
-This is a monorepo project that combines a **Django DRF backend** with a **React frontend**. The primary goal is to **showcase my coding skills for potential clients** while also allowing me to **sell photography and digital products**. Additionally, the site features a blog for casual updates on my work, projects, and experiences.
+This is a **monorepo** project combining a **Django DRF backend** with a **React frontend**. The primary goal is to **showcase my coding skills for potential clients**, allow me to **sell photography and digital products**, and feature a **blog for updates on my work, projects, and experiences**.
 
 ---
 
 ## 🌐 Domain & Branding
 
-The site is hosted on **spencers.studio**, chosen to reflect my diverse creative work across **photography, coding, and digital content**.
+The site is hosted on **spencers.studio**, reflecting my **photography, coding, and digital content** work.
 
-### Sections of the Site
+### **Sections of the Site**
 
 - **Home** – Introduction to the site and its purpose  
 - **Photography** – Portfolio showcase & potential sale of prints  
 - **Coding** – Highlights of my coding experience, projects, and services  
 - **Blog** – Casual updates, tutorials, and insights into my work  
 - **Store** – Digital & physical products (filters, presets, prints, coding tools)  
-- **Dashboard** – User profile & management panel for logged-in users  
-- **Contact** – A way for visitors to reach out for inquiries or services  
-- **Cart** – Users can now add products to their cart and manage their orders  
-- **Checkout** – Fully integrated Stripe payment system  
+- **Account** – User profile & order management panel  
+- **Contact** – Inquiry form for potential clients or collaborations  
+- **Cart & Checkout** – Full e-commerce system with Stripe integration  
 
 ---
 
-## 🎨 Design & UI
+## 🎨 Design & UI Improvements
 
 This project follows a **modern, professional aesthetic** while keeping usability in mind.
 
-- **Frameworks**: Tailwind CSS + DaisyUI for streamlined styling  
-- **Typography**:  
-  - **Montserrat** – Used across the site for clarity and a clean, modern look  
-- **Color Palette**:
+### **Latest UI Enhancements**
+
+- **Revamped Home Page**
+  - Slow fade-in tagline  
+  - Typing effect for `spencers.studio`  
+  - Pulsating animation for branding  
+  - Animated gradient background with smooth transitions  
+
+- **Typography**
+  - **Proxima-nova** - For headings, clear and friendly
+  - **Montserrat** – Primary font for clarity and a sleek, modern look  
+  - **Adjustments to Font Weight & Spacing** – Improved readability and flow  
+
+- **Color Palette**
   - **Rust Red** (`#d64933`) – Primary accent (buttons, headers, calls to action)  
   - **Slate Gray** (`#7e7f9a`) – Secondary color for contrast  
   - **Warm White** (`#f8f6f2`) – Background & text contrast  
   - **Neutral Gray** (`#e5e5e5`) – Form backgrounds, muted sections  
   - **Dark Gray** (`#1c1c1c`) – Footer & darker UI elements  
-
-![Colour Palette](readme-assets/coolors.jpg)
-
-These choices ensure **strong readability, high contrast, and an inviting feel** for users.
 
 ---
 
@@ -51,64 +56,56 @@ These choices ensure **strong readability, high contrast, and an inviting feel**
 - PostgreSQL (Planned)  
 - CORS handling (`django-cors-headers`)  
 - Environment variables (`django-environ`)  
+- Media storage handling (Cloudinary/S3 planned)  
 
-### Frontend (React)
+### Frontend (React + Vite)
 
-- React with Vite for fast development  
+- **React + Vite** for fast development  
+- **Framer Motion** for animations & smooth transitions  
+- **React Router** for multi-page navigation  
 - **Tailwind CSS + DaisyUI** for styling  
-- JWT Authentication (handled via `localStorage`)  
-- API calls to Django backend  
-
-### Media & File Handling
-
-- Django serves images via **media storage** (now correctly configured)  
-- Future integration with **Cloudinary or S3** for production-ready media handling  
-
-### 🛒 Store & Cart System
-
-- **Cart Context & `useCart` Hook** – Provides global cart state management  
-- **Persistent Cart (localStorage)** – Items remain in the cart after page refresh  
-- **Cart Syncs with Backend** – When logged in, the cart is stored per user  
-- **Full Checkout & Payment Flow** – Secure Stripe integration  
+- **JWT Authentication** for secure user sessions  
 
 ---
 
-## 💳 Payments & Order Flow
+## 🛒 Store, Cart & Payments
 
-### Checkout Process
+### **Implemented Features**
+
+- **Cart Context & `useCart` Hook** – Global cart state management  
+- **Persistent Cart (localStorage)** – Items remain after page refresh  
+- **Cart Syncs with Backend** – When logged in, cart is stored per user  
+- **Full Checkout & Payment Flow** – Secure Stripe integration  
+- **Order Status Updates** – Dashboard allows users to track purchases  
+
+### **Checkout Process**
 
 1. **User adds items to cart** (persistent via localStorage)
-2. **Proceed to Checkout** → Creates an order in Django backend (status: `pending`)
+2. **Proceed to Checkout** → Creates an order in Django backend (`pending`)
 3. **Redirect to Stripe Payment Page**
-4. **Successful Payment** → Redirects to `/checkout/success/` and:
-   - Confirms the order as `paid`
-   - Clears the user's cart (both frontend & backend)
-   - Redirects to **Dashboard** after 5 seconds
-5. **Cancelled Payment** → Redirects to `/checkout/cancel/` and:
-   - Keeps the order `pending`
-   - Allows users to retry payment from their **Dashboard**
-   - Redirects back to the **Cart** page
+4. **Successful Payment** → Order updates to `paid`, cart clears, and redirects to **Dashboard**
+5. **Cancelled Payment** → Redirects to `/checkout/cancel/`, keeping order `pending` for later payment
 
-### Handling Digital vs Physical Products
+### **Handling Digital vs Physical Products**
 
-- **Digital products require login** (to prevent unauthorized access)
-- **Physical products require shipping details at checkout**
-- **Pending orders can be paid later** via the **Pay Now** button in the **Dashboard**
-- **Cart is fully synced across devices when logged in**
+- **Digital and Physical product purchases require login** (prevents unauthorized access)  
+- **Pending orders can be completed later** via **Account**  
 
 ---
 
 ## 🚀 Latest Features & Enhancements
 
-- ✔ **Stripe Checkout Fully Implemented** – Secure payments for digital & physical products  
-- ✔ **Order System Overhauled** – Pending orders now clear on failed payments  
-- ✔ **Cart Clears After Payment or Cancellation** – Prevents duplicate stacking  
-- ✔ **Backend Cart API Extended** – Added `/cart/clear/` endpoint for syncing cart  
-- ✔ **Order History Now Visible on Dashboard** – Users can track purchases  
-- ✔ **"Pay Now" for Pending Orders** – Users can complete pending payments  
-- ✔ **Shipping Details Added** – Required for physical orders at checkout  
-- ✔ **Error Messaging for Checkout** – Improved feedback for missing fields  
-- ✔ **Better UI for Order Management** – Cleaner layout & improved payment flow  
+- ✔ **Proper Invoice Generation** – Automatically create downloadable invoices.  
+- ✔ **Better Dashboard Order UI** – Improve visibility & management of past orders. 
+- ✔ **Dynamic Home Page Animations** – Tagline fades in, brand name types out, and background subtly shifts.  
+- ✔ **Store & Cart System Overhaul** – Now fully synced with backend for persistent shopping.  
+- ✔ **Stripe Checkout Implemented** – Secure payment processing.  
+- ✔ **Order History in Dashboard** – Users can track past purchases.  
+- ✔ **"Pay Now" for Pending Orders** – Users can complete unfinished payments.  
+- ✔ **Cart Clears After Payment or Cancellation** – Prevents stacking duplicate orders.  
+- ✔ **Shipping Details Now Integrated** – Required for physical orders.  
+- ✔ **Improved UI for Order Management** – Cleaner layout and smoother interactions.  
+- ✔ **Error Messaging for Checkout** – Better feedback for missing fields.  
 
 ---
 
@@ -116,40 +113,58 @@ These choices ensure **strong readability, high contrast, and an inviting feel**
 
 ### Why JWT?
 
-- Works well with React (tokens stored in localStorage)
-- Scalable for API use (mobile apps, third-party clients)
-- No reliance on Django’s built-in session handling
-- Refresh tokens allow extended sessions without re-login
+- Works well with React (`localStorage` for tokens)  
+- Scalable for API use (mobile apps, third-party clients)  
+- No reliance on Django’s built-in session handling  
+- Refresh tokens allow extended sessions without frequent re-login  
 
-### How It Works
+### Authentication Flow
 
-- User logs in → Receives access token + refresh token
-- Access token is stored in localStorage and used for authentication
-- If the token expires, the frontend requests a new one using the refresh token
-- Protected routes (e.g., Dashboard) require authentication
+- User logs in → Receives access token + refresh token  
+- Access token stored in **localStorage**, used for API authentication  
+- If expired, the frontend requests a new one using the refresh token  
+- Protected routes (e.g., Dashboard) require authentication  
 
 ---
 
-## 🛠 Next Steps & Planned Features
+## 🧪 Testing & Deployment
 
-- **Proper Invoice Generation** – Automatically generate invoices for completed purchases.  
-- **Better Dashboard Order UI** – Improve visibility & management of past orders.  
-- **Image Details Page** – A dedicated page for each image with purchase options.  
-- **Email Notifications** – Order confirmations & payment receipts.  
-- **Product Reviews & Ratings** – Customers that have purchased can leave feedback.  
+### **Planned Enhancements**
+
+- **Unit Tests (Jest + React Testing Library)** for frontend.  
+- **End-to-End Testing (Cypress)** for checkout flow.  
+- **Docker Support** for easier development & production deployment.  
+- **PostgreSQL Migration** (Replacing SQLite for production).  
+- **Vercel / Netlify Deployment** (Frontend hosting).  
+- **Render / Railway for Backend** (Fast & scalable Django API hosting).  
+
+---
+
+## 🚀 Next Steps & Planned Features
+
+### **Short-Term Goals**
+
+- **Blog Detail Pages** – Individual blog post pages with SEO-friendly URLs.  
+- **Image Details Page** – Dedicated page for each photo with purchase options.  
+- **Product Reviews & Ratings** – Customers can leave feedback.  
 - **Discount Codes & Promotions** – Future marketing features.  
 
+### **Long-Term Goals**
+ 
+- **Email Notifications** – Order confirmations, abandoned cart reminders.  
+- **Membership Plans** – Premium content for subscribed users.  
+- **Multilingual Support** – Expand reach with multiple languages.  
+
 ---
 
-## 🧪 Testing: Store & Cart API
+## 📜 License
 
-### Automated Tests Added
+© 2025 Spencer Barriball. All rights reserved.
 
-- ✅ **Cart Functionality Tests** – Add, remove, and update cart items  
-- ✅ **Order Processing Tests** – Verify order status changes and Stripe payments  
-- ✅ **JWT Auth Tests** – Ensure users remain logged in across sessions  
+This software, including its code, design, and content, is the intellectual property of Spencer Barriball and **may not** be copied, modified, distributed, or used in any way without explicit written permission.
 
-Tests can be run with:
+Unauthorized use, reproduction, or distribution of this software is strictly prohibited.
 
-```bash
-python manage.py test store
+---
+
+🚀 **Built with passion for Photography, Creativity, and Coding.**

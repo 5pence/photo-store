@@ -45,6 +45,33 @@ const Orders = () => {
     }
   };
 
+  const downloadInvoice = async (orderId) => {
+    if (!token) return;
+  
+    try {
+      const response = await axios.get(`http://127.0.0.1:8000/api/orders/${orderId}/invoice/`, {
+        headers: { Authorization: `Bearer ${token}` },
+        responseType: "blob", // Ensure we get a binary file
+      });
+  
+      if (response.status !== 200) {
+        throw new Error("Failed to download invoice");
+      }
+  
+      // Create a download link for the PDF
+      const blob = new Blob([response.data], { type: "application/pdf" });
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = `invoice_${orderId}.pdf`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+    } catch (error) {
+      console.error("Error downloading invoice:", error);
+    }
+  };
+  
   if (loading) return <p>Loading orders...</p>;
   if (error) return <p className="text-red-500">{error}</p>;
   if (orders.length === 0) return <p>No orders found.</p>;
@@ -58,6 +85,15 @@ const Orders = () => {
             key={order.id}
             className="relative bg-white shadow-lg rounded-lg p-6 transition duration-200 hover:shadow-xl"
           >
+            {/* ✅ Show this button only if the order is paid */}
+            {order.payment_status === "paid" && (
+                <button
+                    onClick={() => downloadInvoice(order.id)}
+                    className="absolute top-4 right-4 bg-muted-blue text-white px-4 py-2 rounded hover:bg-gray-700 transition"
+                >
+                    View Invoice
+                </button>
+            )}
             {/* 🟥 "Pay Now" Button in Top-Right Corner */}
             {order.payment_status === "pending" && (
               <button

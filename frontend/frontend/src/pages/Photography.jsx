@@ -1,15 +1,27 @@
 import PropTypes from "prop-types";
 import MasonryGrid from "../components/MasonryGrid";
-
+import { useEffect } from "react";
+import { motion } from "framer-motion";
 
 const Photography = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
-    <div className="container mx-auto px-4 py-8">
-      <h2 className="text-3xl font-bold text-center mb-6 text-[#d64933]">
-        Photography Showcase
-      </h2>
-      <MasonryGrid />
-    </div>
+    <>
+      <motion.div
+        className="container mx-auto px-4 py-8 min-h-screen flex flex-col"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.5 }}
+      >
+        <h2 className="text-3xl font-bold text-center mb-6 text-[#d64933]">
+          Photography Showcase
+        </h2>
+        <MasonryGrid />
+      </motion.div>
+    </>
   );
 };
 

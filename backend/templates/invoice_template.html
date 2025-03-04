@@ -2,21 +2,26 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Invoice</title>
+    <title>Invoice - spencers.studio</title>
     <style>
-        body { font-family: Arial, sans-serif; margin: 40px; }
-        h1 { color: #d64933; }
+        @import url('https://use.typekit.net/xfy7cxh.css'); /* Proxima Nova */
+        body { font-family: 'proxima-nova', sans-serif; margin: 40px; color: #1C1C1C; }
+        h1, h2 { color: #D64933; }
+        .header { text-align: center; font-size: 24px; font-weight: bold; margin-bottom: 20px; }
         table { width: 100%; border-collapse: collapse; margin-top: 20px; }
         th, td { border: 1px solid #ddd; padding: 10px; text-align: left; }
-        th { background-color: #f8f6f2; }
-        .total { font-weight: bold; color: #d64933; }
+        th { background-color: #F8F6F2; }
+        .total { font-weight: bold; color: #D64933; text-align: right; }
     </style>
 </head>
 <body>
-    <h1>Invoice #{{ order.id }}</h1>
-    <p><strong>Customer:</strong> {{ order.user.username }}</p>
-    <p><strong>Shipping Address:</strong> {{ order.full_name }}, {{ order.address }}, {{ order.city }}, {{ order.postcode }}, {{ order.country }}</p>
+
+    <div class="header"><h1>spencers.studio</h1></div>
+    
+    <p><strong>Invoice Number:</strong> #{{ order.id }}</p>
     <p><strong>Date:</strong> {{ order.created_at }}</p>
+    <p><strong>Customer:</strong> {{ order.user.username }}</p>
+    <p><strong>Billing Address:</strong> {{ order.full_name }}, {{ order.address }}, {{ order.city }}, {{ order.postcode }}, {{ order.country }}</p>
 
     <table>
         <thead>
@@ -28,17 +33,20 @@
             </tr>
         </thead>
         <tbody>
-            {% for item in order.items.all %}
+            {% for item in items %}
             <tr>
                 <td>{{ item.product.name }}</td>
                 <td>{{ item.quantity }}</td>
-                <td>£{{ item.price }}</td>
-                <td>£{{ item.quantity|floatformat:2 }}</td>
+                <td>{{ item.price }}</td>
+                <td>{{ item.subtotal }}</td>
             </tr>
             {% endfor %}
         </tbody>
     </table>
 
     <h2 class="total">Total: £{{ order.total_price }}</h2>
+
+    <p><strong>Contact:</strong> support@spencers.studio | <a href="https://spencers.studio">spencers.studio</a></p>
+
 </body>
 </html>

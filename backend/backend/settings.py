@@ -34,12 +34,16 @@ INSTALLED_APPS = [
     'corsheaders',
     'taggit',
     'django_extensions',
+    'ckeditor',
+    'ckeditor_uploader',
     # Authentication
     'rest_framework_simplejwt',
     # Custom apps
     'accounts',
     'gallery',
     'store',
+    'blog',
+    'contact',
 ]
 
 MIDDLEWARE = [
@@ -58,7 +62,7 @@ ROOT_URLCONF = 'backend.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / "templates"],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -150,6 +154,31 @@ SIMPLE_JWT = {
     "AUTH_HEADER_TYPES": ("Bearer",),
 }
 
+CKEDITOR_UPLOAD_PATH = "uploads/"
+
+CKEDITOR_CONFIGS = {
+    "default": {
+        "toolbar": "full",
+        "height": 400,
+        "width": "100%",
+        "extraPlugins": ",".join(
+            [
+                "uploadimage",  # Enables image uploads
+                "image2",       # Advanced image editing
+                "embed",        # Enables video embeds
+                "autoembed",
+                "autogrow",     # Auto-expand editor
+                "codesnippet",  # Code formatting
+            ]
+        ),
+        "filebrowserUploadUrl": "/ckeditor/upload/",
+        "filebrowserUploadMethod": "form",
+        "allowedContent": True,  # Allows all HTML content
+        "removePlugins": "resize",  # Prevents unwanted resizing
+    }
+}
+
+ADMIN_EMAIL = os.environ.get('ADMIN_EMAIL')
 
 EMAIL_BACKEND = os.environ.get(
     "EMAIL_BACKEND", "django.core.mail.backends.smtp.EmailBackend")

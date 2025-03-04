@@ -1,6 +1,8 @@
 import stripe
+import tempfile
 from django.conf import settings
-from django.http import FileResponse
+from django.http import HttpResponse
+from django.template.loader import render_to_string
 from rest_framework import generics, status
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -9,6 +11,8 @@ from .models import Category, Product, Cart, CartItem, Order, OrderItem
 from .serializers import CategorySerializer, OrderSerializer, ProductSerializer
 from .serializers import CartSerializer, CartItemSerializer
 from .utils import generate_invoice
+from weasyprint import HTML
+from io import BytesIO
 
 
 stripe.api_key = settings.STRIPE_SECRET_KEY
@@ -196,7 +200,9 @@ class ConfirmOrderView(APIView):
                     {"error": "No pending order found"}, status=404)
 
             # ✅ Check for missing shipping details
-            missing_fields = [field for field in ["full_name", "address", "city", "postcode", "country"] if not getattr(order, field)]
+            missing_fields = [field for field in [
+                "full_name", "address", "city", "postcode", "country"
+            ] if not getattr(order, field)]
             if missing_fields:
                 print(f"❌ Missing shipping details: {missing_fields}")
                 return Response(
@@ -256,7 +262,7 @@ class ClearCartView(APIView):
         try:
             cart = Cart.objects.get(user=request.user)
             serializer = CartSerializer(cart)
-            serializer.clear_cart() 
+            serializer.clear_cart()
             return Response(
                 {"message": "Cart cleared successfully"},
                 status=status.HTTP_200_OK)
@@ -314,11 +320,35 @@ class InvoiceDownloadView(APIView):
         except Order.DoesNotExist:
             return Response({"error": "Order not found"}, status=404)
 
-        pdf_file = generate_invoice(order_id)
-        if not pdf_file:
-            return Response(
-                {"error": "Failed to generate invoice"}, status=500)
+        # Calculate subtotals for each item
+        items = []
+        for item in order.items.all():
+            subtotal = float(item.price) * int(item.quantity)
+            items.append({
+                "product": item.product,
+                "quantity": item.quantity,
+                "price": f"£{item.price:.2f}",
+                "subtotal": f"£{subtotal:.2f}"
+            })
 
-        response = FileResponse(pdf_file, content_type="application/pdf")
-        response["Content-Disposition"] = f'attachment; filename="invoice_{order_id}.pdf"'
-        return response
+        print(items)
+
+        # Render the invoice HTML
+        html_string = render_to_string(
+            "invoice_template.html",
+            {"order": order, "items": items}  # Pass updated items list
+        )
+
+        # Generate the PDF using WeasyPrint
+        with tempfile.NamedTemporaryFile(delete=True) as tmp_file:
+            HTML(string=html_string).write_pdf(tmp_file.name)
+
+            # Return the PDF as a response
+            with open(tmp_file.name, "rb") as pdf_file:
+                response = HttpResponse(
+                    pdf_file, content_type="application/pdf"
+                )
+                response[
+                    "Content-Disposition"
+                ] = f'attachment; filename="invoice_{order.id}.pdf"'
+                return response

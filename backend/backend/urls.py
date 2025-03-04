@@ -8,6 +8,9 @@ urlpatterns = [
     path("api/auth/", include("accounts.urls")),
     path("api/", include('gallery.urls')),
     path("api/", include('store.urls')),
+    path("api/", include("blog.urls")),
+    path("api/", include("contact.urls")),
+    path("ckeditor/", include("ckeditor_uploader.urls")),
 ]
 
 if settings.DEBUG:
