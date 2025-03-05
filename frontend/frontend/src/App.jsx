@@ -4,6 +4,9 @@ import Footer from "./components/Footer";
 import AnimatedRoutes from "./components/AnimatedRoutes";
 import { AuthProvider } from "./context/AuthContext";  
 import { CartProvider } from "./context/CartContext";
+import '@fortawesome/fontawesome-free/css/all.min.css';
+import "boxicons/css/boxicons.min.css";
+
 
 const App = () => {
     return (

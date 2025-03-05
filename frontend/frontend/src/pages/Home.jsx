@@ -76,12 +76,12 @@ const Home = () => {
       {/* Spencer's Studio types out after fade-in */}
       {showStudioText && (
         <motion.h2
-          className="text-5xl md:text-6xl font-bold text-white mt-6 slow-pulse"
-          initial={{ opacity: 0, scale: 0.95 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 2 }}
+            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mt-6 slow-pulse"
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 2 }}
         >
-          {studioText}
+            {studioText}
         </motion.h2>
       )}
 

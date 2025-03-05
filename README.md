@@ -12,7 +12,7 @@ The site is hosted on **spencers.studio**, reflecting my **photography, coding, 
 
 - **Home** – Introduction to the site and its purpose  
 - **Photography** – Portfolio showcase & potential sale of prints  
-- **Coding** – Highlights of my coding experience, projects, and services  
+- **About** – Highlights of my coding experience, tech stack, photogrpahy and services  
 - **Blog** – Casual updates, tutorials, and insights into my work  
 - **Store** – Digital & physical products (filters, presets, prints, coding tools)  
 - **Account** – User profile & order management panel  
@@ -32,6 +32,11 @@ This project follows a **modern, professional aesthetic** while keeping usabilit
   - Typing effect for `spencers.studio`  
   - Pulsating animation for branding  
   - Animated gradient background with smooth transitions  
+
+- **About Page**
+  - Cartoon images made for services
+  - Tech stack with years experience added
+  - Testimonials of past mentees and clients
 
 - **Typography**
   - **Proxima-nova** - For headings, clear and friendly
@@ -145,12 +150,13 @@ This project follows a **modern, professional aesthetic** while keeping usabilit
 ### **Short-Term Goals**
 
 - **Blog Detail Pages** – Individual blog post pages with SEO-friendly URLs.  
-- **Image Details Page** – Dedicated page for each photo with purchase options.  
+- **Image Details Page** – Dedicated page for each photo with purchase options.
+- **Change password request** - To help people who forget their password.  
 - **Product Reviews & Ratings** – Customers can leave feedback.  
 - **Discount Codes & Promotions** – Future marketing features.  
 
 ### **Long-Term Goals**
- 
+
 - **Email Notifications** – Order confirmations, abandoned cart reminders.  
 - **Membership Plans** – Premium content for subscribed users.  
 - **Multilingual Support** – Expand reach with multiple languages.  

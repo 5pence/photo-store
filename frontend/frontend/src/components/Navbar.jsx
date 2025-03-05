@@ -29,7 +29,7 @@ const Navbar = () => {
 
         <div className="hidden lg:flex space-x-6 text-lg">
           <NavLink to="/photography" className="hover:text-gray-200 transition">Photos</NavLink>
-          <NavLink to="/coding" className="hover:text-gray-200 transition">Dev</NavLink>
+          <NavLink to="/about" className="hover:text-gray-200 transition">About</NavLink>
           <NavLink to="/store" className="hover:text-gray-200 transition">Shop</NavLink>
           <NavLink to="/blog" className="hover:text-gray-200 transition">Blog</NavLink>
           {user && <NavLink to="/dashboard" className="hover:text-gray-200 transition">Account</NavLink>}

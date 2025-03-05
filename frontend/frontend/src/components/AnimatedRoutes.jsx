@@ -29,7 +29,7 @@ const AnimatedRoutes = ({ user }) => {
         <Route path="/photography" element={<AnimatedPage><Photography /></AnimatedPage>} />
         <Route path="/store" element={<AnimatedPage><Store /></AnimatedPage>} />
         <Route path="/blog" element={<AnimatedPage><Blog /></AnimatedPage>} />
-        <Route path="/coding" element={<AnimatedPage><Coding /></AnimatedPage>} />
+        <Route path="/about" element={<AnimatedPage><Coding /></AnimatedPage>} />
         <Route path="/contact" element={<AnimatedPage><Contact /></AnimatedPage>} />
         <Route path="/terms" element={<AnimatedPage><Terms /></AnimatedPage>} />
         <Route path="/privacy" element={<AnimatedPage><Privacy /></AnimatedPage>} />
