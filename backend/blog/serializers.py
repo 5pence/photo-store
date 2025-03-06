@@ -12,3 +12,15 @@ class BlogPostSerializer(serializers.ModelSerializer):
 
     def get_tags(self, obj):
         return [tag.name for tag in obj.tags.all()]
+
+
+class BlogPostDetailSerializer(serializers.ModelSerializer):
+    tags = serializers.SerializerMethodField()
+
+    class Meta:
+        model = BlogPost
+        fields = ["id", "title", "slug", "content", "cover_image",
+                  "meta_title", "meta_description", "published_date", "tags"]
+
+    def get_tags(self, obj):
+        return [tag.name for tag in obj.tags.all()]

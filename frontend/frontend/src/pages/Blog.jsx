@@ -13,14 +13,21 @@ const Blog = () => {
   const [activeTag, setActiveTag] = useState("All");
 
   useEffect(() => {
-    fetchPosts();
-  }, [page]);
+    fetchPosts(true);
+  }, []);
 
-  const fetchPosts = async () => {
+  const fetchPosts = async (reset = false) => {
     try {
       const res = await axios.get(`http://127.0.0.1:8000/api/blog/?page=${page}`);
-      setPosts((prev) => [...prev, ...res.data]);
-      setFilteredPosts((prev) => [...prev, ...res.data]);
+  
+      if (reset) {
+        setPosts(res.data); // Reset the posts when returning
+        setFilteredPosts(res.data);
+      } else {
+        setPosts((prev) => [...prev, ...res.data]);
+        setFilteredPosts((prev) => [...prev, ...res.data]);
+      }
+  
       extractTags(res.data);
       setHasMore(res.data.length > 0);
     } catch (error) {
@@ -29,6 +36,7 @@ const Blog = () => {
       setLoading(false);
     }
   };
+  
 
   // Extract unique tags from posts
   const extractTags = (posts) => {

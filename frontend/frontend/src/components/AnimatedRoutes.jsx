@@ -6,6 +6,7 @@ import Home from "../pages/Home";
 import Photography from "../pages/Photography";
 import Store from "../pages/Store";
 import Blog from "../pages/Blog";
+import BlogDetail from "../pages/BlogDetail";
 import Coding from "../pages/Coding";
 import Contact from "../pages/Contact";
 import Dashboard from "../pages/Dashboard";
@@ -31,6 +32,7 @@ const AnimatedRoutes = ({ user }) => {
         <Route path="/photography" element={<AnimatedPage><Photography /></AnimatedPage>} />
         <Route path="/store" element={<AnimatedPage><Store /></AnimatedPage>} />
         <Route path="/blog" element={<AnimatedPage><Blog /></AnimatedPage>} />
+        <Route path="/blog/:slug" element={<AnimatedPage><BlogDetail /></AnimatedPage>} />
         <Route path="/about" element={<AnimatedPage><Coding /></AnimatedPage>} />
         <Route path="/contact" element={<AnimatedPage><Contact /></AnimatedPage>} />
         <Route path="/terms" element={<AnimatedPage><Terms /></AnimatedPage>} />
