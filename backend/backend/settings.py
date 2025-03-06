@@ -1,5 +1,6 @@
 import ssl
 import os
+import dj_database_url
 import environ
 from pathlib import Path
 from datetime import timedelta
@@ -16,7 +17,7 @@ else:
     print("⚠️ WARNING: .env file not found!")
 
 
-SECRET_KEY = env("SECRET_KEY", default="fallback-iuytrfghjm")
+SECRET_KEY = env("SECRET_KEY")
 
 DEBUG = env.bool("DEBUG", default=False)
 
@@ -36,6 +37,8 @@ INSTALLED_APPS = [
     'django_extensions',
     'ckeditor',
     'ckeditor_uploader',
+    'cloudinary',
+    'cloudinary_storage',
     # Authentication
     'rest_framework_simplejwt',
     # Custom apps
@@ -79,10 +82,12 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 
 
 # Database
-# https://docs.djangoproject.com/en/5.0/ref/settings/#databases
-
 DATABASES = {
-    "default": env.db(default="sqlite:///db.sqlite3")
+    "default": dj_database_url.config(
+        default=os.getenv("DATABASE_URL"),
+        conn_max_age=600,
+        ssl_require=True,  # Ensure Railway allows SSL connections
+    )
 }
 
 # Stripe
@@ -166,6 +171,15 @@ SIMPLE_JWT = {
     "AUTH_HEADER_TYPES": ("Bearer",),
 }
 
+CLOUDINARY_STORAGE = {
+    "CLOUD_NAME": os.getenv("CLOUDINARY_CLOUD_NAME"),
+    "API_KEY": os.getenv("CLOUDINARY_API_KEY"),
+    "API_SECRET": os.getenv("CLOUDINARY_API_SECRET"),
+}
+
+DEFAULT_FILE_STORAGE = "cloudinary_storage.storage.MediaCloudinaryStorage"
+
+
 CKEDITOR_UPLOAD_PATH = "uploads/"
 
 CKEDITOR_CONFIGS = {
@@ -192,16 +206,12 @@ CKEDITOR_CONFIGS = {
 
 ADMIN_EMAIL = os.environ.get('ADMIN_EMAIL')
 
-EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+# EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 
-# Later on when i switch to SendGrid I get API Key and update env
-
-# EMAIL_BACKEND=django.core.mail.backends.smtp.EmailBackend
-# EMAIL_HOST=smtp.sendgrid.net
-# EMAIL_PORT=587
-# EMAIL_USE_TLS=True
-# EMAIL_HOST_USER=apikey  # This stays as "apikey" for SendGrid
-# EMAIL_HOST_PASSWORD=your_sendgrid_api_key
-# DEFAULT_FROM_EMAIL=your-email@example.com
-print(f"EMAIL_BACKEND: {EMAIL_BACKEND}")
-DEFAULT_FROM_EMAIL = "sbarriball@me.com"
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+EMAIL_HOST = "smtp.sendgrid.net"
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = "apikey"
+EMAIL_HOST_PASSWORD = os.getenv("SENDGRID_API_KEY")
+DEFAULT_FROM_EMAIL = os.getenv("DEFAULT_FROM_EMAIL", "noreply@spencers.studio")
