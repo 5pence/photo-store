@@ -1,4 +1,5 @@
-from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
+from django.contrib.auth.views import PasswordResetView
 from django.core.mail import send_mail
 from django.http import JsonResponse
 from rest_framework import generics
@@ -9,6 +10,8 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework import status
 from .serializers import UserSerializer, UserProfileSerializer
 from .serializers import ChangePasswordSerializer
+
+User = get_user_model()
 
 
 class RegisterView(generics.CreateAPIView):
@@ -60,3 +63,28 @@ def test_email(request):
         return JsonResponse({"message": "Email sent successfully!"})
     except Exception as e:
         return JsonResponse({"error": str(e)}, status=500)
+
+
+class CustomPasswordResetView(PasswordResetView):
+    def form_valid(self, form):
+        print("🔹 Password reset form was submitted!")  # Debugging print
+
+        # Send a test email directly from this view
+        send_mail(
+            "Test Password Reset Email",
+            "This is a manually triggered email from form_valid().",
+            "your-email@example.com",
+            ["your-email@example.com"],
+            fail_silently=False,
+        )
+
+        print("🔹 Email was manually sent in form_valid()!")
+
+        response = super().form_valid(form)  # Call Django's built-in function
+        return JsonResponse({"message": "Password reset email sent!"})
+
+    def form_invalid(self, form):
+        print("❌ Password reset form is invalid!")
+        print("🔍 Received Data:", self.request.POST)
+        print("FORM ERRORS: ", form.errors)
+        return JsonResponse({"error": "Invalid form submission"}, status=400)

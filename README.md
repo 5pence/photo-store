@@ -100,6 +100,7 @@ This project follows a **modern, professional aesthetic** while keeping usabilit
 
 ## 🚀 Latest Features & Enhancements
 
+- ✔ **Change password request** - To help people who forget their password.  
 - ✔ **Proper Invoice Generation** – Automatically create downloadable invoices.  
 - ✔ **Better Dashboard Order UI** – Improve visibility & management of past orders. 
 - ✔ **Dynamic Home Page Animations** – Tagline fades in, brand name types out, and background subtly shifts.  
@@ -151,7 +152,6 @@ This project follows a **modern, professional aesthetic** while keeping usabilit
 
 - **Blog Detail Pages** – Individual blog post pages with SEO-friendly URLs.  
 - **Image Details Page** – Dedicated page for each photo with purchase options.
-- **Change password request** - To help people who forget their password.  
 - **Product Reviews & Ratings** – Customers can leave feedback.  
 - **Discount Codes & Promotions** – Future marketing features.  
 

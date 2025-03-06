@@ -133,12 +133,24 @@ MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+AUTH_USER_MODEL = "accounts.CustomUser"
+
+CSRF_COOKIE_NAME = "csrftoken"
+CSRF_USE_SESSIONS = False  # Ensure CSRF is cookie-based
+CSRF_COOKIE_HTTPONLY = False  # Allow frontend to access CSRF token
+CSRF_COOKIE_SAMESITE = "Lax"  # Needed for local testing
+CSRF_COOKIE_SECURE = False  # Set to True in production with HTTPS
+
+CORS_ALLOW_CREDENTIALS = True  # Ensure Django allows credentials
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:5173",
     "http://127.0.0.1:5173",
 ]
 
-CORS_ALLOW_CREDENTIALS = True
+CSRF_TRUSTED_ORIGINS = [
+    "http://127.0.0.1:5173",
+    "http://localhost:5173",
+]
 
 REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": (
@@ -180,8 +192,7 @@ CKEDITOR_CONFIGS = {
 
 ADMIN_EMAIL = os.environ.get('ADMIN_EMAIL')
 
-EMAIL_BACKEND = os.environ.get(
-    "EMAIL_BACKEND", "django.core.mail.backends.smtp.EmailBackend")
+EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 
 # Later on when i switch to SendGrid I get API Key and update env
 
@@ -192,3 +203,5 @@ EMAIL_BACKEND = os.environ.get(
 # EMAIL_HOST_USER=apikey  # This stays as "apikey" for SendGrid
 # EMAIL_HOST_PASSWORD=your_sendgrid_api_key
 # DEFAULT_FROM_EMAIL=your-email@example.com
+print(f"EMAIL_BACKEND: {EMAIL_BACKEND}")
+DEFAULT_FROM_EMAIL = "sbarriball@me.com"

@@ -1,7 +1,7 @@
 import { Routes, Route, useLocation, Navigate } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
 import PropTypes from "prop-types";
-import AnimatedPage from "./AnimatedPage"; // ✅ This should now exist
+import AnimatedPage from "./AnimatedPage";
 import Home from "../pages/Home";
 import Photography from "../pages/Photography";
 import Store from "../pages/Store";
@@ -17,6 +17,8 @@ import Success from "../pages/Success";
 import CheckoutCancel from "../pages/CheckoutCancel";
 import Terms from "../pages/Terms";
 import Privacy from "../pages/Privacy";
+import ForgotPassword from "./ForgotPassword";
+import ResetPassword from "./ResetPassword";
 
 
 const AnimatedRoutes = ({ user }) => {
@@ -43,14 +45,14 @@ const AnimatedRoutes = ({ user }) => {
                 )
             }
         />
-
-
         <Route path="/login" element={<AnimatedPage><Login /></AnimatedPage>} />
         <Route path="/signup" element={<AnimatedPage><Signup /></AnimatedPage>} />
         <Route path="/cart" element={<AnimatedPage><Cart /></AnimatedPage>} />
         <Route path="/checkout" element={<AnimatedPage><Checkout /></AnimatedPage>} />
         <Route path="/checkout/success" element={<AnimatedPage><Success /></AnimatedPage>} />
         <Route path="/checkout/cancel" element={<CheckoutCancel />} />
+        <Route path="/forgot-password" element={<ForgotPassword />} />
+        <Route path="/reset-password/:uidb64/:token" element={<ResetPassword />} />
       </Routes>
     </AnimatePresence>
   );

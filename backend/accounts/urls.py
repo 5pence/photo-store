@@ -1,6 +1,9 @@
 from django.urls import path
-from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
-from .views import RegisterView, UserProfileView, ChangePasswordView, test_email
+from django.contrib.auth import views as auth_views
+from rest_framework_simplejwt.views import TokenObtainPairView
+from rest_framework_simplejwt.views import TokenRefreshView
+from .views import RegisterView, UserProfileView, ChangePasswordView
+from .views import test_email, CustomPasswordResetView
 
 urlpatterns = [
     path("register/", RegisterView.as_view(), name="register"),
@@ -11,4 +14,16 @@ urlpatterns = [
     path('profile/change-password/', ChangePasswordView.as_view(),
          name='change-password'),
     path("test-email/", test_email, name="test-email"),
+    path('password-reset/', CustomPasswordResetView.as_view(),
+         name='password_reset'),
+    path('password-reset/done/', auth_views.PasswordResetDoneView.as_view(),
+         name='password_reset_done'),
+    path('password-reset-confirm/<uidb64>/<token>/',
+         auth_views.PasswordResetConfirmView.as_view(),
+         name='password_reset_confirm'),
+    path('password-reset-complete/',
+         auth_views.PasswordResetCompleteView.as_view(),
+         name='password_reset_complete'),
 ]
+
+print(f"🔹 Using Password Reset View: {CustomPasswordResetView}")

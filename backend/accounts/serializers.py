@@ -1,9 +1,12 @@
-from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
 from django.contrib.auth.hashers import check_password
 from django.core.mail import send_mail
 from rest_framework.serializers import ModelSerializer, CharField, EmailField
 from rest_framework.serializers import ValidationError
 import re
+
+# Ensure we're using the correct user model
+User = get_user_model()
 
 
 class UserSerializer(ModelSerializer):
@@ -24,12 +27,12 @@ class UserSerializer(ModelSerializer):
 
 class UserProfileSerializer(ModelSerializer):
     email = EmailField(required=True)
-    current_password = CharField(write_only=True, required=False)
+    current_password = CharField(write_only=True, required=True)
 
     class Meta:
         model = User
-        fields = ['username', 'email', 'first_name', 'last_name',
-                  'current_password']
+        fields = ['username', 'email', 'first_name',
+                  'last_name', 'current_password']
         read_only_fields = ["username"]
 
     def validate_email(self, value):
@@ -42,6 +45,9 @@ class UserProfileSerializer(ModelSerializer):
     def validate(self, data):
         """Ensure password matches before changing email"""
         user = self.context['request'].user
+        if 'current_password' not in data:
+            raise ValidationError(
+                {"current_password": "This field is required."})
         if not check_password(data['current_password'], user.password):
             raise ValidationError({"current_password": "Incorrect password."})
         return data
