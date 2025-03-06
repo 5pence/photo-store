@@ -17,9 +17,9 @@ else:
     print("⚠️ WARNING: .env file not found!")
 
 
-SECRET_KEY = env("SECRET_KEY")
+SECRET_KEY = os.getenv("SECRET_KEY", "somerandomkeyfallback")
 
-DEBUG = env.bool("DEBUG", default=False)
+DEBUG = os.getenv("DEBUG", default=False)
 
 ALLOWED_HOSTS = []
 
@@ -91,7 +91,7 @@ DATABASES = {
 }
 
 # Stripe
-STRIPE_SECRET_KEY = env("STRIPE_SECRET_KEY")
+STRIPE_SECRET_KEY = os.getenv("STRIPE_SECRET_KEY")
 STRIPE_PUBLISHABLE_KEY = os.getenv("STRIPE_PUBLISHABLE_KEY")
 
 # Password validation
@@ -204,7 +204,7 @@ CKEDITOR_CONFIGS = {
     }
 }
 
-ADMIN_EMAIL = os.environ.get('ADMIN_EMAIL')
+ADMIN_EMAIL = os.getenv('ADMIN_EMAIL')
 
 # EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 
