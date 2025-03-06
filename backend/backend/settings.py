@@ -21,7 +21,11 @@ SECRET_KEY = os.getenv("SECRET_KEY", "somerandomkeyfallback")
 
 DEBUG = os.getenv("DEBUG", default=False)
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    "photo-store-production.up.railway.app",
+    "localhost",
+    "127.0.0.1",
+]
 
 INSTALLED_APPS = [
     'django.contrib.admin',
