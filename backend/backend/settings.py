@@ -185,28 +185,21 @@ CORS_ALLOW_HEADERS = [
     "access-control-allow-credentials"
 ]
 
-# CORS_ALLOWED_ORIGINS = [
-#     "https://photo-store-q0nm.onrender.com",
-#     "https://your-vercel-url.vercel.app",
-#     "https://spencers.studio",
-#     "http://localhost:5173",
-#     "http://127.0.0.1:5173",
-# ]
-
-CORS_ALLOWED_ORIGINS = ['*']
-
-CORS_ORIGIN_WHITELIST = [
-    'https://photo-store-q0nm.onrender.com'
+CORS_ALLOWED_ORIGINS = [
+    "https://spencers.studio",
+    "https://your-vercel-url.vercel.app",
+    "https://photo-store-q0nm.onrender.com",
+    "http://localhost:5173",
+    "http://127.0.0.1:5173",
 ]
-# CSRF_TRUSTED_ORIGINS = [
-#     "https://photo-store-q0nm.onrender.com",
-#     "https://your-vercel-url.vercel.app",
-#     "https://spencers.studio",
-#     "http://127.0.0.1:5173",
-#     "http://localhost:5173",
-# ]
 
-CSRF_TRUSTED_ORIGINS = ['*']
+CSRF_TRUSTED_ORIGINS = [
+    "https://photo-store-q0nm.onrender.com",
+    "https://your-vercel-url.vercel.app",
+    "https://spencers.studio",
+    "http://127.0.0.1:5173",
+    "http://localhost:5173",
+]
 
 REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": (
