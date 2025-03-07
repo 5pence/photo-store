@@ -1,13 +1,14 @@
 from django.db import models
 from ckeditor.fields import RichTextField
 from taggit.managers import TaggableManager
+from cloudinary.models import CloudinaryField
 
 
 class BlogPost(models.Model):
     title = models.CharField(max_length=200)
     slug = models.SlugField(unique=True)
     content = RichTextField()
-    cover_image = models.ImageField(upload_to="blog_covers/")
+    cover_image = CloudinaryField(folder="blog_covers/")
     tags = TaggableManager()
     meta_title = models.CharField(max_length=200, blank=True, null=True)
     meta_description = models.TextField(blank=True, null=True)

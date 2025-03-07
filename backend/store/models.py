@@ -2,6 +2,7 @@ from django.db import models
 from django.conf import settings
 from django.urls import reverse
 from django.contrib.auth import get_user_model
+from cloudinary.models import CloudinaryField
 
 User = get_user_model()
 
@@ -75,7 +76,7 @@ class ProductImage(models.Model):
     product = models.ForeignKey(
         Product, related_name="images", on_delete=models.CASCADE
     )
-    image = models.ImageField(upload_to="products/%Y/%m/%d")
+    image = CloudinaryField(folder="products/%Y/%m/%d")
     alt_text = models.CharField(max_length=255, blank=True)
 
     def __str__(self):
