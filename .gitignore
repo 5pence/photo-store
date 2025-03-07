@@ -13,7 +13,6 @@ __pycache__/
 *.pyd
 db.sqlite3
 media/
-staticfiles/
 uploads/
 backend/**/migrations/
 
