@@ -8,6 +8,8 @@ const ResetPassword = () => {
   const [message, setMessage] = useState("");
   const navigate = useNavigate();
 
+  const API_BASE_URL = import.meta.env.VITE_BACKEND_URL;
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (password !== confirmPassword) {
@@ -15,7 +17,7 @@ const ResetPassword = () => {
       return;
     }
 
-    const response = await fetch(`http://127.0.0.1:8000/password-reset-confirm/${uidb64}/${token}/`, {
+    const response = await fetch(`${API_BASE_URL}/password-reset-confirm/${uidb64}/${token}/`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ password }),

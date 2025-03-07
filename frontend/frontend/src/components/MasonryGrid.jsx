@@ -6,7 +6,8 @@ import PropTypes from "prop-types";
 import axios from "axios";
 
 const MasonryGrid = () => {
-  const API_URL = "http://localhost:8000/api/images/";
+  const API_BASE_URL = import.meta.env.VITE_BACKEND_URL;
+  const API_URL = `${API_BASE_URL}/api/images/`;
   const [images, setImages] = useState([]);
   const [tags, setTags] = useState([]);
   const [selectedTag, setSelectedTag] = useState("All");

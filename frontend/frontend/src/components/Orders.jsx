@@ -7,12 +7,13 @@ const Orders = () => {
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const API_BASE_URL = import.meta.env.VITE_BACKEND_URL;
 
   useEffect(() => {
     if (!user || !token) return;
 
     axios
-      .get("http://127.0.0.1:8000/api/orders/", {
+      .get(`${API_BASE_URL}/api/orders/`, {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((res) => {
@@ -32,7 +33,7 @@ const Orders = () => {
 
     try {
       const response = await axios.post(
-        "http://127.0.0.1:8000/api/orders/retry-payment/",
+        `${API_BASE_URL}/api/orders/retry-payment/`,
         { order_id: orderId },
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -49,7 +50,7 @@ const Orders = () => {
     if (!token) return;
   
     try {
-      const response = await axios.get(`http://127.0.0.1:8000/api/orders/${orderId}/invoice/`, {
+      const response = await axios.get(`${API_BASE_URL}/api/orders/${orderId}/invoice/`, {
         headers: { Authorization: `Bearer ${token}` },
         responseType: "blob", // Ensure we get a binary file
       });

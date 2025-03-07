@@ -17,6 +17,7 @@ const Signup = () => {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const [cartRestored, setCartRestored] = useState(false); // ✅ Prevent infinite loop
+  const API_BASE_URL = import.meta.env.VITE_BACKEND_URL;
 
   useEffect(() => {
     if (user && token && !cartRestored) {
@@ -70,7 +71,7 @@ const Signup = () => {
 
     try {
       // ✅ Send registration request to Django API
-      const res = await axios.post("http://127.0.0.1:8000/api/auth/register/", {
+      const res = await axios.post(`${API_BASE_URL}/api/auth/register/`, {
         username: userData.username,
         email: userData.email,
         password: userData.password,

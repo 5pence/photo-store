@@ -9,6 +9,7 @@ const CheckoutCancel = () => {
   const { clearCart } = useCart();
   const { token } = useAuth();
   const [isClearing, setIsClearing] = useState(true);
+  const API_BASE_URL = import.meta.env.VITE_BACKEND_URL;
 
   useEffect(() => {
     const sessionActive = sessionStorage.getItem("checkoutSession");
@@ -30,7 +31,7 @@ const CheckoutCancel = () => {
 
         // ✅ Clears backend cart (only if token exists)
         if (token) {
-          await axios.delete("http://127.0.0.1:8000/api/cart/clear/", {
+          await axios.delete(`${API_BASE_URL}/api/cart/clear/`, {
             headers: { Authorization: `Bearer ${token}` },
           });
           console.log("✅ Backend cart cleared");

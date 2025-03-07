@@ -11,6 +11,7 @@ const Blog = () => {
   const [hasMore, setHasMore] = useState(true);
   const [tags, setTags] = useState([]);
   const [activeTag, setActiveTag] = useState("All");
+  const API_BASE_URL = import.meta.env.VITE_BACKEND_URL;
 
   useEffect(() => {
     fetchPosts(true);
@@ -18,7 +19,7 @@ const Blog = () => {
 
   const fetchPosts = async (reset = false) => {
     try {
-      const res = await axios.get(`http://127.0.0.1:8000/api/blog/?page=${page}`);
+      const res = await axios.get(`${API_BASE_URL}/api/blog/?page=${page}`);
   
       if (reset) {
         setPosts(res.data); // Reset the posts when returning

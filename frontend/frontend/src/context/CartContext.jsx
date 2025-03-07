@@ -18,7 +18,7 @@ export const CartProvider = ({ children }) => {
   const [cart, setCart] = useState([]);
   const { user, token } = useAuth();
   const navigate = useNavigate();
-  const BASE_URL = "http://127.0.0.1:8000";
+  const BASE_URL = import.meta.env.VITE_BACKEND_URL;
 
   // Check if cart contains digital products
   const hasDigitalProducts = cart.some(item => item.product_type === "digital");
@@ -114,7 +114,7 @@ export const CartProvider = ({ children }) => {
 
     try {
         const response = await axios.post(
-            "http://127.0.0.1:8000/api/cart/add/",
+            `${BASE_URL}/api/cart/add/`,
             { product_id: product.id, quantity },
             { headers: { Authorization: `Bearer ${token}` } }
         );

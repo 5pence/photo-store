@@ -7,12 +7,12 @@ const BlogDetail = () => {
   const { slug } = useParams();
   const [post, setPost] = useState(null);
   const [loading, setLoading] = useState(true);
-  const navigate = useNavigate();
+  const API_BASE_URL = import.meta.env.VITE_BACKEND_URL;
 
   useEffect(() => {
     const fetchPost = async () => {
       try {
-        const res = await axios.get(`http://127.0.0.1:8000/api/blog/${slug}/`);
+        const res = await axios.get(`${API_BASE_URL}/api/blog/${slug}/`);
         setPost(res.data);
       } catch (error) {
         console.error("Error fetching blog post:", error);

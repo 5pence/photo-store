@@ -3,10 +3,11 @@ import { useState, useEffect } from "react";
 const ForgotPassword = () => {
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
+  const API_BASE_URL = import.meta.env.VITE_BACKEND_URL;
 
   useEffect(() => {
     // Fetch CSRF token on component mount
-    fetch("http://127.0.0.1:8000/api/auth/password-reset/", {
+    fetch(`${API_BASE_URL}/api/auth/password-reset/`, {
       method: "GET",
       credentials: "include",  // Important for CSRF cookies
     });
@@ -38,7 +39,7 @@ const ForgotPassword = () => {
   
     console.log("📤 Sending request with formData:", email); // Debugging
   
-    const response = await fetch("http://127.0.0.1:8000/api/auth/password-reset/", {
+    const response = await fetch(`${API_BASE_URL}/api/auth/password-reset/`, {
       method: "POST",
       headers: {
         "X-CSRFToken": csrfToken, // Attach CSRF token

@@ -2,8 +2,10 @@ import { createContext, useContext, useState, useEffect } from "react";
 import axios from "axios";
 import PropTypes from "prop-types";
 
-const API_URL = "http://127.0.0.1:8000/api/auth/";
-const CART_API_URL = "http://127.0.0.1:8000/api/cart/add/";
+const API_BASE_URL = import.meta.env.VITE_BACKEND_URL;
+
+const API_URL = `${API_BASE_URL}/api/auth/`;
+const CART_API_URL = `${API_BASE_URL}/api/cart/add/`;
 
 const AuthContext = createContext();
 

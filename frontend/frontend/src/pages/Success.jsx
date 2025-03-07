@@ -14,6 +14,7 @@ const SuccessPage = () => {
   const [orderConfirmed, setOrderConfirmed] = useState(false);
   const [orderId, setOrderId] = useState(null);
   const [errorMessage, setErrorMessage] = useState("");
+  const API_BASE_URL = import.meta.env.VITE_BACKEND_URL;
 
   useEffect(() => {
     const storedOrderId = new URLSearchParams(location.search).get("order_id");
@@ -35,7 +36,7 @@ const SuccessPage = () => {
 
   
     // ✅ Confirm order with API
-    axios.post("http://127.0.0.1:8000/api/orders/confirm/", 
+    axios.post(`${API_BASE_URL}/api/orders/confirm/`, 
       { order_id: Number(storedOrderId) }, 
       { headers: { Authorization: `Bearer ${token}` } }
     )

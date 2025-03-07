@@ -7,10 +7,11 @@ import { motion, AnimatePresence } from "framer-motion";
 const Store = () => {
   const [products, setProducts] = useState([]);
   const { addToCart } = useCart();
+  const API_BASE_URL = import.meta.env.VITE_BACKEND_URL;
 
   useEffect(() => {
     axios
-      .get("http://127.0.0.1:8000/api/products/")
+      .get(`${API_BASE_URL}/api/products/`)
       .then((response) => {
         setProducts(response.data);
       })

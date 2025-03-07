@@ -12,6 +12,7 @@ const Contact = () => {
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(null);
   const [error, setError] = useState(null);
+  const API_BASE_URL = import.meta.env.VITE_BACKEND_URL;
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -25,7 +26,7 @@ const Contact = () => {
     setError(null);
     
     try {
-      await axios.post("http://127.0.0.1:8000/api/contact/", formData);
+      await axios.post(`${API_BASE_URL}/api/contact/`, formData);
       setSuccess("Your message has been sent successfully! 🎉");
       setFormData({ name: "", email: "", phone: "", message: "" });
     } catch (err) {

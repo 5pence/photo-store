@@ -10,6 +10,7 @@ const { user, token } = useAuth();
 const navigate = useNavigate();
 const [loading, setLoading] = useState(false);
 const [error, setError] = useState("");
+const API_BASE_URL = import.meta.env.VITE_BACKEND_URL;
 
 // Address state
 const [shippingDetails, setShippingDetails] = useState({
@@ -55,7 +56,7 @@ try {
 const headers = user && token ? { Authorization: `Bearer ${token}` } : {};
 
 const response = await axios.post(
-"http://127.0.0.1:8000/api/checkout/",
+`${API_BASE_URL}/api/checkout/`,
 {
 cart: cart.map((item) => ({
 id: item.id,
