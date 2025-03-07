@@ -160,7 +160,7 @@ CSRF_COOKIE_HTTPONLY = False  # Allow frontend to access CSRF token
 CSRF_COOKIE_SAMESITE = "Lax"  # Needed for local testing
 CSRF_COOKIE_SECURE = False  # Set to True in production with HTTPS
 
-CORS_ALLOW_ALL_ORIGINS = True  # ✅ Temporary fix to verify
+# CORS_ALLOW_ALL_ORIGINS = True  # ✅ Temporary fix to verify
 
 CORS_ALLOW_CREDENTIALS = True  # ✅ Allow cookies & auth headers
 
@@ -180,17 +180,18 @@ CORS_ALLOW_HEADERS = [
     "x-requested-with",
     "accept",
     "accept-encoding",
-    "origin"
+    "origin",
+    "access-control-allow-credentials"
 ]
 
-# CORS_ALLOWED_ORIGINS = [
-#     "https://photo-store-q0nm.onrender.com",
-#     "https://your-vercel-url.vercel.app",
-#     "https://spencers.studio",
-#     "http://localhost:5173",
-#     "http://127.0.0.1:5173",
-# ]
-CORS_ALLOWED_ORIGINS = True
+CORS_ALLOWED_ORIGINS = [
+    "https://photo-store-q0nm.onrender.com",
+    "https://your-vercel-url.vercel.app",
+    "https://spencers.studio",
+    "http://localhost:5173",
+    "http://127.0.0.1:5173",
+]
+
 
 CSRF_TRUSTED_ORIGINS = [
     "https://photo-store-q0nm.onrender.com",
