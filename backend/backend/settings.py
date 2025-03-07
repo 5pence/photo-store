@@ -160,7 +160,29 @@ CSRF_COOKIE_HTTPONLY = False  # Allow frontend to access CSRF token
 CSRF_COOKIE_SAMESITE = "Lax"  # Needed for local testing
 CSRF_COOKIE_SECURE = False  # Set to True in production with HTTPS
 
-CORS_ALLOW_CREDENTIALS = True  # Ensure Django allows credentials
+CORS_ALLOW_ALL_ORIGINS = True  # ✅ Temporary fix to verify
+
+CORS_ALLOW_CREDENTIALS = True  # ✅ Allow cookies & auth headers
+
+CORS_ALLOW_METHODS = [
+    "GET",
+    "POST",
+    "PUT",
+    "PATCH",
+    "DELETE",
+    "OPTIONS"
+]
+
+CORS_ALLOW_HEADERS = [
+    "authorization",
+    "content-type",
+    "x-csrftoken",
+    "x-requested-with",
+    "accept",
+    "accept-encoding",
+    "origin"
+]
+
 # CORS_ALLOWED_ORIGINS = [
 #     "https://photo-store-q0nm.onrender.com",
 #     "https://your-vercel-url.vercel.app",
@@ -169,6 +191,7 @@ CORS_ALLOW_CREDENTIALS = True  # Ensure Django allows credentials
 #     "http://127.0.0.1:5173",
 # ]
 CORS_ALLOWED_ORIGINS = True
+
 CSRF_TRUSTED_ORIGINS = [
     "https://photo-store-q0nm.onrender.com",
     "https://your-vercel-url.vercel.app",
