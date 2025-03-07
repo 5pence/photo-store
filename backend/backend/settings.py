@@ -22,7 +22,7 @@ SECRET_KEY = os.getenv("SECRET_KEY", "somerandomkeyfallback")
 DEBUG = os.getenv("DEBUG", default=False)
 
 ALLOWED_HOSTS = [
-    "photo-store-production.up.railway.app",
+    "photo-store-q0nm.onrender.com",
     "localhost",
     "127.0.0.1",
 ]
@@ -156,11 +156,13 @@ CSRF_COOKIE_SECURE = False  # Set to True in production with HTTPS
 
 CORS_ALLOW_CREDENTIALS = True  # Ensure Django allows credentials
 CORS_ALLOWED_ORIGINS = [
+    "https://photo-store-q0nm.onrender.com",
     "http://localhost:5173",
     "http://127.0.0.1:5173",
 ]
 
 CSRF_TRUSTED_ORIGINS = [
+    "https://photo-store-q0nm.onrender.com",
     "http://127.0.0.1:5173",
     "http://localhost:5173",
 ]
