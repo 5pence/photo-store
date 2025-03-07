@@ -63,12 +63,12 @@ const Navbar = () => {
 
       {menuOpen && (
         <div className="absolute top-16 left-0 w-full bg-rust flex flex-col gap-2 p-4 shadow-lg">
-          <NavLink to="/photography" className="hover:text-gray-200 py-2" onClick={() => setMenuOpen(false)}>Photography</NavLink>
-          <NavLink to="/store" className="hover:text-gray-200 py-2" onClick={() => setMenuOpen(false)}>Store</NavLink>
+          <NavLink to="/photography" className="hover:text-gray-200 py-2" onClick={() => setMenuOpen(false)}>Photos</NavLink>
+          <NavLink to="/about" className="hover:text-gray-200 py-2" onClick={() => setMenuOpen(false)}>About</NavLink>
+          <NavLink to="/store" className="hover:text-gray-200 py-2" onClick={() => setMenuOpen(false)}>Shop</NavLink>
           <NavLink to="/blog" className="hover:text-gray-200 py-2" onClick={() => setMenuOpen(false)}>Blog</NavLink>
-          <NavLink to="/coding" className="hover:text-gray-200 py-2" onClick={() => setMenuOpen(false)}>Coding</NavLink>
           <NavLink to="/contact" className="hover:text-gray-200 py-2" onClick={() => setMenuOpen(false)}>Contact</NavLink>
-          {user && <NavLink to="/dashboard" className="hover:text-gray-200 py-2" onClick={() => setMenuOpen(false)}>Dashboard</NavLink>}
+          {user && <NavLink to="/dashboard" className="hover:text-gray-200 py-2" onClick={() => setMenuOpen(false)}>Account</NavLink>}
           <NavLink to="/login" className="bg-light-gray text-dark py-2 text-center rounded-md" onClick={() => setMenuOpen(false)}>Login</NavLink>
           <NavLink to="/signup" className="border border-white text-white py-2 text-center rounded-md hover:bg-warm-white hover:text-rust" onClick={() => setMenuOpen(false)}>Signup</NavLink>
         </div>
