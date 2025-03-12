@@ -13,31 +13,43 @@ const Blog = () => {
   const [activeTag, setActiveTag] = useState("All");
   const API_BASE_URL = import.meta.env.VITE_BACKEND_URL;
 
+  // ✅ Fetch initial posts when component mounts
   useEffect(() => {
-    fetchPosts(true);
+    fetchPosts(true); // ✅ Ensures page 1 loads
   }, []);
+
+  // ✅ Fetch additional posts when page changes
+  useEffect(() => {
+    if (page > 1) {
+      fetchPosts();
+    }
+  }, [page]);
 
   const fetchPosts = async (reset = false) => {
     try {
+      setLoading(true);
       const res = await axios.get(`${API_BASE_URL}/api/blog/?page=${page}`);
-  
+      
+      if (res.data.length === 0) {
+        setHasMore(false); // ✅ Stop API calls if no more data
+        return;
+      }
+
       if (reset) {
-        setPosts(res.data); // Reset the posts when returning
+        setPosts(res.data);
         setFilteredPosts(res.data);
       } else {
         setPosts((prev) => [...prev, ...res.data]);
         setFilteredPosts((prev) => [...prev, ...res.data]);
       }
-  
+
       extractTags(res.data);
-      setHasMore(res.data.length > 0);
     } catch (error) {
       console.error("Error fetching blog posts:", error);
     } finally {
       setLoading(false);
     }
   };
-  
 
   // Extract unique tags from posts
   const extractTags = (posts) => {
@@ -48,9 +60,14 @@ const Blog = () => {
     setTags(["All", ...Array.from(allTags)]);
   };
 
-  // Infinite scroll logic
+  // ✅ Infinite Scroll Logic (Better threshold + prevents spam)
   const handleScroll = () => {
-    if (window.innerHeight + document.documentElement.scrollTop >= document.documentElement.offsetHeight - 100 && hasMore) {
+    if (!hasMore || loading) return; // ✅ Prevents unnecessary API calls
+
+    const scrollPosition = window.innerHeight + document.documentElement.scrollTop;
+    const threshold = document.documentElement.offsetHeight - 500; // ✅ Slightly increased buffer for smoother loading
+
+    if (scrollPosition >= threshold) {
       setPage((prev) => prev + 1);
     }
   };
@@ -100,20 +117,19 @@ const Blog = () => {
         <AnimatePresence>
           {filteredPosts.map((post) => (
             <motion.div
-    key={post.id}
-    className="bg-white p-5 rounded-lg w-full max-w-sm" // ✅ Removed Tailwind's shadow-lg
-    initial={{ scale: 1, boxShadow: "0px 5px 15px rgba(0, 0, 0, 0.1)" }}
-    animate={{ scale: 1, boxShadow: "0px 5px 15px rgba(0, 0, 0, 0.1)" }}
-    whileHover={{
-        scale: 1.05,
-        boxShadow: "0px 15px 40px rgba(0, 0, 0, 0.2)"
-    }}
-    transition={{
-        duration: 0.3,
-        ease: "linear"
-    }}
->
-          
+              key={post.id}
+              className="bg-white p-5 rounded-lg w-full max-w-sm"
+              initial={{ scale: 1, boxShadow: "0px 5px 15px rgba(0, 0, 0, 0.1)" }}
+              animate={{ scale: 1, boxShadow: "0px 5px 15px rgba(0, 0, 0, 0.1)" }}
+              whileHover={{
+                  scale: 1.05,
+                  boxShadow: "0px 15px 40px rgba(0, 0, 0, 0.2)"
+              }}
+              transition={{
+                  duration: 0.3,
+                  ease: "linear"
+              }}
+            >
               <Link to={`/blog/${post.slug}`}>
                 {post.cover_image && (
                   <motion.img
