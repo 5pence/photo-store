@@ -1,116 +1,198 @@
-/* ✅ Ensure root container does NOT force center alignment */
+/* Root container */
 #root {
     width: 100%;
     max-width: none;
     margin: 0;
     padding: 0;
-    text-align: left; /* Prevent forced center alignment */
+    text-align: left;
 }
 
-/* ✅ Blog Content (CKEditor Styled) */
+/* General Styling */
+body {
+    font-family: 'Montserrat', sans-serif;
+    background-color: #f8f8f8;
+    color: #333;
+}
+
+/* Header & Navbar */
+nav {
+    background: #d64c3b;
+    color: white;
+    font-weight: bold;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+nav a {
+    text-decoration: none;
+    color: white;
+    transition: color 0.3s ease;
+}
+
+nav a:hover {
+    color: #f6f6f6;
+}
+
+/* Buttons */
+button {
+    background: #d64c3b;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+button:hover {
+    background: #b43e2d;
+}
+
+/* Typography */
+h1 {
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+    color: #d64c3b;
+}
+
+h2 {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    color: #d64c3b;
+}
+
+h3 {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-top: 1.5rem;
+}
+
+p {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    margin-bottom: 1rem;
+}
+
+/* Blog Content Styling */
 .blog-content {
     font-family: inherit;
     font-size: inherit;
     color: inherit;
-    line-height: 1.7; /* Improve readability */
+    background: white;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    max-width: 800px;
+    margin: auto;
 }
 
-/* Headings - Make them bigger with more space */
-.blog-content h2 {
-    font-size: 2rem;
-    margin-top: 2.5rem;
-    margin-bottom: 1rem;
-    font-weight: bold;
-}
-
+.blog-content h1,
+.blog-content h2,
 .blog-content h3 {
-    font-size: 1.7rem;
+    font-weight: bold;
     margin-top: 2rem;
     margin-bottom: 1rem;
-    font-weight: bold;
 }
 
-/* ✅ Ensure Paragraphs Have Proper Spacing */
 .blog-content p {
     margin-bottom: 1rem;
     line-height: 1.6;
 }
 
-/* ✅ Center Tables & Make Them Look Good */
+/* Tables */
 .blog-content table {
-    width: 80%; /* Keep it neat */
+    width: 80%;
+    margin: 1.5rem auto;
     border-collapse: collapse;
-    margin: 1.5rem auto; /* Center the table */
-    background: white; /* Ensure good contrast */
+    background: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.blog-content th,
+.blog-content th, 
 .blog-content td {
+    padding: 12px;
     border: 1px solid #ddd;
-    padding: 8px;
+    text-align: left;
 }
 
 .blog-content th {
-    background: #f6f8fa;
+    background: #f8f8fa;
     font-weight: bold;
 }
 
-/* ✅ Lists - Ensure they display properly */
+/* Lists */
 .blog-content ul {
     list-style-type: disc;
     margin-left: 2rem;
+    padding-left: 1rem;
 }
 
 .blog-content ol {
     list-style-type: decimal;
     margin-left: 2rem;
+    padding-left: 1rem;
 }
 
-/* ✅ Fix Code Blocks (Properly Dark Background) */
+.blog-content li {
+    margin-bottom: 0.5rem;
+}
+
+/* Code Blocks */
 .blog-content pre {
-    background: #282c34 !important; /* Dark */
+    background: #282c34 !important; /* Darker background */
     color: #ffffff !important;
     padding: 1rem;
     border-radius: 6px;
     overflow-x: auto;
+    font-size: 1rem;
+    font-family: "Fira Code", monospace;
 }
 
 .blog-content code {
-    background: #1e1e1e;
-    color: #f8f8f2;
+    background: rgba(255, 255, 255, 0.1);
     padding: 3px 6px;
     border-radius: 4px;
     font-family: "Fira Code", monospace;
 }
 
-/* ✅ Make Sure `.prose` Styles Do Not Interfere */
-.blog-content .prose code {
-    background: #1e1e1e !important; /* Dark background */
-    color: #f8f8f2 !important;
+/* Inline Code */
+.prose code {
+    background: none !important;
+    color: inherit !important;
     font-size: 0.9em;
     padding: 2px 4px;
 }
 
-.blog-content .prose pre {
-    background: #282c34 !important;
-    padding: 1rem;
-    border-radius: 6px;
-    overflow-x: auto;
+/* Footer */
+footer {
+    background: #d64c3b;
+    color: white;
+    padding: 20px;
+    text-align: center;
+    margin-top: 3rem;
 }
 
-.blog-content .prose table {
-    width: 100%;
-    border-collapse: collapse;
+/* Background Animation */
+@keyframes moving-gradient {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
 }
 
-.blog-content .prose th, 
-.blog-content .prose td {
-    border: 1px solid #ddd;
-    padding: 8px;
-    text-align: left;
+.animate-moving-gradient {
+    background-size: 300% 300%;
+    animation: moving-gradient 22s infinite alternate ease-in-out;
 }
 
-.blog-content .prose th {
-    background: #f6f8fa;
-    font-weight: bold;
+/* Slow Pulse */
+@keyframes slowPulse {
+    0% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.02); opacity: 0.95; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+.slow-pulse {
+    animation: slowPulse 6s infinite ease-in-out;
 }
