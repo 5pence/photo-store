@@ -4,6 +4,7 @@ from .models import BlogPost
 
 class BlogPostSerializer(serializers.ModelSerializer):
     tags = serializers.SerializerMethodField()
+    cover_image = serializers.SerializerMethodField()
 
     class Meta:
         model = BlogPost
@@ -13,9 +14,15 @@ class BlogPostSerializer(serializers.ModelSerializer):
     def get_tags(self, obj):
         return [tag.name for tag in obj.tags.all()]
 
+    def get_cover_image(self, obj):
+        if obj.cover_image:
+            return obj.cover_image.url
+        return None
+
 
 class BlogPostDetailSerializer(serializers.ModelSerializer):
     tags = serializers.SerializerMethodField()
+    cover_image = serializers.SerializerMethodField()
 
     class Meta:
         model = BlogPost
