@@ -20,6 +20,45 @@
   filter: drop-shadow(0 0 2em #61dafbaa);
 }
 
+.ck-content h1, 
+.ck-content h2, 
+.ck-content h3 {
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: inherit; /* Keeps the default color */
+}
+
+.ck-content p {
+  margin-bottom: 10px;
+  color: inherit; /* Ensures the paragraph text matches site font */
+  font-size: inherit; /* Keeps the same font size */
+}
+
+.ck-content ul {
+  list-style: disc;
+  padding-left: 20px;
+}
+
+.ck-content table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.ck-content table, 
+.ck-content th, 
+.ck-content td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+.ck-content pre {
+  background: #f4f4f4;
+  padding: 10px;
+  border-radius: 5px;
+  overflow-x: auto;
+}
+
 @keyframes logo-spin {
   from {
     transform: rotate(0deg);
