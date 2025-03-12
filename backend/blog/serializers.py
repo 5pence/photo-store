@@ -26,5 +26,6 @@ class BlogPostDetailSerializer(serializers.ModelSerializer):
         return [tag.name for tag in obj.tags.all()]
 
     def get_cover_image(self, obj):
-        # Ensure full Cloudinary URL is returned
-        return obj.cover_image.url if obj.cover_image else None
+        if obj.cover_image:
+            return obj.cover_image.url
+        return None
