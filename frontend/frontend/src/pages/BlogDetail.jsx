@@ -49,7 +49,7 @@ const BlogDetail = () => {
 
       {/* Blog Content in a Styled Card */}
       <motion.div
-        className="blog-content prose prose-lg bg-white shadow-lg rounded-lg p-8 mt-10 mx-auto max-w-4xl text-lg leading-relaxed"
+        className="prose prose-lg prose-gray mx-auto max-w-4xl bg-white shadow-lg rounded-lg p-8 mt-10 leading-relaxed"
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}

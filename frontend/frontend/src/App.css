@@ -113,3 +113,36 @@
   margin-left: 1.5rem;
 }
 
+/* Ensure inline <code> styling looks right */
+.prose code {
+    background: none !important;
+    color: inherit !important;
+    font-size: 0.9em;
+    padding: 2px 4px;
+  }
+  
+  /* Ensure preformatted blocks <pre> render properly */
+  .prose pre {
+    background: #f6f8fa !important;
+    padding: 1rem;
+    border-radius: 6px;
+    overflow-x: auto;
+  }
+  
+  /* Fix tables inside CKEditor output */
+  .prose table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .prose th, .prose td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+  }
+  
+  .prose th {
+    background: #f6f8fa;
+    font-weight: bold;
+  }
+  
