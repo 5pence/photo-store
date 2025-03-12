@@ -1,149 +1,116 @@
+/* ✅ Ensure root container does NOT force center alignment */
 #root {
-    width: 100%; /* Make sure it spans full width */
-    max-width: none; /* Remove max constraint */
+    width: 100%;
+    max-width: none;
     margin: 0;
     padding: 0;
-    text-align: left; /* Remove forced center alignment */
-  }
-
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+    text-align: left; /* Prevent forced center alignment */
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
-}
-
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
-}
-  
-/* Background Animation */
-@keyframes moving-gradient {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-}
-
-.animate-moving-gradient {
-    background-size: 300% 300%;
-    animation: moving-gradient 22s infinite alternate ease-in-out;
-}
-
-/* Spencer’s Studio Slow Pulse */
-@keyframes slowPulse {
-    0% { transform: scale(1); opacity: 1; }
-    50% { transform: scale(1.02); opacity: 0.95; }
-    100% { transform: scale(1); opacity: 1; }
-}
-
-.slow-pulse {
-    animation: slowPulse 6s infinite ease-in-out;
-}
-
-/* Only apply CKEditor styles inside blog posts */
+/* ✅ Blog Content (CKEditor Styled) */
 .blog-content {
-    font-family: inherit;  /* Keep site-wide font */
-    font-size: inherit;    /* Keep default font size */
-    color: inherit;        /* Keep text color */
-  }
-  
-  .blog-content h1,
-  .blog-content h2,
-  .blog-content h3 {
+    font-family: inherit;
+    font-size: inherit;
+    color: inherit;
+    line-height: 1.7; /* Improve readability */
+}
+
+/* Headings - Make them bigger with more space */
+.blog-content h2 {
+    font-size: 2rem;
+    margin-top: 2.5rem;
+    margin-bottom: 1rem;
     font-weight: bold;
-    margin-top: 1.5rem;
-  }
-  
-  .blog-content p {
+}
+
+.blog-content h3 {
+    font-size: 1.7rem;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    font-weight: bold;
+}
+
+/* ✅ Ensure Paragraphs Have Proper Spacing */
+.blog-content p {
     margin-bottom: 1rem;
     line-height: 1.6;
-  }
-  
-  .blog-content table {
-    width: 100%;
-    border-collapse: collapse;
-  }
-  
-  .blog-content th,
-  .blog-content td {
-    border: 1px solid #ddd;
-    padding: 8px;
-  }
-  
-  .blog-content pre {
-    background: #1e1e1e;
-    color: #f8f8f2;
-    padding: 12px;
-    border-radius: 5px;
-    overflow-x: auto;
-  }
-  
-  .blog-content code {
-    background: rgba(0, 0, 0, 0.05);
-    padding: 2px 6px;
-    border-radius: 4px;
-  }
-  
-.blog-content ul,
-.blog-content ol {
-  margin-left: 1.5rem;
 }
 
-/* Ensure inline <code> styling looks right */
-.prose code {
-    background: none !important;
-    color: inherit !important;
-    font-size: 0.9em;
-    padding: 2px 4px;
-  }
-  
-  /* Ensure preformatted blocks <pre> render properly */
-  .prose pre {
-    background: #f6f8fa !important;
+/* ✅ Center Tables & Make Them Look Good */
+.blog-content table {
+    width: 80%; /* Keep it neat */
+    border-collapse: collapse;
+    margin: 1.5rem auto; /* Center the table */
+    background: white; /* Ensure good contrast */
+}
+
+.blog-content th,
+.blog-content td {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+.blog-content th {
+    background: #f6f8fa;
+    font-weight: bold;
+}
+
+/* ✅ Lists - Ensure they display properly */
+.blog-content ul {
+    list-style-type: disc;
+    margin-left: 2rem;
+}
+
+.blog-content ol {
+    list-style-type: decimal;
+    margin-left: 2rem;
+}
+
+/* ✅ Fix Code Blocks (Properly Dark Background) */
+.blog-content pre {
+    background: #282c34 !important; /* Dark */
+    color: #ffffff !important;
     padding: 1rem;
     border-radius: 6px;
     overflow-x: auto;
-  }
-  
-  /* Fix tables inside CKEditor output */
-  .prose table {
+}
+
+.blog-content code {
+    background: #1e1e1e;
+    color: #f8f8f2;
+    padding: 3px 6px;
+    border-radius: 4px;
+    font-family: "Fira Code", monospace;
+}
+
+/* ✅ Make Sure `.prose` Styles Do Not Interfere */
+.blog-content .prose code {
+    background: #1e1e1e !important; /* Dark background */
+    color: #f8f8f2 !important;
+    font-size: 0.9em;
+    padding: 2px 4px;
+}
+
+.blog-content .prose pre {
+    background: #282c34 !important;
+    padding: 1rem;
+    border-radius: 6px;
+    overflow-x: auto;
+}
+
+.blog-content .prose table {
     width: 100%;
     border-collapse: collapse;
-  }
-  
-  .prose th, .prose td {
+}
+
+.blog-content .prose th, 
+.blog-content .prose td {
     border: 1px solid #ddd;
     padding: 8px;
     text-align: left;
-  }
-  
-  .prose th {
+}
+
+.blog-content .prose th {
     background: #f6f8fa;
     font-weight: bold;
-  }
-  
+}
