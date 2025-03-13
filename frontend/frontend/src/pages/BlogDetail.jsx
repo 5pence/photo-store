@@ -28,7 +28,7 @@ const BlogDetail = () => {
   if (!post) return <p className="text-center mt-8 text-red-600">Post not found</p>;
 
   const cleanMetaDescription = post.meta_description.replace(/<\/?[^>]+(>|$)/g, "");
-  const metahead = post.title
+  const metahead = post.title;
 
   return (
     <div className="container mx-auto px-4 py-12">
