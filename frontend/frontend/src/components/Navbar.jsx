@@ -1,5 +1,5 @@
 import { NavLink, useNavigate } from "react-router-dom";
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import AuthContext from "../context/AuthContext";
 import useCart from "../context/useCart";
 
@@ -8,6 +8,25 @@ const Navbar = () => {
   const { cart, clearCart } = useCart();
   const [menuOpen, setMenuOpen] = useState(false);
   const navigate = useNavigate();
+  const [theme, setTheme] = useState(localStorage.getItem("theme") || "spencerTheme");
+  const [isDarkMode, setIsDarkMode] = useState(theme === "dark");
+
+  // Apply the theme on mount
+  useEffect(() => {
+    document.documentElement.setAttribute("data-theme", theme);
+    localStorage.setItem("theme", theme);
+    setIsDarkMode(theme === "dark");
+  }, [theme]);
+
+  // Toggle theme function with animation
+  const toggleTheme = () => {
+    document.body.classList.add("fade-out");
+    setTimeout(() => {
+      setTheme(theme === "spencerTheme" ? "dark" : "spencerTheme");
+      document.body.classList.remove("fade-out");
+      document.body.classList.add("dark-mode-fade");
+    }, 300);
+  };
 
   const handleLogout = () => {
     clearCart();
@@ -44,6 +63,14 @@ const Navbar = () => {
             </span>
           </NavLink>
         )}
+
+        {/* 🌙 Dark Mode Toggle */}
+        <button 
+          onClick={toggleTheme} 
+          className={`ml-4 px-4 py-2 rounded-md transition ${isDarkMode ? 'bg-light-gray text-dark' : 'bg-muted-blue text-white'}`}
+        >
+          {isDarkMode ? "☀️ Light Mode" : "🌙 Dark Mode"}
+        </button>
 
         <div className="hidden lg:flex space-x-4">
           {!user ? (
