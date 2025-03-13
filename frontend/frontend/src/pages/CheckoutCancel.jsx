@@ -56,6 +56,9 @@ const CheckoutCancel = () => {
 
   return (
     <div className="container mx-auto px-4 py-6 text-center">
+    <title>Checkout Canceled | Spencers Studio</title>
+    <meta name="description" content="Your checkout was canceled. No worries—your order is pending. Feel free to continue shopping or try again." />
+
       <h1 className="text-2xl font-bold text-red-600">🚫 Payment Cancelled</h1>
       {isClearing ? (
         <p className="text-gray-700">Clearing your cart...</p>

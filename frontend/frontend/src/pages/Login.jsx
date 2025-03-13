@@ -34,6 +34,9 @@ const Login = () => {
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-200 px-4">
+    <title>Login | Spencers Studio</title>
+    <meta name="description" content="Access your Spencers Studio account. Log in securely to manage your profile, track your orders, and explore exclusive content." />
+
       <div className="bg-white p-8 rounded-2xl shadow-lg w-full max-w-md">
         <h2 className="text-3xl font-heading font-extrabold text-center text-[#d64933] mb-6">Login</h2>
 

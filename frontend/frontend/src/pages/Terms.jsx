@@ -7,6 +7,9 @@ const Terms = () => {
 
   return (
     <div className="container mx-auto px-4 py-12">
+    <title>Terms & Conditions | Spencers Studio</title>
+    <meta name="description" content="Read the Terms & Conditions of Spencers Studio. Understand the rules, policies, and guidelines for using our website, services, and purchasing products." />
+
       <h1 className="text-4xl font-bold text-center mb-6 text-[#d64933]">Terms and Conditions</h1>
       
       <div className="max-w-3xl mx-auto text-gray-700 space-y-6">

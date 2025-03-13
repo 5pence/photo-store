@@ -65,6 +65,8 @@ const Coding = () => {
 
   return (
     <div className="container mx-auto px-4 py-12">
+    <title>About | Spencers Studio</title>
+    <meta name="description" content="Learn more about Spencer Barriball – a developer, photographer, and creative mind. Discover his past projects, clients, and the technologies he works with." />
       {/* About Section */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-center mb-12">
         <div className="md:col-span-2">

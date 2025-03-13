@@ -38,6 +38,9 @@ const Contact = () => {
 
   return (
     <div className="container mx-auto px-4 py-12">
+    <title>Contact | Spencers Studio</title>
+    <meta name="description" content="Get in touch with Spencer Barriball at Spencers Studio. Whether you have a project in mind, need photography services, or just want to connect—reach out today!" />
+
       <h1 className="text-4xl font-bold text-center mb-8 text-[#d64933]">Contact Me</h1>
       <p className="text-center text-lg text-gray-600 max-w-2xl mx-auto">
         Have a project in mind? Drop me a message and I'll get back to you!

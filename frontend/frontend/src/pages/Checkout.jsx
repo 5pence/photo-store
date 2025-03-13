@@ -101,6 +101,9 @@ setErrors(prev => ({ ...prev, [name]: "" }));
 
 return (
 <div className="container mx-auto px-4 py-6">
+<title>Checkout | Spencers Studio</title>
+<meta name="description" content="Secure your order at Spencers Studio. Review your cart, enter your details, and complete your purchase with secure payment options." />
+
   <h1 className="text-2xl font-bold mb-4">💳 Checkout</h1>
 
   {validCart.length === 0 ? (

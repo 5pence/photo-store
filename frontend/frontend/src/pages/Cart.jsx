@@ -18,6 +18,9 @@ const Cart = () => {
 
   return (
     <div className="container mx-auto px-4 py-6">
+    <title>Cart | Spencers Studio</title>
+    <meta name="description" content="View your selected items and proceed to checkout at Spencers Studio. Secure payments and high-quality products await." />
+
       <h1 className="text-2xl font-bold mb-4">🛒 Your Cart</h1>
 
       {validCart.length === 0 ? (

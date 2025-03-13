@@ -95,6 +95,8 @@ const Blog = () => {
 
   return (
     <div className="container mx-auto px-4 py-8">
+    <title>Blog | Spencers Studio</title>
+    <meta name="description" content="Explore Spencers Studio blog for insights on coding, photography, and creativity. Discover tutorials, tips, and behind-the-scenes stories from Spencer Barriball." />
       <h2 className="text-3xl font-bold text-center mb-6 text-[#d64933]">Blog</h2>
 
       {/* Tag Filter Buttons */}

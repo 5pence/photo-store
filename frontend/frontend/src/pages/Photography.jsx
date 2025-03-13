@@ -10,6 +10,8 @@ const Photography = () => {
 
   return (
     <>
+    <title>Photography | Spencers Studio</title>
+    <meta name="description" content="Explore the photography of Spencer Barriball at Spencers Studio. Capturing stunning landscapes, portraits, street photography, and creative visuals." />
       <motion.div
         className="container mx-auto px-4 py-8 min-h-screen flex flex-col"
         initial={{ opacity: 0 }}

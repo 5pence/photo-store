@@ -27,8 +27,12 @@ const BlogDetail = () => {
 
   if (!post) return <p className="text-center mt-8 text-red-600">Post not found</p>;
 
+  const cleanMetaDescription = post.meta_description.replace(/<\/?[^>]+(>|$)/g, "");
+
   return (
     <div className="container mx-auto px-4 py-12">
+      <title>{post.meta_title} | Spencers Studio</title>
+      <meta name="description" content={cleanMetaDescription} />
       {/* Cover Image */}
       {post.cover_image && (
         <motion.img

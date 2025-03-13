@@ -7,6 +7,9 @@ const Privacy = () => {
 
   return (
     <div className="container mx-auto px-4 py-12">
+    <title>Privacy Policy | Spencers Studio</title>
+    <meta name="description" content="Read the Privacy Policy of Spencers Studio. Learn how we collect, use, and protect your data while you browse our website and services." />
+
       <h1 className="text-4xl font-bold text-center mb-6 text-[#d64933]">Privacy Policy</h1>
       
       <div className="max-w-3xl mx-auto text-gray-700 space-y-6">

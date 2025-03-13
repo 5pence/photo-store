@@ -35,6 +35,8 @@ const About = () => {
 
   return (
     <div className="container mx-auto px-6 py-12">
+    <title>About | Spencers Studio</title>
+    <meta name="description" content="Learn more about Spencer Barriball – a developer, photographer, and creative mind. Discover his past projects, clients, and the technologies he works with." />
       {/* Technologies & Tools */}
       <section className="mb-12">
         <h2 className="text-2xl font-bold text-center text-[#d64933] mb-6">Technologies & Tools Used</h2>

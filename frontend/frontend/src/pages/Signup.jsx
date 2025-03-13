@@ -90,6 +90,9 @@ const Signup = () => {
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-200 px-4">
+    <title>Sign Up | Spencers Studio</title>
+    <meta name="description" content="Create your Spencers Studio account today. Gain access to exclusive content, manage your orders, and be part of a creative community." />
+
       <div className="bg-white p-8 rounded-2xl shadow-lg w-full max-w-md">
         <h2 className="text-3xl font-extrabold font-sans text-center text-[#d64933] mb-6">Sign Up</h2>
 

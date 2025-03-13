@@ -55,6 +55,9 @@ const SuccessPage = () => {
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-warm-white p-6">
+    <title>Success | Spencers Studio</title>
+    <meta name="description" content="Your order has been successfully placed at Spencers Studio. Thank you for your support! Check your email for confirmation and next steps." />
+
       <div className="bg-white shadow-lg rounded-lg p-8 text-center max-w-lg border border-gray-300">
         <FaCheckCircle className="text-green-500 text-6xl mx-auto mb-4" />
         <h1 className="text-2xl font-semibold text-rust">Payment Successful!</h1>

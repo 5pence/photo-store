@@ -62,7 +62,11 @@ const Home = () => {
           }
         `}
       </style>
-
+      <title>Spencers Studio | Photography, Coding & Creativity</title>
+      <meta
+        name="description"
+        content="Welcome to Spencers Studio – a showcase of photography, web development, and creative projects by Spencer Barriball. Explore stunning visuals, insightful coding tutorials, and unique artistic expressions."
+      />
       {/* Tagline fades in together */}
       <motion.h1
         className="text-4xl md:text-5xl font-light text-white tracking-wide"

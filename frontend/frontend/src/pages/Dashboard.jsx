@@ -7,6 +7,9 @@ const Dashboard = () => {
 
   return (
     <div className="container mx-auto px-4 py-6">
+    <title>Account | Spencers Studio</title>
+    <meta name="description" content="Manage your account and view your orders at Spencers Studio. Track purchases, update your details, and access your account securely." />
+
       {/* Welcome Section */}
       {user ? (
       <div className="mb-6 border-b pb-4">
