@@ -23,16 +23,21 @@ const BlogDetail = () => {
     fetchPost();
   }, [slug]);
 
+
+  useEffect(() => {
+    if (post) {
+      document.title = `${post.title} | Spencers Studio`;
+    }
+  }, [post]);
+
   if (loading) return <p className="text-center mt-8 text-gray-600">Loading...</p>;
 
   if (!post) return <p className="text-center mt-8 text-red-600">Post not found</p>;
 
   const cleanMetaDescription = post.meta_description.replace(/<\/?[^>]+(>|$)/g, "");
-  const metahead = post.title;
 
   return (
     <div className="container mx-auto px-4 py-12">
-      <title>{metahead} | Spencers Studio</title>
       <meta name="description" content={cleanMetaDescription} />
       {/* Cover Image */}
       {post.cover_image && (
