@@ -46,6 +46,7 @@ export default {
   plugins: [daisyui],
   daisyui: {
     themes: [
+        "dark",
       {
         spencerTheme: {
           "primary": "#D64933", // Rusty Red
