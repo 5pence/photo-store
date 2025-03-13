@@ -150,6 +150,10 @@ p {
     font-family: "Fira Code", monospace;
 }
 
+.blog-content a {
+    color: #d64c3b;
+}
+
 .blog-content code {
     background: rgba(255, 255, 255, 0.1);
     padding: 3px 6px;
