@@ -20,6 +20,7 @@ import Terms from "../pages/Terms";
 import Privacy from "../pages/Privacy";
 import ForgotPassword from "./ForgotPassword";
 import ResetPassword from "./ResetPassword";
+import ArchetypeWheelPage from "../pages/ArchetypeWheelPage";
 
 
 const AnimatedRoutes = ({ user }) => {
@@ -29,6 +30,7 @@ const AnimatedRoutes = ({ user }) => {
     <AnimatePresence mode="wait">
       <Routes location={location} key={location.pathname}>
         <Route path="/" element={<AnimatedPage><Home /></AnimatedPage>} />
+        <Route path="/archetype-wheel" element={<AnimatedPage><ArchetypeWheelPage /></AnimatedPage>}/>
         <Route path="/photography" element={<AnimatedPage><Photography /></AnimatedPage>} />
         <Route path="/store" element={<AnimatedPage><Store /></AnimatedPage>} />
         <Route path="/blog" element={<AnimatedPage><Blog /></AnimatedPage>} />

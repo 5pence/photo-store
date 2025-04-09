@@ -23,14 +23,15 @@ const App = () => {
 const MainLayout = () => {
     const location = useLocation();
     const isHomePage = location.pathname === "/"; // ✅ Detect if on home page
+    const hideChrome = location.pathname === "/archetype-wheel";
 
     return (
         <div className="flex flex-col min-h-screen">
-            <Navbar />
+            {!hideChrome && <Navbar />}
             <main className={`flex-grow ${isHomePage ? "pt-0" : "pt-[80px] lg:pt-[100px]"}`}>
                 <AnimatedRoutes />
             </main>
-            <Footer className="mt-auto" /> {/* ✅ Footer stays at the bottom */}
+            {!hideChrome && <Footer className="mt-auto" />} {/* ✅ Footer stays at the bottom */}
         </div>
     );
 };
