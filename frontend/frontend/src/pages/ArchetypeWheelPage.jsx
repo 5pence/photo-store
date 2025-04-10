@@ -7,22 +7,25 @@ export default function ArchetypeWheelPage() {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 1.2 }}
-      className="min-h-screen bg-[#E3F1DC] flex flex-col items-center justify-center px-4 py-12 text-center font-serif"
+      className="min-h-screen bg-nyanza flex flex-col items-center justify-center px-4 pt-0 pb-12 text-center font-serif"
     >
-        <h1 className="z-10 text-4xl lg:text-5xl font-light mb-4 tracking-wide text-gray-800">
-        Your Inner Compass
+      <div className="w-full max-w-3xl pt-0 lg:pt-0">
+
+        {/* Title */}
+        <h1 className="text-5xl lg:text-6xl font-light mt-4 mb-4 tracking-wide text-gunmetal font-serif">
+          Your Inner Compass
         </h1>
 
-
-        <p className="z-10 text-lg max-w-xl text-gray-600 mb-12 italic leading-relaxed">
-            Twelve voices. Each with a shape.  
-            Not shouting — but waiting.  
-            Turn toward the one that’s been whispering.
+        {/* Subtext */}
+        <p className="font-serif text-xl lg:text-2xl text-gunmetal italic leading-relaxed mb-6 font-[400] tracking-wide">
+          Twelve voices. Each with a shape. <br />
+          Turn toward the one that’s been whispering.
         </p>
 
+        {/* Archetype Wheel */}
+        <ArchetypeWheel />
 
-      <ArchetypeWheel />
+      </div>
     </motion.div>
   );
 }
-

@@ -28,7 +28,7 @@ const MainLayout = () => {
     return (
         <div className="flex flex-col min-h-screen">
             {!hideChrome && <Navbar />}
-            <main className={`flex-grow ${isHomePage ? "pt-0" : "pt-[80px] lg:pt-[100px]"}`}>
+            <main className={`flex-grow ${isHomePage || hideChrome ? "pt-0" : "pt-[80px] lg:pt-[100px]"}`}>
                 <AnimatedRoutes />
             </main>
             {!hideChrome && <Footer className="mt-auto" />} {/* ✅ Footer stays at the bottom */}

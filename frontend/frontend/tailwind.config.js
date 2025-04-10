@@ -23,12 +23,22 @@ export default {
         "muted-blue": "#7E7F9A", // Muted Blue
         "dark": "#1C1C1C", // Deep Charcoal
         "light-gray": "#E5E5E5", // Soft Gray
-        "warm-white": "#F8F6F2" // Warm Off-White
+        "warm-white": "#F8F6F2", // Warm Off-White
+        "lavender": "#E6E1F4",  // Start of Archetype palette
+        "gunmetal": "#2E3D3A",
+        "hookers-green": "#6A7D76",
+        "isabelline": "#F1EBE5",
+        "nyanza": "#E3F1DC",
+        "pale-dogwood": "#F5D9CE",
+        "melon": "#F7BFB0",
+        "mountbatten-pink": "#A18BA3",
       },
       fontFamily: {
         proxima: ['proxima-nova', 'sans-serif'],
         heading: ['Montserrat', 'ui-sans-serif', 'system-ui'],
         body: ['Montserrat', 'sans-serif'],
+        serif: ['"IvyOra Text Light"', 'serif'],
+        loretta: ['"Loretta Light"', 'serif'],
         sans: ['Montserrat', 'ui-sans-serif', 'system-ui'],
       },
     },
