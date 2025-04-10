@@ -21,15 +21,17 @@ import Privacy from "../pages/Privacy";
 import ForgotPassword from "./ForgotPassword";
 import ResetPassword from "./ResetPassword";
 import ArchetypeWheelPage from "../pages/ArchetypeWheelPage";
+import ArchetypeIntro from "../pages/Archetype";
 
 
 const AnimatedRoutes = ({ user }) => {
   const location = useLocation();
-
+  console.log("Routes loaded");
   return (
     <AnimatePresence mode="wait">
       <Routes location={location} key={location.pathname}>
         <Route path="/" element={<AnimatedPage><Home /></AnimatedPage>} />
+        <Route path="/archetype" element={<AnimatedPage><ArchetypeIntro /></AnimatedPage>}/>
         <Route path="/archetype-wheel" element={<AnimatedPage><ArchetypeWheelPage /></AnimatedPage>}/>
         <Route path="/photography" element={<AnimatedPage><Photography /></AnimatedPage>} />
         <Route path="/store" element={<AnimatedPage><Store /></AnimatedPage>} />

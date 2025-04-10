@@ -3,7 +3,7 @@ import { archetypes } from "./data";
 import gsap from "gsap";
 import ArchetypeModal from "../components/ArchetypeModal.jsx";
 
-const scores = [9, 16, 1, 10, 6, 14, 11, 3, 15, 2, 16, 13];
+const scores = [16, 12, 1, 10, 6, 14, 11, 3, 15, 2, 11, 13];
 const names = [
   "The Pathfinder",
   "The Orphan",
@@ -186,36 +186,30 @@ export default function ArchetypeWheel() {
         
           );
         })}
+        {(() => {
+        const sortedIndices = scores
+            .map((score, index) => ({ score, index }))
+            .sort((a, b) => b.score - a.score)
+            .map((entry) => entry.index);
+            return sortedIndices.map((originalIndex) => {
+                return (
 
-{(() => {
-  const sortedIndices = scores
-    .map((score, index) => ({ score, index }))
-    .sort((a, b) => b.score - a.score)
-    .map((entry) => entry.index);
-
-
-  return sortedIndices.map((originalIndex) => {
-    return (
-
-      <div key={`score-${originalIndex}`} 
-            className="absolute left-[250px] top-[250px]">
-        <div
-            ref={(el) => (scoreRefs.current[originalIndex] = el)}
-            className="absolute text-[1rem] text-[#2E3D3A] font-serif z-20"
-            style={{
-            transform: "translate(-50%, -50%)",
-            opacity: 0,
-            }}
-        >
-            {scores[originalIndex]}
-        </div>
-      </div>
-    );
-  });
-})()}
-
-
-
+                <div key={`score-${originalIndex}`} 
+                        className="absolute left-[250px] top-[250px]">
+                    <div
+                        ref={(el) => (scoreRefs.current[originalIndex] = el)}
+                        className="absolute text-[1rem] text-[#2E3D3A] font-serif z-20"
+                        style={{
+                        transform: "translate(-50%, -50%)",
+                        opacity: 0,
+                        }}
+                    >
+                        {scores[originalIndex]}
+                    </div>
+                </div>
+                );
+            });
+        })()}
       </div>
       <ArchetypeModal
         isOpen={modalOpen}
