@@ -23,7 +23,7 @@ const App = () => {
 const MainLayout = () => {
     const location = useLocation();
     const isHomePage = location.pathname === "/"; // ✅ Detect if on home page
-    const hideChrome = ["/archetype-wheel", "/archetype"].includes(location.pathname);
+    const hideChrome = ["/archetype-wheel", "/archetype", "/archetype-quiz"].includes(location.pathname);
 
 
     return (

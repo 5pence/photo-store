@@ -1,6 +1,13 @@
 import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
 
 export default function ArchetypeIntro() {
+    const navigate = useNavigate();
+
+    const handleStart = () => {
+        navigate("/archetype-quiz");
+    }
+
   return (
     <div className="min-h-screen bg-nyanza text-gunmetal font-serif flex flex-col items-center justify-center px-4 py-12">
       <motion.h1
@@ -56,30 +63,32 @@ export default function ArchetypeIntro() {
       </motion.div>
 
       <motion.button
-        className="relative w-40 h-40 rounded-full bg-lavender shadow-md flex items-center justify-center 
-                    hover:scale-105 transition-transform duration-300 mt-8"
+        onClick={handleStart}
+        className="relative rounded-full bg-lavender w-40 h-40 flex items-center justify-center text-gunmetal font-serif
+            transition-all duration-500 ease-out mt-8 hover:bg-lavender
+            shadow-[0_10px_20px_rgba(186,133,255,0.25)]
+            hover:shadow-[0_15px_25px_rgba(186,133,255,0.35)]
+            hover:scale-105 active:scale-95"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 3.2, duration: 1 }}
         >
-          {/* Animated rotating hands */}
-        <motion.img
-            src="/archetypes/handsCircle.png" 
-            alt=""
-            className="absolute inset-0 w-full h-full object-contain opacity-20 pointer-events-none rounded-full"
-            animate={{ rotate: -360 }}
-            transition={{
-            repeat: Infinity,
-            duration: 60,
-            ease: "linear"
-            }}
-        />
+    <motion.img
+        src="/archetypes/handsCircle.png"
+        alt=""
+        className="absolute inset-0 w-full h-full object-contain opacity-20 pointer-events-none rounded-full"
+        animate={{ rotate: -360 }}
+        transition={{
+        repeat: Infinity,
+        duration: 60,
+        ease: "linear",
+        }}
+    />
+  <span className="relative z-10 font-serif text-gunmetal text-sm tracking-wide">
+    Enter
+  </span>
+</motion.button>
 
-        {/* Button text */}
-        <span className="relative z-10 font-serif text-gunmetal text-sm tracking-wide">
-            Enter
-        </span>
-      </motion.button>
 
 
       <motion.p

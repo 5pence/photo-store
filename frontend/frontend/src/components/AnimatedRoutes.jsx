@@ -20,8 +20,9 @@ import Terms from "../pages/Terms";
 import Privacy from "../pages/Privacy";
 import ForgotPassword from "./ForgotPassword";
 import ResetPassword from "./ResetPassword";
-import ArchetypeWheelPage from "../pages/ArchetypeWheelPage";
 import ArchetypeIntro from "../pages/Archetype";
+import ArchetypeQuiz from "../pages/ArchetypeQuiz";
+import ArchetypeWheelPage from "../pages/ArchetypeWheelPage";
 
 
 const AnimatedRoutes = ({ user }) => {
@@ -32,6 +33,7 @@ const AnimatedRoutes = ({ user }) => {
       <Routes location={location} key={location.pathname}>
         <Route path="/" element={<AnimatedPage><Home /></AnimatedPage>} />
         <Route path="/archetype" element={<AnimatedPage><ArchetypeIntro /></AnimatedPage>}/>
+        <Route path="/archetype-quiz" element={<AnimatedPage><ArchetypeQuiz /></AnimatedPage>} />
         <Route path="/archetype-wheel" element={<AnimatedPage><ArchetypeWheelPage /></AnimatedPage>}/>
         <Route path="/photography" element={<AnimatedPage><Photography /></AnimatedPage>} />
         <Route path="/store" element={<AnimatedPage><Store /></AnimatedPage>} />

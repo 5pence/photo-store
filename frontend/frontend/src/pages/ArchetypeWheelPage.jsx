@@ -1,7 +1,11 @@
+import { useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
 import ArchetypeWheel from "../archetypeWheel/ArchetypeWheel";
 
 export default function ArchetypeWheelPage() {
+  const location = useLocation();
+  const responses = location.state?.responses || {};
+
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -23,7 +27,7 @@ export default function ArchetypeWheelPage() {
         </p>
 
         {/* Archetype Wheel */}
-        <ArchetypeWheel />
+        <ArchetypeWheel responses={responses} />
 
       </div>
     </motion.div>

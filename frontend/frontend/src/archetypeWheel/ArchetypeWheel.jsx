@@ -2,8 +2,8 @@ import { useEffect, useRef, useState } from "react";
 import { archetypes } from "./data";
 import gsap from "gsap";
 import ArchetypeModal from "../components/ArchetypeModal.jsx";
+import PropTypes from "prop-types";
 
-const scores = [16, 12, 1, 10, 6, 14, 11, 3, 15, 2, 11, 13];
 const names = [
   "The Pathfinder",
   "The Orphan",
@@ -19,24 +19,26 @@ const names = [
   "The Magician",
 ];
 
-const maxScore = Math.max(...scores);
-const topIndexes = scores
-  .map((score, i) => (score === maxScore ? i : -1))
-  .filter((i) => i !== -1);
-const topNames = topIndexes.map((i) => names[i]);
+export default function ArchetypeWheel({ responses }) {
 
-const poeticLine = (() => {
-  if (topNames.length === 1) {
-    return `Your strongest voice is ${topNames[0]}. Its whisper rises alone.`;
-  } else if (topNames.length === 2) {
-    return `Your strongest voices are ${topNames[0]} and ${topNames[1]}. Their whispers rise together.`;
-  } else {
-    const last = topNames.pop();
-    return `Your strongest voices are ${topNames.join(", ")}, and ${last}. Their whispers rise together.`;
-  }
-})();
+  const scores = names.map((name) => responses?.[name] || 0);
+  const maxScore = Math.max(...scores);
 
-export default function ArchetypeWheel() {
+  const topIndexes = scores
+    .map((score, i) => (score === maxScore ? i : -1))
+    .filter((i) => i !== -1);
+  const topNames = topIndexes.map((i) => names[i]);
+
+  const poeticLine = (() => {
+    if (topNames.length === 1) {
+      return `Your strongest voice is ${topNames[0]}. Its whisper rises alone.`;
+    } else if (topNames.length === 2) {
+      return `Your strongest voices are ${topNames[0]} and ${topNames[1]}. Their whispers rise together.`;
+    } else {
+      const last = topNames.pop();
+      return `Your strongest voices are ${topNames.join(", ")}, and ${last}. Their whispers rise together.`;
+    }
+  })();
   const [modalOpen, setModalOpen] = useState(false);
   const [selectedArchetype, setSelectedArchetype] = useState(null);
   const iconRefs = useRef([]);
@@ -60,7 +62,6 @@ export default function ArchetypeWheel() {
     .map((score, index) => ({ score, index }))
     .sort((a, b) => b.score - a.score);
 
-    console.log("hey: ", byScoreDesc);
 
     // Step 2: Define your desired visual positions from 12 around the clock
     const spiralClockwise = [0, 11, 1, 10, 2, 9, 3, 8, 4, 7, 5, 6];
@@ -219,3 +220,7 @@ export default function ArchetypeWheel() {
     </>
   );
 }
+
+ArchetypeWheel.propTypes = {
+    responses: PropTypes.object.isRequired,
+  };
