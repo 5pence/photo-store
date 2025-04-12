@@ -109,24 +109,24 @@ const archetypeQuestions = [
       reflection: "They dance across silence, shaking joy from the rafters.",
     },
   
-    // The Everyman
+    // The Friend
     {
-      archetype: "The Everyman",
+      archetype: "The Friend",
       question: "Have you ever held your tongue, not because you agreed, but because you didn’t want to cause a scene?",
-      reflection: "The Everyman would rather carry discomfort than cause it.",
+      reflection: "The Friend would rather carry discomfort than cause it.",
     },
     {
-      archetype: "The Everyman",
+      archetype: "The Friend",
       question: "Do you sometimes fear you’ll be forgotten if you stop being useful?",
       reflection: "They serve not to shine, but to stay.",
     },
     {
-      archetype: "The Everyman",
+      archetype: "The Friend",
       question: "When others break apart, are you the one still holding the pieces?",
-      reflection: "The Everyman knows the weight of staying when others leave.",
+      reflection: "The Friend knows the weight of staying when others leave.",
     },
     {
-      archetype: "The Everyman",
+      archetype: "The Friend",
       question: "Have you ever dimmed your own light, just to make others feel more at ease?",
       reflection: "They know how to vanish in plain sight.",
     },

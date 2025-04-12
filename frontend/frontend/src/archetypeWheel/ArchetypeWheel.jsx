@@ -3,6 +3,7 @@ import { archetypes } from "./data";
 import gsap from "gsap";
 import ArchetypeModal from "../components/ArchetypeModal.jsx";
 import PropTypes from "prop-types";
+import { motion, AnimatePresence } from "framer-motion";
 
 const names = [
   "The Pathfinder",
@@ -20,6 +21,17 @@ const names = [
 ];
 
 export default function ArchetypeWheel({ responses }) {
+  const [showOverlay, setShowOverlay] = useState(true);
+  const [modalOpen, setModalOpen] = useState(false);
+  const [selectedArchetype, setSelectedArchetype] = useState(null);
+  const [overlayStep, setOverlayStep] = useState(0);
+
+  const iconRefs = useRef([]);
+  const lineRefs = useRef([]);
+  const scoreRefs = useRef([]);
+  const radius = 220;
+  const center = 250;
+  const circleSize = 500;
 
   const scores = names.map((name) => responses?.[name] || 0);
   const maxScore = Math.max(...scores);
@@ -39,44 +51,41 @@ export default function ArchetypeWheel({ responses }) {
       return `Your strongest voices are ${topNames.join(", ")}, and ${last}. Their whispers rise together.`;
     }
   })();
-  const [modalOpen, setModalOpen] = useState(false);
-  const [selectedArchetype, setSelectedArchetype] = useState(null);
-  const iconRefs = useRef([]);
-  const lineRefs = useRef([]);
-  const scoreRefs = useRef([]);
-  const radius = 220;
-  const center = 250;
-  const circleSize = 500;
 
   const handleIconClick = (index) => {
     setSelectedArchetype({
       name: names[index],
       description: archetypes[index].description || "A gentle placeholder for now.",
+      highlighted: topIndexes.includes(index),
     });
     setModalOpen(true);
   };
 
   useEffect(() => {
-    // Step 1: Get indices sorted by score descending
+    const timeouts = [
+      setTimeout(() => setOverlayStep(1), 2000),
+      setTimeout(() => setOverlayStep(2), 4000),
+      setTimeout(() => setOverlayStep(3), 6000),
+      setTimeout(() => setShowOverlay(false), 8000),
+    ];
+    return () => timeouts.forEach(clearTimeout);
+  }, []);
+
+  useEffect(() => {
+    if (showOverlay) return;
+
     const byScoreDesc = scores
-    .map((score, index) => ({ score, index }))
-    .sort((a, b) => b.score - a.score);
+      .map((score, index) => ({ score, index }))
+      .sort((a, b) => b.score - a.score);
 
-
-    // Step 2: Define your desired visual positions from 12 around the clock
     const spiralClockwise = [0, 11, 1, 10, 2, 9, 3, 8, 4, 7, 5, 6];
-
-    // Step: Create an array that maps each visual index to the *actual* score index
     const sortedIndices = Array(archetypes.length);
     spiralClockwise.forEach((visualIndex, i) => {
-    sortedIndices[visualIndex] = byScoreDesc[i].index;
+      sortedIndices[visualIndex] = byScoreDesc[i].index;
     });
 
     sortedIndices.forEach((index, visualIndex) => {
-      // 0 = 12 o'clock, rotates clockwise
       const angle = (visualIndex / archetypes.length) * 2 * Math.PI - Math.PI / 2;
-
-
       const x = radius * Math.cos(angle);
       const y = radius * Math.sin(angle);
       const score = scores[index];
@@ -119,108 +128,126 @@ export default function ArchetypeWheel({ responses }) {
         ease: "power2.out",
       });
     });
-  }, []);
+  }, [showOverlay]);
 
   return (
     <>
-      <div className="text-center mb-16 text-gunmetal font-serif italic text-base lg:text-lg leading-relaxed tracking-wide">
-        {poeticLine}
-      </div>
-      <div className="relative w-[500px] h-[500px] mx-auto my-12">
-        <svg width={circleSize} height={circleSize} className="absolute top-0 left-0">
-          {archetypes.map((_, i) => (
-            <line
-              key={i}
-              ref={(el) => (lineRefs.current[i] = el)}
-              x1={center}
-              y1={center}
-              x2={center}
-              y2={center}
-              stroke={scores[i] === maxScore ? "#997A8D" : "#6A7D76"}
-              strokeWidth={scores[i] === maxScore ? 5 : 1}
-              strokeOpacity="0.9"
-            />
-          ))}
-        </svg>
-
-        {archetypes.map((a, i) => {
-          const score = scores[i];
-          const isTop = score === maxScore;
-          const scale = 0.8 + (score / 16) * 0.7;
-          const size = 76 * scale;
-
-          return (
-            <div
-              key={a.name}
-              className="absolute left-1/2 top-1/2"
-              ref={(el) => (iconRefs.current[i] = el)}
-              style={{
-                width: `${size}px`,
-                height: `${size}px`,
-                marginLeft: `-${size / 2}px`,
-                marginTop: `-${size / 2}px`,
-                cursor: "pointer",
-              }}
-              onClick={() => handleIconClick(i)}
-            >
-              <div
-                className={`rounded-full overflow-hidden transition-all duration-500 ${
-                    isTop ? "ring-2 border-2 shadow-inner" : "shadow-md"
-                } ${isTop ? "shadow-[0_0_12px_rgba(106,125,118,0.6)]" : ""}`}
-                style={{
-                    width: "100%",
-                    height: "100%",
-                    background: isTop
-                    ? "radial-gradient(ellipse at center, #F1F8F3 10%, #F1EBE5 100%)"
-                    : "",
-                    borderColor: isTop ? "#997A8D" : undefined,
-                }}
-               >
-
-                <img
-                  src={a.icon}
-                  alt={a.name}
-                  className="w-full h-full object-contain"
-                />
-              </div>
+      <AnimatePresence>
+        {showOverlay && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 2 }}
+            className="fixed inset-0 z-50 bg-gunmetal text-isabelline flex items-center justify-center font-serif text-xl md:text-2xl text-center px-6"
+          >
+            <motion.img
+                src="archetypes/vegvisir.png"
+                alt="Vegvisir"
+                initial={{ scale: 1, rotate: 0 }}
+                animate={{ scale: 5.5, rotate: 360 }}
+                transition={{ duration: 7.5, ease: "easeInOut" }}
+                className="absolute -translate-x-1/2 -translate-y-1/2 opacity-20 origin-center mix-blend-overlay w-[400px] pointer-events-none"
+              />
+            <div className="relative space-y-4">
+              {overlayStep > 0 && <h1 className="animate-fade-slow font-serif text-isabelline p-4">The Old Ones gather.</h1>}
+              {overlayStep > 1 && <h1 className="animate-fade-slow font-serif text-isabelline p-4">The Circle turns.</h1>}
+              {overlayStep > 2 && <h1 className="animate-fade-slow font-serif text-isabelline p-4">The truth begins to rise.</h1>}
+              
             </div>
-        
-          );
-        })}
-        {(() => {
-        const sortedIndices = scores
-            .map((score, index) => ({ score, index }))
-            .sort((a, b) => b.score - a.score)
-            .map((entry) => entry.index);
-            return sortedIndices.map((originalIndex) => {
-                return (
+          </motion.div>
+        )}
+      </AnimatePresence>
 
-                <div key={`score-${originalIndex}`} 
-                        className="absolute left-[250px] top-[250px]">
-                    <div
-                        ref={(el) => (scoreRefs.current[originalIndex] = el)}
-                        className="absolute text-[1rem] text-[#2E3D3A] font-serif z-20"
-                        style={{
-                        transform: "translate(-50%, -50%)",
-                        opacity: 0,
-                        }}
-                    >
-                        {scores[originalIndex]}
-                    </div>
+      {!showOverlay && (
+        <>
+          <div className="text-center mb-16 text-gunmetal font-serif italic text-base lg:text-lg leading-relaxed tracking-wide">
+            {poeticLine}
+          </div>
+          <div className="relative w-[500px] h-[500px] mx-auto my-12">
+            <svg width={circleSize} height={circleSize} className="absolute top-0 left-0">
+              {archetypes.map((_, i) => (
+                <line
+                  key={i}
+                  ref={(el) => (lineRefs.current[i] = el)}
+                  x1={center}
+                  y1={center}
+                  x2={center}
+                  y2={center}
+                  stroke={scores[i] === maxScore ? "#997A8D" : "#6A7D76"}
+                  strokeWidth={scores[i] === maxScore ? 5 : 1}
+                  strokeOpacity="0.9"
+                />
+              ))}
+            </svg>
+
+            {archetypes.map((a, i) => {
+              const score = scores[i];
+              const isTop = score === maxScore;
+              const scale = 0.8 + (score / 16) * 0.7;
+              const size = 76 * scale;
+
+              return (
+                <div
+                  key={a.name}
+                  className="absolute left-1/2 top-1/2"
+                  ref={(el) => (iconRefs.current[i] = el)}
+                  style={{
+                    width: `${size}px`,
+                    height: `${size}px`,
+                    marginLeft: `-${size / 2}px`,
+                    marginTop: `-${size / 2}px`,
+                    cursor: "pointer",
+                  }}
+                  onClick={() => handleIconClick(i)}
+                >
+                  <div
+                    className={`rounded-full overflow-hidden transition-all duration-500 ${
+                      isTop ? "ring-2 border-2 shadow-inner" : "shadow-md"
+                    } ${isTop ? "shadow-[0_0_12px_rgba(106,125,118,0.6)]" : ""}`}
+                    style={{
+                      width: "100%",
+                      height: "100%",
+                      background: isTop
+                        ? "radial-gradient(ellipse at center, #F1F8F3 10%, #F1EBE5 100%)"
+                        : "",
+                      borderColor: isTop ? "#997A8D" : undefined,
+                    }}
+                  >
+                    <img src={a.icon} alt={a.name} className="w-full h-full object-contain" />
+                  </div>
                 </div>
-                );
-            });
-        })()}
-      </div>
-      <ArchetypeModal
-        isOpen={modalOpen}
-        onClose={() => setModalOpen(false)}
-        archetype={selectedArchetype}
-      />
+              );
+            })}
+            {(() => {
+              const sortedIndices = scores
+                .map((score, index) => ({ score, index }))
+                .sort((a, b) => b.score - a.score)
+                .map((entry) => entry.index);
+              return sortedIndices.map((originalIndex) => (
+                <div key={`score-${originalIndex}`} className="absolute left-[250px] top-[250px]">
+                  <div
+                    ref={(el) => (scoreRefs.current[originalIndex] = el)}
+                    className="absolute text-[1rem] text-[#2E3D3A] font-serif z-20"
+                    style={{ transform: "translate(-50%, -50%)", opacity: 0 }}
+                  >
+                    {scores[originalIndex]}
+                  </div>
+                </div>
+              ));
+            })()}
+          </div>
+          <ArchetypeModal
+            isOpen={modalOpen}
+            onClose={() => setModalOpen(false)}
+            archetype={selectedArchetype}
+          />
+        </>
+      )}
     </>
   );
 }
 
 ArchetypeWheel.propTypes = {
-    responses: PropTypes.object.isRequired,
-  };
+  responses: PropTypes.object.isRequired,
+};
