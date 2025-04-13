@@ -1,4 +1,4 @@
-import { Routes, Route, useLocation, Navigate } from "react-router-dom";
+import { Routes, Route, useLocation, Navigate, useParams } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
 import PropTypes from "prop-types";
 import AnimatedPage from "./AnimatedPage";
@@ -23,18 +23,19 @@ import ResetPassword from "./ResetPassword";
 import ArchetypeIntro from "../pages/Archetype";
 import ArchetypeQuiz from "../pages/ArchetypeQuiz";
 import ArchetypeWheelPage from "../pages/ArchetypeWheelPage";
-
+import ArchetypeDetailPage from "../pages/ArchetypeResultDetail";
 
 const AnimatedRoutes = ({ user }) => {
   const location = useLocation();
-  console.log("Routes loaded");
+
   return (
     <AnimatePresence mode="wait">
       <Routes location={location} key={location.pathname}>
         <Route path="/" element={<AnimatedPage><Home /></AnimatedPage>} />
-        <Route path="/archetype" element={<AnimatedPage><ArchetypeIntro /></AnimatedPage>}/>
+        <Route path="/archetype" element={<AnimatedPage><ArchetypeIntro /></AnimatedPage>} />
         <Route path="/archetype-quiz" element={<AnimatedPage><ArchetypeQuiz /></AnimatedPage>} />
-        <Route path="/archetype-wheel" element={<AnimatedPage><ArchetypeWheelPage /></AnimatedPage>}/>
+        <Route path="/archetype-wheel" element={<AnimatedPage><ArchetypeWheelPage /></AnimatedPage>} />
+        <Route path="/archetype/:slug" element={<AnimatedPage><ArchetypeDetailPage /></AnimatedPage>} />
         <Route path="/photography" element={<AnimatedPage><Photography /></AnimatedPage>} />
         <Route path="/store" element={<AnimatedPage><Store /></AnimatedPage>} />
         <Route path="/blog" element={<AnimatedPage><Blog /></AnimatedPage>} />

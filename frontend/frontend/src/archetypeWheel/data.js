@@ -1,13 +1,13 @@
 export const archetypes = [
     { 
-        name: "Pathfinder",
-        slug: "pathfinder",
+        name: "The Pathfinder",
+        slug: "the-pathfinder",
         icon: "/archetypes/pathfinder-symbol.png",
         song: "/archetypes/songs/pathfinder.mp3",
         description: "Walks where the trail has vanished. Trusts the unknown. Loses the clear path.  That’s how the truth is found.",
         tagline: "walk beyond the edge of the map",
         base: [
-            "You’ve always felt it—that soft pull on your heart, like wind through tall grass, calling you toward something just out of sight.  Not for the thrill of the unknown, but for the truth it hides.  You walk roads others don’t notice, speaking quietly to rivers and rustling leaves, asking questions with your feet.",
+            "You’ve always felt it, that soft pull on your heart, like wind through tall grass, calling you toward something just out of sight.  Not for the thrill of the unknown, but for the truth it hides.  You walk roads others don’t notice, speaking quietly to rivers and rustling leaves, asking questions with your feet.",
             "The world does not always understand your restlessness.  But you were not made to stay still.  You are the mapmaker of your own soul, and each step you take is a vow to never stop listening."
         ],
         shadowTag: "sometimes the wind calls not to freedom, but to escape.",
@@ -37,8 +37,8 @@ export const archetypes = [
         partingMessage: "The horizon will wait.  For now, rest your feet, and trust that the road will remember you when you’re ready to walk again."
     },
     { 
-        name: 'Orphan',
-        slug: "orphan",
+        name: 'The Orphan',
+        slug: "the-orphan",
         icon: '/archetypes/orphan-symbol.png',
         song: '/archetypes/songs/orphan.mp3',
         description: "Knows the ache of being outside. Carries longing like a lantern. Trust builds slowly, but the heart is fierce.",
@@ -73,8 +73,8 @@ export const archetypes = [
         partingMessage: "Even if the world forgets, this place remembers you.  The light is still in your hands.  Come home whenever you need.",
     },
     { 
-        name: 'Hero',
-        slug: 'hero',
+        name: 'The Hero',
+        slug: 'the-hero',
         icon: '/archetypes/hero-symbol.png',
         song: '/archetypes/songs/hero.mp3',
         description: "Stands when others turn away.  Bleeds for the cause.  The struggle isn’t a burden, it’s the proving ground.",
@@ -109,8 +109,8 @@ export const archetypes = [
         partingMessage: "You’ve done enough for today.  Let your heart rest its armour.  The world will call again—but not tonight.",
     },
     { 
-        name: 'Lover',
-        slug: 'lover',
+        name: 'The Lover',
+        slug: 'the-lover',
         icon: '/archetypes/lover-symbol.png',
         song: '/archetypes/songs/lover.mp3',
         description: "Feels with wild honesty. Sees beauty others miss. Chooses love not as weakness, but as devotion.",
@@ -144,14 +144,14 @@ export const archetypes = [
         partingMessage: "Carry the warmth with you.  Let every touch be slower, every breath more whole.  You have already loved enough for one day.",
     },
     { 
-        name: 'Rebel',
-        slug: 'rebel',
+        name: 'The Rebel',
+        slug: 'the-rebel',
         icon: '/archetypes/rebel-symbol.png',
         song: '/archetypes/songs/rebel.mp3',
         description: "Refuses the false.  Burns the rulebook.  This fire isn’t anger, it’s loyalty to something truer.",
         tagline: 'break what binds you, gently.',
         base: [
-            'You are not chaos—you are clarity dressed in flame.  While others cling to what crumbles, you see the beauty in letting go.  You don’t destroy for destruction’s sake.  You tear down illusions, burn hollow structures, and speak the truths no one dares to whisper.  And in the ash, you plant seeds.',
+            'You are not chaos, you are clarity dressed in flame.  While others cling to what crumbles, you see the beauty in letting go.  You don’t destroy for destruction’s sake.  You tear down illusions, burn hollow structures, and speak the truths no one dares to whisper.  And in the ash, you plant seeds.',
             'It is not easy to be you.  People fear what you reveal.  But you do not come to wound, you come to free.  You are the necessary ending, the sacred storm, the voice that says, “This is not who I am anymore”.  And in that rupture, life begins again.',
         ],
         shadowTag: 'when your truth scorches before it softens.',
@@ -180,8 +180,8 @@ export const archetypes = [
         partingMessage: "The fire has done its work. Let the embers cool and your breath return. The next becoming can wait for the morning.",
     },
     { 
-        name: 'Jester',
-        slug: 'jester',
+        name: 'The Jester',
+        slug: 'the-jester',
         icon: '/archetypes/jester-symbol.png',
         song: '/archetypes/songs/jester.mp3',
         description: "Tells truth through laughter. Masks sorrow in wit. The fool is never foolish, just brave enough to play.",
@@ -215,8 +215,8 @@ export const archetypes = [
         partingMessage: "Stumble into joy.  Laugh at the stars on your way home.  When the sky feels heavy, return — we’ll be here.",
     },
     { 
-        name: 'Everyman',
-        slug: 'friend',
+        name: 'The Friend',
+        slug: 'the-friend',
         icon: '/archetypes/everyman-symbol.png',
         song: '/archetypes/songs/friend.mp3',
         description: "Holds space without asking. Arrives without needing. A quiet presence that steadies the storm.",
@@ -251,8 +251,8 @@ export const archetypes = [
         partingMessage: "Not all beginnings are loud.  This one will wait in the quiet until you’re ready to try again.",
     },
     { 
-        name: 'Sage',
-        slug: 'sage',
+        name: 'The Sage',
+        slug: 'the-sage',
         icon: '/archetypes/sage-symbol.png',
         song: '/archetypes/songs/sage.mp3',
         description: "Doesn’t shout, just listens. Speaks only after seeing. The wisdom was never in the answer — but in the stillness between.",
@@ -288,8 +288,8 @@ export const archetypes = [
         partingMessage: "The question will still be here tomorrow. For now, close the book, sip the quiet, and let the night speak to you.",
     },
     { 
-        name: 'Nurturer',
-        slug: 'healer',
+        name: 'The Healer',
+        slug: 'the-healer',
         icon: '/archetypes/nurturer-symbol.png',
         song: '/archetypes/songs/healer.mp3',
         description: "Sees what pain hides.  Tends what others overlook.  Wholeness is found not in fixing, but in honouring the wound.",
@@ -323,8 +323,8 @@ export const archetypes = [
         partingMessage: "You’ve given so much. Now take this—our quiet blessing for your heart. Let it carry you gently, wherever you go.",
     },
     { 
-        name: 'Artist',
-        slug: 'artist',
+        name: 'The Artist',
+        slug: 'the-artist',
         icon: '/archetypes/artist-symbol.png',
         song: '/archetypes/songs/artist.mp3',
         description: "Shapes what words cannot hold.  Breathes meaning into matter.  Doesn’t chase beauty, but becomes it.",
@@ -360,8 +360,8 @@ export const archetypes = [
         partingMessage: "The canvas is never empty. Even now, your soul leaves colour behind. Rest your brushes, and dream in pigment.",
     },
     { 
-        name: 'Ruler',
-        slug: 'ruler',
+        name: 'The Ruler',
+        slug: 'the-ruler',
         icon: '/archetypes/ruler-symbol.png',
         song: '/archetypes/songs/ruler.mp3',
         description: "Builds where others destroy.  Sets boundaries, not cages.  Power isn’t taken, it’s carried with care.",
@@ -395,8 +395,8 @@ export const archetypes = [
         partingMessage: "Your kingdom within is still standing. Let the weight fall for now. You’ve already held more than most ever see.",
     },
     { 
-        name: 'Magician',
-        slug: "magician",
+        name: 'The Magician',
+        slug: "the-magician",
         icon: '/archetypes/magician-symbol.png',
         song: '/archetypes/songs/magician.mp3',
         description: "Moves between what is and what could be.  Weaves wonder through pattern.  When still, the hidden speaks.",
