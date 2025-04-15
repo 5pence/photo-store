@@ -21,7 +21,9 @@ const names = [
 ];
 
 export default function ArchetypeWheel({ responses }) {
-  const [showOverlay, setShowOverlay] = useState(true);
+  const [showOverlay, setShowOverlay] = useState(() => {
+    return sessionStorage.getItem("hasSeenWheelIntro") !== "true";
+  });
   const [modalOpen, setModalOpen] = useState(false);
   const [selectedArchetype, setSelectedArchetype] = useState(null);
   const [overlayStep, setOverlayStep] = useState(0);
@@ -62,11 +64,20 @@ export default function ArchetypeWheel({ responses }) {
   };
 
   useEffect(() => {
+    // only run on first time
+    if (sessionStorage.getItem("hasSeenWheelIntro") === "true") {
+        setShowOverlay(false);
+        return;
+    }
+
     const timeouts = [
       setTimeout(() => setOverlayStep(1), 2000),
       setTimeout(() => setOverlayStep(2), 4000),
       setTimeout(() => setOverlayStep(3), 6000),
-      setTimeout(() => setShowOverlay(false), 8000),
+      setTimeout(() => {
+        setShowOverlay(false);
+        sessionStorage.setItem("hasSeenWheelIntro", "true");
+      }, 8000),
     ];
     return () => timeouts.forEach(clearTimeout);
   }, []);

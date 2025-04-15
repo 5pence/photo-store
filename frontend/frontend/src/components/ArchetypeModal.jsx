@@ -76,7 +76,7 @@ export default function ArchetypeModal({ isOpen, onClose, archetype }) {
         <div className="mt-6 bg-[#E6EAE7] p-4 rounded-xl border border-[#6A7D76]/30 text-sm text-center text-gunmetal">
             <p className="italic mb-3 tracking-wide">This voice speaks loudest right now.</p>
             <a
-            href={`/archetypes/${archetype.name.toLowerCase().replace(/\s+/g, "-")}`}
+            href={`/archetype/${archetype.name.toLowerCase().replace(/\s+/g, "-")}`}
             className="inline-block mt-4 mb-2 px-4 py-2 rounded bg-[#6A7D76] text-white hover:bg-[#5a6d66] transition"
             >
                Listen. Reflect. Remember.
