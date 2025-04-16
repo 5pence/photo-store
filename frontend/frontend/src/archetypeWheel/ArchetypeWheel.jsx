@@ -27,6 +27,8 @@ export default function ArchetypeWheel({ responses }) {
   const [modalOpen, setModalOpen] = useState(false);
   const [selectedArchetype, setSelectedArchetype] = useState(null);
   const [overlayStep, setOverlayStep] = useState(0);
+  const [overlayComplete, setOverlayComplete] = useState(false);
+
 
   const iconRefs = useRef([]);
   const lineRefs = useRef([]);
@@ -35,7 +37,12 @@ export default function ArchetypeWheel({ responses }) {
   const center = 250;
   const circleSize = 500;
 
-  const scores = names.map((name) => responses?.[name] || 0);
+  const [savedScores, setSavedScores] = useState(() => {
+    const stored = sessionStorage.getItem("archetypeScores");
+    return stored ? JSON.parse(stored) : responses;
+  });
+
+  const scores = names.map((name) => savedScores?.[name] || 0);
   const maxScore = Math.max(...scores);
 
   const topIndexes = scores
@@ -67,6 +74,7 @@ export default function ArchetypeWheel({ responses }) {
     // only run on first time
     if (sessionStorage.getItem("hasSeenWheelIntro") === "true") {
         setShowOverlay(false);
+        setOverlayComplete(true);
         return;
     }
 
@@ -76,6 +84,7 @@ export default function ArchetypeWheel({ responses }) {
       setTimeout(() => setOverlayStep(3), 6000),
       setTimeout(() => {
         setShowOverlay(false);
+        setOverlayComplete(true);
         sessionStorage.setItem("hasSeenWheelIntro", "true");
       }, 8000),
     ];
@@ -172,9 +181,11 @@ export default function ArchetypeWheel({ responses }) {
 
       {!showOverlay && (
         <>
-          <div className="text-center mb-16 text-gunmetal font-serif italic text-base lg:text-lg leading-relaxed tracking-wide">
-            {poeticLine}
-          </div>
+            {overlayComplete && (
+                <div className="text-center mb-16 text-gunmetal font-serif italic text-base lg:text-lg leading-relaxed tracking-wide">
+                    {poeticLine}
+                </div>
+            )}
           <div className="relative w-[500px] h-[500px] mx-auto my-12">
             <svg width={circleSize} height={circleSize} className="absolute top-0 left-0">
               {archetypes.map((_, i) => (

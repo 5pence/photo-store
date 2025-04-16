@@ -50,20 +50,27 @@ export default function ArchetypeQuiz() {
     if (disabled) return; // prevent double clicking
     setDisabled(true);
     setSelected(score);
-    setResponses((prev) => ({
-      ...prev,
-      [archetype]: (prev[archetype] || 0) + score,
-    }));
+  
+    const updatedResponses = {
+      ...responses,
+      [archetype]: (responses[archetype] || 0) + score,
+    };
+  
+    setResponses(updatedResponses);
+  
     setTimeout(() => {
       setSelected(null);
       setDisabled(false);
       if (currentIndex < shuffledQuestions.length - 1) {
         setCurrentIndex((prev) => prev + 1);
       } else {
-        navigate("/archetype-wheel", { state: { responses } });
+        // 🔐 Save to sessionStorage
+        sessionStorage.setItem("archetypeScores", JSON.stringify(updatedResponses));
+        navigate("/archetype-wheel", { state: { responses: updatedResponses } });
       }
     }, 500);
   };
+  
 
   if (shuffledQuestions.length === 0) return <div className="p-8">Loading...</div>;
 

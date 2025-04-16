@@ -9,11 +9,18 @@ export default function ArchetypeWheelPage() {
   const [showContent, setShowContent] = useState(false);
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setShowContent(true);
-    }, 8000); // Delay to match overlay reveal
-    return () => clearTimeout(timer);
+    const hasSeenIntro = sessionStorage.getItem("hasSeenWheelIntro") === "true";
+  
+    if (hasSeenIntro) {
+      setShowContent(true); // Show immediately
+    } else {
+      const timer = setTimeout(() => {
+        setShowContent(true); // Wait 8 seconds on first view
+      }, 8000);
+      return () => clearTimeout(timer);
+    }
   }, []);
+  
 
   return (
     <motion.div
