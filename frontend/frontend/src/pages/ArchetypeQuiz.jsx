@@ -35,24 +35,25 @@ export default function ArchetypeQuiz() {
     if (disabled) return;
     setDisabled(true);
     setSelected(score);
-
+  
     const updatedResponses = {
       ...responses,
       [archetype]: (responses[archetype] || 0) + score,
     };
-
-    setResponses(updatedResponses);
-
+  
     setTimeout(() => {
-      setDisabled(false);
       if (currentIndex < shuffledQuestions.length - 1) {
         setCurrentIndex((prev) => prev + 1);
+        // 🟢 Move selected reset here — so it's cleared just before new question renders
+        setSelected(null);
       } else {
         sessionStorage.setItem("archetypeScores", JSON.stringify(updatedResponses));
         navigate("/archetype-wheel", { state: { responses: updatedResponses } });
       }
+      setDisabled(false);
     }, 500);
   };
+  
 
   if (shuffledQuestions.length === 0) return <div className="p-8">Loading...</div>;
 
