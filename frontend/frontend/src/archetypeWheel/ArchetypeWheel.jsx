@@ -29,7 +29,6 @@ export default function ArchetypeWheel({ responses }) {
   const [overlayStep, setOverlayStep] = useState(0);
   const [overlayComplete, setOverlayComplete] = useState(false);
 
-
   const iconRefs = useRef([]);
   const lineRefs = useRef([]);
   const scoreRefs = useRef([]);
@@ -71,11 +70,10 @@ export default function ArchetypeWheel({ responses }) {
   };
 
   useEffect(() => {
-    // only run on first time
     if (sessionStorage.getItem("hasSeenWheelIntro") === "true") {
-        setShowOverlay(false);
-        setOverlayComplete(true);
-        return;
+      setShowOverlay(false);
+      setOverlayComplete(true);
+      return;
     }
 
     const timeouts = [
@@ -150,6 +148,10 @@ export default function ArchetypeWheel({ responses }) {
     });
   }, [showOverlay]);
 
+  const sortedScores = scores
+    .map((score, index) => ({ score, index }))
+    .sort((a, b) => b.score - a.score);
+
   return (
     <>
       <AnimatePresence>
@@ -162,18 +164,17 @@ export default function ArchetypeWheel({ responses }) {
             className="fixed inset-0 z-50 bg-gunmetal text-isabelline flex items-center justify-center font-serif text-xl md:text-2xl text-center px-6"
           >
             <motion.img
-                src="archetypes/vegvisir.png"
-                alt="Vegvisir"
-                initial={{ scale: 1, rotate: 0 }}
-                animate={{ scale: 5.5, rotate: 360 }}
-                transition={{ duration: 7.5, ease: "easeInOut" }}
-                className="absolute -translate-x-1/2 -translate-y-1/2 opacity-20 origin-center mix-blend-overlay w-[400px] pointer-events-none"
-              />
+              src="archetypes/vegvisir.png"
+              alt="Vegvisir"
+              initial={{ scale: 1, rotate: 0 }}
+              animate={{ scale: 5.5, rotate: 360 }}
+              transition={{ duration: 7.5, ease: "easeInOut" }}
+              className="absolute -translate-x-1/2 -translate-y-1/2 opacity-20 origin-center mix-blend-overlay w-[400px] pointer-events-none"
+            />
             <div className="relative space-y-4">
               {overlayStep > 0 && <h1 className="animate-fade-slow font-serif text-isabelline p-4">The Old Ones gather.</h1>}
               {overlayStep > 1 && <h1 className="animate-fade-slow font-serif text-isabelline p-4">The Circle turns.</h1>}
               {overlayStep > 2 && <h1 className="animate-fade-slow font-serif text-isabelline p-4">The truth begins to rise.</h1>}
-              
             </div>
           </motion.div>
         )}
@@ -181,12 +182,13 @@ export default function ArchetypeWheel({ responses }) {
 
       {!showOverlay && (
         <>
-            {overlayComplete && (
-                <div className="text-center mb-16 text-gunmetal font-serif italic text-base lg:text-lg leading-relaxed tracking-wide">
-                    {poeticLine}
-                </div>
-            )}
-          <div className="relative w-[500px] h-[500px] mx-auto my-12">
+          {overlayComplete && (
+            <div className="text-center mb-16 text-gunmetal font-serif italic text-base lg:text-lg leading-relaxed tracking-wide">
+              {poeticLine}
+            </div>
+          )}
+
+          <div className="hidden sm:block relative w-[500px] h-[500px] mx-auto my-12">
             <svg width={circleSize} height={circleSize} className="absolute top-0 left-0">
               {archetypes.map((_, i) => (
                 <line
@@ -241,24 +243,46 @@ export default function ArchetypeWheel({ responses }) {
                 </div>
               );
             })}
-            {(() => {
-              const sortedIndices = scores
-                .map((score, index) => ({ score, index }))
-                .sort((a, b) => b.score - a.score)
-                .map((entry) => entry.index);
-              return sortedIndices.map((originalIndex) => (
-                <div key={`score-${originalIndex}`} className="absolute left-[250px] top-[250px]">
-                  <div
-                    ref={(el) => (scoreRefs.current[originalIndex] = el)}
-                    className="absolute text-[1rem] text-[#2E3D3A] font-serif z-20"
-                    style={{ transform: "translate(-50%, -50%)", opacity: 0 }}
-                  >
-                    {scores[originalIndex]}
-                  </div>
+            {sortedScores.map(({ index }) => (
+              <div key={`score-${index}`} className="absolute left-[250px] top-[250px]">
+                <div
+                  ref={(el) => (scoreRefs.current[index] = el)}
+                  className="absolute text-[1rem] text-[#2E3D3A] font-serif z-20"
+                  style={{ transform: "translate(-50%, -50%)", opacity: 0 }}
+                >
+                  {scores[index]}
                 </div>
-              ));
-            })()}
+              </div>
+            ))}
           </div>
+
+          {/* Mobile View: Vertical List */}
+          <div className="sm:hidden w-full max-w-sm mx-auto my-8 space-y-3 px-4">
+  {sortedScores.map(({ score, index }) => {
+    const isTop = score === maxScore;
+    return (
+      <div
+        key={index}
+        onClick={() => handleIconClick(index)}
+        className={`flex items-center gap-4 p-3 rounded-xl shadow hover:bg-nyanza cursor-pointer transition ${
+          isTop ? "bg-isabelline ring-2 ring-[#997A8D]" : "bg-isabelline"
+        }`}
+      >
+        <img
+          src={archetypes[index].icon}
+          alt={names[index]}
+          className="w-12 h-12 object-contain rounded-full"
+        />
+        <div className="flex-1">
+          <p className="font-serif text-base text-gunmetal">{names[index]}</p>
+        </div>
+        <span className="text-hookers-green font-serif text-lg font-medium">{score}</span>
+      </div>
+    );
+  })}
+</div>
+
+
           <ArchetypeModal
             isOpen={modalOpen}
             onClose={() => setModalOpen(false)}
