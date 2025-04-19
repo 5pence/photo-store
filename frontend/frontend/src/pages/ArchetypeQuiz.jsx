@@ -113,10 +113,19 @@ export default function ArchetypeQuiz() {
               {moonPhases.map(({ value, label, src }) => (
                 <motion.button
                   key={value}
-                  className="flex flex-col items-center bg-transparent hover:bg-transparent focus:outline-none focus:ring-0 focus-visible:ring-0 focus-visible:outline-none active:outline-none"
+                  className="flex items-center gap-4 bg-transparent focus:outline-none focus:ring-0 focus-visible:ring-0 focus-visible:outline-none active:outline-none"
                   onClick={() => handleAnswer(value, current.archetype)}
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.95 }}
+                  style={{
+                    WebkitTapHighlightColor: 'transparent',
+                    WebkitAppearance: 'none',
+                    appearance: 'none',
+                    background: 'transparent',
+                    outline: 'none',
+                    border: 'none',
+                    boxShadow: 'none',
+                  }}
                 >
                   <motion.img
                     src={src}
@@ -153,6 +162,15 @@ export default function ArchetypeQuiz() {
                     className="flex items-center gap-4 bg-transparent focus:outline-none focus:ring-0 focus-visible:ring-0 focus-visible:outline-none active:outline-none"
                     onClick={() => handleAnswer(value, current.archetype)}
                     whileTap={{ scale: 0.97 }}
+                    style={{
+                        WebkitTapHighlightColor: 'transparent',
+                        WebkitAppearance: 'none',
+                        appearance: 'none',
+                        background: 'transparent',
+                        outline: 'none',
+                        border: 'none',
+                        boxShadow: 'none',
+                      }}
                   >
                     <motion.img
                       src={src}

@@ -33,3 +33,19 @@
     background: transparent !important;
   }
   
+  .root :global(button) {
+    background: transparent !important;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-appearance: none;
+    appearance: none;
+    border: none;
+  }
+  
+  .root :global(button:focus),
+  .root :global(button:focus-visible),
+  .root :global(button:active) {
+    outline: none !important;
+    box-shadow: none !important;
+    background: transparent !important;
+  }
+  
