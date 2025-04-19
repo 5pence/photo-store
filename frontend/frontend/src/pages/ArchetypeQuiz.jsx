@@ -2,6 +2,7 @@ import { useEffect, useState, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import questions from "../archetypeWheel/archetypeQuestions";
+import styles from "./ArchetypeQuiz.module.css"; 
 
 const shuffleArray = (arr) => [...arr].sort(() => Math.random() - 0.5);
 
@@ -31,7 +32,6 @@ export default function ArchetypeQuiz() {
     prevIndexRef.current = currentIndex;
   }, [currentIndex]);
 
-  // Clear selection immediately when index changes (prevents carry-over)
   useEffect(() => {
     setSelected(null);
   }, [currentIndex]);
@@ -40,16 +40,15 @@ export default function ArchetypeQuiz() {
     if (disabled) return;
     setDisabled(true);
     setSelected(score);
-  
+
     const updatedResponses = {
       ...responses,
       [archetype]: (responses[archetype] || 0) + score,
     };
-  
+
     setTimeout(() => {
       if (currentIndex < shuffledQuestions.length - 1) {
         setCurrentIndex((prev) => prev + 1);
-        // 🟢 Move selected reset here — so it's cleared just before new question renders
         setSelected(null);
       } else {
         sessionStorage.setItem("archetypeScores", JSON.stringify(updatedResponses));
@@ -58,7 +57,6 @@ export default function ArchetypeQuiz() {
       setDisabled(false);
     }, 500);
   };
-  
 
   if (shuffledQuestions.length === 0) return <div className="p-8">Loading...</div>;
 
@@ -66,7 +64,7 @@ export default function ArchetypeQuiz() {
   const progress = ((currentIndex + 1) / shuffledQuestions.length) * 100;
 
   return (
-    <div className="min-h-screen bg-nyanza text-gunmetal font-serif flex flex-col items-center px-4 pt-6 sm:pt-20 pb-12 text-center relative">
+    <div className={`${styles.root} min-h-screen bg-nyanza text-gunmetal font-serif flex flex-col items-center px-4 pt-6 sm:pt-20 pb-12 text-center relative`}>
       <div className="mb-6 sm:mb-16 flex flex-col items-center w-full max-w-md">
         <p className="text-[10px] sm:text-xs italic mb-1 sm:mb-1 mt-2 sm:mt-0">
           Step {currentIndex + 1} of 48 — <span className="text-gunmetal/60">the journey begins in shadow</span>
@@ -101,9 +99,7 @@ export default function ArchetypeQuiz() {
             </motion.h2>
           </div>
 
-          {/* Moon Phase Selector */}
           <div className="relative w-full">
-            {/* Desktop line */}
             <svg
               height="1"
               width={window.innerWidth < 768 ? "440px" : "500px"}
@@ -112,12 +108,12 @@ export default function ArchetypeQuiz() {
               <line x1="0" y1="1" x2="100%" y2="1" stroke="#2E3D3A" strokeWidth="2" />
             </svg>
 
-            {/* Horizontal Layout (desktop/tablet) */}
+            {/* Desktop */}
             <div className="hidden sm:flex justify-center items-center gap-6 relative z-10">
               {moonPhases.map(({ value, label, src }) => (
                 <motion.button
                   key={value}
-                  className="flex flex-col items-center bg-transparent hover:bg-transparent focus:outline-none"
+                  className="flex flex-col items-center bg-transparent hover:bg-transparent focus:outline-none focus:ring-0 focus-visible:ring-0 focus-visible:outline-none active:outline-none"
                   onClick={() => handleAnswer(value, current.archetype)}
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.95 }}
@@ -127,10 +123,10 @@ export default function ArchetypeQuiz() {
                     alt={label}
                     className="w-12 h-12 md:w-16 md:h-16 object-contain"
                     animate={
-                        selected === value && currentIndex === prevIndexRef.current
-                          ? { scale: 1.15 }
-                          : { scale: 1 }
-                      }                      
+                      selected === value && currentIndex === prevIndexRef.current
+                        ? { scale: 1.15 }
+                        : { scale: 1 }
+                    }
                     transition={{ duration: 0.3 }}
                   />
                   <span className="text-xs mt-1 text-gunmetal opacity-70">{label}</span>
@@ -138,9 +134,8 @@ export default function ArchetypeQuiz() {
               ))}
             </div>
 
-            {/* Vertical Layout (mobile) */}
+            {/* Mobile */}
             <div className="sm:hidden relative flex justify-center items-center mt-6 mb-10">
-              {/* Vertical line SVG */}
               <svg
                 width="1"
                 height="calc(100% - 40px)"
@@ -151,12 +146,11 @@ export default function ArchetypeQuiz() {
                 <line x1="1" y1="0" x2="1" y2="100" stroke="#2E3D3A" strokeWidth="2" />
               </svg>
 
-              {/* Moon choices */}
               <div className="flex flex-col gap-6 relative z-10">
                 {moonPhases.map(({ value, label, src }) => (
                   <motion.button
                     key={value}
-                    className="flex items-center gap-4 bg-transparent focus:outline-none"
+                    className="flex items-center gap-4 bg-transparent focus:outline-none focus:ring-0 focus-visible:ring-0 focus-visible:outline-none active:outline-none"
                     onClick={() => handleAnswer(value, current.archetype)}
                     whileTap={{ scale: 0.97 }}
                   >
@@ -168,7 +162,7 @@ export default function ArchetypeQuiz() {
                         selected === value && currentIndex === prevIndexRef.current
                           ? { scale: 1.1 }
                           : { scale: 1 }
-                      }                      
+                      }
                       transition={{ duration: 0.3 }}
                     />
                     <span className="text-base text-gunmetal font-serif">{label}</span>

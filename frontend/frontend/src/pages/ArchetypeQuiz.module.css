@@ -1,0 +1,35 @@
+.root :global(button img) {
+    -webkit-tap-highlight-color: transparent;
+    -webkit-user-select: none;
+    user-select: none;
+    touch-action: manipulation;
+  }
+  
+  .root :global(button:focus),
+  .root :global(button:active) {
+    outline: none;
+    box-shadow: none;
+    border: none;
+  }
+  
+  .root :global(button:focus img),
+  .root :global(button:active img) {
+    filter: none !important;
+    transform: none !important;
+  }
+
+  button{
+    background: none;
+  }
+  
+  .root :global(button:focus-visible) {
+    outline: none !important;
+    box-shadow: none !important;
+  }
+  
+  .root :global(button:focus) {
+    outline: none !important;
+    box-shadow: none !important;
+    background: transparent !important;
+  }
+  
