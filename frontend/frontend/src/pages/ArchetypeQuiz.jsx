@@ -40,23 +40,32 @@ export default function ArchetypeQuiz() {
     if (disabled) return;
     setDisabled(true);
     setSelected(score);
-
-    const updatedResponses = {
-      ...responses,
-      [archetype]: (responses[archetype] || 0) + score,
-    };
-
-    setTimeout(() => {
-      if (currentIndex < shuffledQuestions.length - 1) {
-        setCurrentIndex((prev) => prev + 1);
+  
+    // Use functional update to always access latest state
+    setResponses((prevResponses) => {
+      const updated = {
+        ...prevResponses,
+        [archetype]: (prevResponses[archetype] || 0) + score,
+      };
+  
+      sessionStorage.setItem("archetypeScores", JSON.stringify(updated));
+  
+      // Navigate inside this block so it's based on latest data
+      setTimeout(() => {
         setSelected(null);
-      } else {
-        sessionStorage.setItem("archetypeScores", JSON.stringify(updatedResponses));
-        navigate("/archetype-wheel", { state: { responses: updatedResponses } });
-      }
-      setDisabled(false);
-    }, 500);
+        setDisabled(false);
+  
+        if (currentIndex < shuffledQuestions.length - 1) {
+          setCurrentIndex((prev) => prev + 1);
+        } else {
+          navigate("/archetype-wheel", { state: { responses: updated } });
+        }
+      }, 500);
+  
+      return updated;
+    });
   };
+  
 
   if (shuffledQuestions.length === 0) return <div className="p-8">Loading...</div>;
 
