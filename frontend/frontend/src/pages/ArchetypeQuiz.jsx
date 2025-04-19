@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import questions from "../archetypeWheel/archetypeQuestions";
@@ -21,10 +21,15 @@ export default function ArchetypeQuiz() {
   const [disabled, setDisabled] = useState(false);
   const isFirstQuestion = currentIndex === 0;
   const navigate = useNavigate();
+  const prevIndexRef = useRef(currentIndex);
 
   useEffect(() => {
     setShuffledQuestions(shuffleArray(questions));
   }, []);
+
+  useEffect(() => {
+    prevIndexRef.current = currentIndex;
+  }, [currentIndex]);
 
   // Clear selection immediately when index changes (prevents carry-over)
   useEffect(() => {
@@ -112,7 +117,7 @@ export default function ArchetypeQuiz() {
               {moonPhases.map(({ value, label, src }) => (
                 <motion.button
                   key={value}
-                  className="flex flex-col items-center bg-transparent hover:bg-transparent"
+                  className="flex flex-col items-center bg-transparent hover:bg-transparent focus:outline-none"
                   onClick={() => handleAnswer(value, current.archetype)}
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.95 }}
@@ -121,7 +126,11 @@ export default function ArchetypeQuiz() {
                     src={src}
                     alt={label}
                     className="w-12 h-12 md:w-16 md:h-16 object-contain"
-                    animate={{ scale: selected === value ? 1.15 : 1 }}
+                    animate={
+                        selected === value && currentIndex === prevIndexRef.current
+                          ? { scale: 1.15 }
+                          : { scale: 1 }
+                      }                      
                     transition={{ duration: 0.3 }}
                   />
                   <span className="text-xs mt-1 text-gunmetal opacity-70">{label}</span>
@@ -147,7 +156,7 @@ export default function ArchetypeQuiz() {
                 {moonPhases.map(({ value, label, src }) => (
                   <motion.button
                     key={value}
-                    className="flex items-center gap-4 bg-transparent"
+                    className="flex items-center gap-4 bg-transparent focus:outline-none"
                     onClick={() => handleAnswer(value, current.archetype)}
                     whileTap={{ scale: 0.97 }}
                   >
@@ -155,7 +164,11 @@ export default function ArchetypeQuiz() {
                       src={src}
                       alt={label}
                       className="w-10 h-10 object-contain"
-                      animate={{ scale: selected === value ? 1.1 : 1 }}
+                      animate={
+                        selected === value && currentIndex === prevIndexRef.current
+                          ? { scale: 1.1 }
+                          : { scale: 1 }
+                      }                      
                       transition={{ duration: 0.3 }}
                     />
                     <span className="text-base text-gunmetal font-serif">{label}</span>
