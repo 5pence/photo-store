@@ -33,6 +33,7 @@ const AnimatedRoutes = ({ user }) => {
       <Routes location={location} key={location.pathname}>
         <Route path="/" element={<AnimatedPage><Home /></AnimatedPage>} />
         <Route path="/archetype" element={<AnimatedPage><ArchetypeIntro /></AnimatedPage>} />
+        <Route path="/archetypes" element={<AnimatedPage><ArchetypeIntro /></AnimatedPage>} />
         <Route path="/archetype-quiz" element={<AnimatedPage><ArchetypeQuiz /></AnimatedPage>} />
         <Route path="/archetype-wheel" element={<AnimatedPage><ArchetypeWheelPage /></AnimatedPage>} />
         <Route path="/archetype/:slug" element={<AnimatedPage><ArchetypeDetailPage /></AnimatedPage>} />
