@@ -41,10 +41,6 @@ export default function ArchetypeWheelPage() {
                 <h1 className="text-5xl lg:text-6xl font-light mt-4 mb-4 tracking-wide text-gunmetal font-serif">
                 Your Inner Compass
                 </h1>
-                <p className="font-serif text-xl lg:text-2xl text-gunmetal italic leading-relaxed mb-6 font-[400] tracking-wide">
-                Twelve voices. Each with a shape. <br />
-                Turn toward the one that’s been whispering.
-                </p>
             </motion.div>
         )}
 
@@ -52,7 +48,6 @@ export default function ArchetypeWheelPage() {
 
         {/* Archetype Wheel */}
         <ArchetypeWheel responses={responses} />
-
       </div>
     </motion.div>
   );
