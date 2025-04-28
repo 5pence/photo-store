@@ -109,20 +109,13 @@ export default function ArchetypeQuiz() {
           </div>
 
           <div className="relative w-full">
-            <svg
-              height="1"
-              width={window.innerWidth < 768 ? "440px" : "500px"}
-              className="absolute top-[2.3rem] left-1/2 transform -translate-x-1/2 -translate-y-0.5 z-0 hidden sm:block"
-            >
-              <line x1="0" y1="1" x2="100%" y2="1" stroke="#2E3D3A" strokeWidth="2" />
-            </svg>
 
             {/* Desktop */}
             <div className="hidden sm:flex justify-center items-center gap-6 relative z-10">
               {moonPhases.map(({ value, label, src }) => (
                 <motion.button
                   key={value}
-                  className="flex items-center gap-4 bg-transparent focus:outline-none focus:ring-0 focus-visible:ring-0 focus-visible:outline-none active:outline-none"
+                  className="flex flex-col items-center gap-2 bg-transparent focus:outline-none focus:ring-0 focus-visible:ring-0 focus-visible:outline-none active:outline-none"
                   onClick={() => handleAnswer(value, current.archetype)}
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.95 }}
@@ -147,7 +140,7 @@ export default function ArchetypeQuiz() {
                     }
                     transition={{ duration: 0.3 }}
                   />
-                  <span className="text-xs mt-1 text-gunmetal opacity-70">{label}</span>
+                  <span className="text-base mt-1 text-gunmetal opacity-90">{label}</span>
                 </motion.button>
               ))}
             </div>
