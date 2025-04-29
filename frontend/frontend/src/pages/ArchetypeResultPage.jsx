@@ -38,9 +38,6 @@ body: JSON.stringify(payload),
 if (res.ok) {
     setShowModal(false);
     setShowThanks(true);
-    setTimeout(() => {
-      alert("You're in the circle 🌕\n\nA quiet letter will find its way to your inbox soon.");
-    }, 300);
 } else {
 alert("Something went wrong. Please try again later.");
 }
