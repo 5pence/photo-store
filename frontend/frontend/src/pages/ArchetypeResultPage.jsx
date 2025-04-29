@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { archetypes } from '../archetypeWheel/data';
@@ -9,6 +9,7 @@ const { slug } = useParams();
 const archetype = archetypes.find((a) => a.slug === slug);
 const [showModal, setShowModal] = useState(false);
 const [showThanks, setShowThanks] = useState(false);
+const [showToast, setShowToast] = useState(false);
 const [formData, setFormData] = useState({ name: '', email: '' });
 const [submitting, setSubmitting] = useState(false);
 const API_BASE_URL = import.meta.env.VITE_BACKEND_URL;
@@ -16,6 +17,12 @@ const API_BASE_URL = import.meta.env.VITE_BACKEND_URL;
 if (!archetype) return <div className="text-center p-8">Archetype not found.</div>;
 
 const handleJoinClick = () => setShowModal(true);
+
+const handleCopyLink = () => {
+    navigator.clipboard.writeText(`${window.location.origin}/archetype`);
+    setShowToast(true);
+    setTimeout(() => setShowToast(false), 3000); // Hide after 3 seconds
+};
 
 const handleFormSubmit = async (e) => {
 e.preventDefault();
@@ -153,7 +160,28 @@ return (
       If this stirred something in you, give it as a moment to another who walks the quiet path too.<br />
       No one knows who might cradle a light like this.
     </p>
-
+    <div className="flex justify-center mt-6">
+        <button
+            onClick={handleCopyLink}
+            className="bg-isabelline hover:bg-nyanza text-gunmetal font-serif text-lg px-6 py-2 rounded-full shadow transition-all duration-300"
+        >
+            Copy Link to Share
+        </button>
+    </div>
+    <AnimatePresence>
+        {showToast && (
+            <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 30 }}
+            transition={{ duration: 0.8, ease: "easeInOut" }}    
+            className="fixed bottom-6 left-1/2 transform -translate-x-1/2 bg-lavender text-gunmetal font-serif px-6 py-3 rounded-full shadow-lg"
+            >
+                <div className="text-lg">Link copied. A new journey begins...</div>
+                <div className="text-sm italic mt-1 opacity-80">The quiet path opens to another.</div>
+            </motion.div>
+        )}
+    </AnimatePresence>
 
     <p className="text-center italic font-loretta tracking-wide text-lg text-gunmetal mt-8 mb-2">
       This sacred space carries no ads, no noise, no algorithms nudging you toward more.<br />
