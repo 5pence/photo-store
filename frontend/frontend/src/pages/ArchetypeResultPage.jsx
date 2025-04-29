@@ -8,6 +8,7 @@ export default function ArchetypeResult() {
 const { slug } = useParams();
 const archetype = archetypes.find((a) => a.slug === slug);
 const [showModal, setShowModal] = useState(false);
+const [showThanks, setShowThanks] = useState(false);
 const [formData, setFormData] = useState({ name: '', email: '' });
 const [submitting, setSubmitting] = useState(false);
 const API_BASE_URL = import.meta.env.VITE_BACKEND_URL;
@@ -35,7 +36,11 @@ body: JSON.stringify(payload),
 });
 
 if (res.ok) {
-window.location.href = "https://ko-fi.com/spencersstudio";
+    setShowModal(false);
+    setShowThanks(true);
+    setTimeout(() => {
+      alert("You're in the circle 🌕\n\nA quiet letter will find its way to your inbox soon.");
+    }, 300);
 } else {
 alert("Something went wrong. Please try again later.");
 }
@@ -171,7 +176,7 @@ return (
       </div>
     </div>
     <p className="text-center italic font-loretta tracking-wide text-lg text-gunmetal mt-8 mb-2">
-      Everyone who supports receives the entire Archetype Series album (12 songs) by TØOR.
+        As a thank you for your kindness, you’ll receive the full Archetype Series album (12 songs) — a gift for your journey, from TØOR.
     </p>
   </div>
   {/* Parting Message (optional) */}
@@ -235,6 +240,34 @@ return (
     </div>
   </div>
 )}
+  {showThanks && (
+  <div className="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50">
+    <div className="bg-isabelline p-8 rounded-xl max-w-md w-full shadow-xl text-center">
+      <h2 className="text-xl font-serif text-gunmetal mb-3">🌕 You’re in the circle</h2>
+      <p className="font-loretta text-gunmetal leading-relaxed mb-4">
+        A quiet letter will find its way to your inbox soon.<br />
+        If you’d like to help keep this space alight, you can offer your kindness below.
+      </p>
+      <a
+        href="https://ko-fi.com/spencersstudio"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="inline-block"
+      >
+        <button className="bg-nyanza hover:bg-hookers-green hover:text-isabelline text-gunmetal font-serif text-lg px-6 py-2 rounded-full shadow transition">
+          Support the Circle
+        </button>
+      </a>
+      <button
+        onClick={() => setShowThanks(false)}
+        className="mt-6 text-sm text-gunmetal underline hover:text-hookers-green transition"
+      >
+        Close
+      </button>
+    </div>
+  </div>
+)}
+
 
 
 </div>
