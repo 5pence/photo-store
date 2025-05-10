@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>NESO Dataset Fetch Test</title>
+</head>
+<body>
+  <h1>Carbon Intensity (GB)</h1>
+  <ul id="dataset-list">Loading...</ul>
+
+  <script>
+    async function fetchAllDatasets() {
+      try {
+        const response = await fetch('https://api.electricitymap.org/v3/carbon-intensity/latest?zone=GB', {
+          method: 'GET',
+          headers: {
+            'auth-token': 'HWKZzlqZPsZzwmUcu5mz'
+          }
+        });
+
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
+        const data = await response.json();
+        console.log('Carbon Intensity Data:', data);
+
+        const list = document.getElementById('dataset-list');
+        list.innerHTML = ''; // Clear "Loading..."
+
+        // Display some key values
+        const fieldsToShow = ['zone', 'carbonIntensity', 'datetime', 'updatedAt'];
+
+        fieldsToShow.forEach(key => {
+          const li = document.createElement('li');
+          li.textContent = `${key}: ${data[key] !== undefined ? data[key] : 'N/A'}`;
+          list.appendChild(li);
+        });
+
+      } catch (error) {
+        console.error('Error fetching data:', error);
+        document.getElementById('dataset-list').textContent = 'Failed to load data.';
+      }
+    }
+
+    fetchAllDatasets();
+  </script>
+</body>
+</html>

@@ -9,9 +9,9 @@ export default function ArchetypeIntro() {
     }
 
   return (
-    <div className="min-h-screen bg-nyanza text-gunmetal font-serif flex flex-col items-center justify-center px-4 py-12">
+    <div className="min-h-screen bg-nyanza text-gunmetal font-poetic flex flex-col items-center justify-center px-4 py-12">
       <motion.h1
-        className="text-gunmetal font-serif font-thin text-xl md:text-3xl mb-4 tracking-wide"
+        className="text-gunmetal font-poetic font-thin text-xl md:text-3xl mb-4 tracking-wide"
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1.2 }}
@@ -29,7 +29,7 @@ export default function ArchetypeIntro() {
       />
 
       <motion.div
-        className="w-full max-w-2xl lg:max-w-3xl bg-isabelline p-10 rounded-xl shadow-md font-serif font-light md:text-lg leading-loose tracking-wide text-left"
+        className="w-full max-w-2xl lg:max-w-3xl bg-isabelline p-10 rounded-xl shadow-md font-poetic font-light md:text-lg leading-loose tracking-wide text-left"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 1.8, duration: 1.5 }}
@@ -64,7 +64,7 @@ export default function ArchetypeIntro() {
 
       <motion.button
         onClick={handleStart}
-        className="relative rounded-full bg-lavender w-40 h-40 flex items-center justify-center text-gunmetal font-serif
+        className="relative rounded-full bg-lavender w-40 h-40 flex items-center justify-center text-gunmetal font-poetic
             transition-all duration-500 ease-out mt-8 hover:bg-lavender
             shadow-[0_10px_20px_rgba(186,133,255,0.25)]
             hover:shadow-[0_15px_25px_rgba(186,133,255,0.35)]
@@ -84,7 +84,7 @@ export default function ArchetypeIntro() {
         ease: "linear",
         }}
     />
-  <span className="relative z-10 font-serif text-gunmetal text-sm tracking-wide">
+  <span className="relative z-10 font-poetic text-gunmetal text-sm tracking-wide">
     Enter
   </span>
 </motion.button>

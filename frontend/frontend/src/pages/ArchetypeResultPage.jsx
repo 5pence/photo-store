@@ -57,13 +57,13 @@ setSubmitting(false);
 };
 
 return (
-<div className="bg-nyanza min-h-screen py-12 px-6 text-[#2E3D3A] font-serif">
+<div className="bg-nyanza min-h-screen py-12 px-6 text-[#2E3D3A] font-poetic">
   <div className="max-w-3xl mx-auto bg-lavender rounded-xl p-6 shadow-md flex items-center space-x-4">
     <div className="flex items-center space-x-4">
       <img src={archetype.icon} alt={`${archetype.name} symbol`} className="w-20 h-20 rounded-full object-cover" />
       <div>
-        <h1 className="font-serif text-gunmetal font-thin text-2xl tracking-wide">{archetype.name}</h1>
-        <p className="font-serif text-gunmetal font-thin italic relative top-3 tracking-wide">
+        <h1 className="font-poetic text-gunmetal font-thin text-2xl tracking-wide">{archetype.name}</h1>
+        <p className="font-poetic text-gunmetal font-thin italic relative top-3 tracking-wide">
           {archetype.tagline}
         </p>
       </div>
@@ -79,7 +79,7 @@ return (
 
   {/* Shadow Section */}
   <div className="max-w-3xl mx-auto mt-10 bg-isabelline p-6 rounded-xl shadow">
-    <p className="font-serif italic mb-2 text-hookers-green tracking-wide">{archetype.shadowTag}</p>
+    <p className="font-poetic italic mb-2 text-hookers-green tracking-wide">{archetype.shadowTag}</p>
     <ul className="font-loretta list-none list-inside space-y-1 text-base text-hookers-green">
       {archetype.shadowList.map((item, i) => (
       <li key={i}>{item}</li>
@@ -89,29 +89,29 @@ return (
 
   {/* Reframe Section */}
   <div className="max-w-3xl mx-auto mt-10 bg-isabelline p-6 rounded-xl shadow">
-    <p className="font-serif italic mb-2 text-hookers-green tracking-wide">{archetype.reframeTag}</p>
+    <p className="font-poetic italic mb-2 text-hookers-green tracking-wide">{archetype.reframeTag}</p>
     <p className="font-loretta space-y-1 text-base text-hookers-green">{archetype.reframeText}</p>
   </div>
 
   {/* Gratitude Section */}
   <div className="max-w-3xl mx-auto mt-10 bg-lavender p-6 rounded-xl shadow space-y-4">
-    <h2 className="font-serif italic font-thin text-gunmetal text-2xl">🕯️ {archetype.gratitudeThanks}</h2>
+    <h2 className="font-poetic italic font-thin text-gunmetal text-2xl">🕯️ {archetype.gratitudeThanks}</h2>
     {archetype.gratitudeIntro.map((para, i) => (
     <p className="font-loretta space-y-1 text-base text-gunmetal" key={i}>{para}</p>
     ))}
     <p className="mt-4 font-loretta space-y-1 text-base text-gunmetal">{archetype.affirmationIntro}</p>
     <blockquote className="border-l-4 border-[#6A7D76] pl-4 text-gunmetal italic">
       {archetype.affirmation.map((line, i) => (
-      <p className="font-serif italic font-thin text-gunmetal text-lg" key={i}>{line}</p>
+      <p className="font-poetic italic font-thin text-gunmetal text-lg" key={i}>{line}</p>
       ))}
     </blockquote>
-    <p className="font-serif italic font-thin text-gunmetal text-base">{archetype.affirmationSettle}</p>
+    <p className="font-poetic italic font-thin text-gunmetal text-base">{archetype.affirmationSettle}</p>
   </div>
 
   {/* Reflection Section */}
   <div className="max-w-3xl mx-auto mt-10 bg-isabelline p-6 rounded-xl shadow">
-    <p className="font-serif italic font-thin text-gunmetal text-2xl">🌀 reflection prompt</p>
-    <p className="mt-2 ont-serif italic font-thin text-gunmetal text-lg">{archetype.reflectionTag}</p>
+    <p className="font-poetic italic font-thin text-gunmetal text-2xl">🌀 reflection prompt</p>
+    <p className="mt-2 font-poetic italic font-thin text-gunmetal text-lg">{archetype.reflectionTag}</p>
     <p className="mt-4 font-loretta space-y-1 text-base text-gunmetal">{archetype.reflectionSettle}</p>
   </div>
 
@@ -137,7 +137,7 @@ return (
     </p>
 
     <motion.div className="w-full flex justify-center">
-      <motion.button onClick={handleJoinClick} className="relative rounded-full bg-lavender w-44 h-44 flex items-center justify-center text-gunmetal font-serif
+      <motion.button onClick={handleJoinClick} className="relative rounded-full bg-lavender w-44 h-44 flex items-center justify-center text-gunmetal font-poetic
                 transition-all duration-500 ease-out mt-8 hover:bg-lavender
                 shadow-[0_10px_20px_rgba(186,133,255,0.25)]
                 hover:shadow-[0_15px_25px_rgba(186,133,255,0.35)]
@@ -163,7 +163,7 @@ return (
     <div className="flex justify-center mt-6">
         <button
             onClick={handleCopyLink}
-            className="bg-isabelline hover:bg-nyanza text-gunmetal font-serif text-lg px-6 py-2 rounded-full shadow transition-all duration-300"
+            className="bg-isabelline hover:bg-nyanza text-gunmetal font-poetic text-lg px-6 py-2 rounded-full shadow transition-all duration-300"
         >
             Copy Link to Share
         </button>
@@ -175,7 +175,7 @@ return (
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 30 }}
             transition={{ duration: 0.8, ease: "easeInOut" }}    
-            className="fixed bottom-6 left-1/2 transform -translate-x-1/2 bg-lavender text-gunmetal font-serif px-6 py-3 rounded-full shadow-lg"
+            className="fixed bottom-6 left-1/2 transform -translate-x-1/2 bg-lavender text-gunmetal font-poetic px-6 py-3 rounded-full shadow-lg"
             >
                 <div className="text-lg">Link copied. A new journey begins...</div>
                 <div className="text-sm italic mt-1 opacity-80">The quiet path opens to another.</div>
@@ -194,7 +194,7 @@ return (
       <div className="relative">
         <div className="absolute -inset-1.5 rounded-full bg-lavender opacity-40 blur-xl animate-pulse pointer-events-none"></div>
         <a href="https://ko-fi.com/spencersstudio" target="_blank" rel="noopener noreferrer">
-          <button className="relative bg-isabelline hover:bg-nyanza text-gunmetal font-serif text-lg px-8 py-4 rounded-full shadow transition-all duration-300 z-10">
+          <button className="relative bg-isabelline hover:bg-nyanza text-gunmetal font-poetic text-lg px-8 py-4 rounded-full shadow transition-all duration-300 z-10">
             Support the Circle
           </button>
         </a>
@@ -214,7 +214,7 @@ return (
     <p className="italic text-base">{archetype.partingMessage}</p>
     <div className="flex justify-center items-center space-x-6 mt-6">
       <button onClick={()=> window.location.href = "/archetype-wheel"}
-        className="bg-lavender hover:bg-isabelline text-hookers-green font-serif px-6 py-2 rounded-full shadow transition-all duration-300"
+        className="bg-lavender hover:bg-isabelline text-hookers-green font-poetic px-6 py-2 rounded-full shadow transition-all duration-300"
         >
         Return to your results wheel
       </button>
@@ -243,7 +243,7 @@ return (
         &times;
       </button>
 
-      <h2 className="text-xl font-serif text-gunmetal text-center mb-4">🌕 Welcome, wanderer</h2>
+      <h2 className="text-xl font-poetic text-gunmetal text-center mb-4">🌕 Welcome, wanderer</h2>
       <p className="font-loretta text-center mb-4">
         You’re about to enter the quiet circle where the stories continue.<br /><br />
         Would you like to receive occasional letters from the circle?<br />
@@ -268,7 +268,7 @@ return (
   {showThanks && (
   <div className="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50">
     <div className="bg-isabelline p-8 rounded-xl max-w-md w-full shadow-xl text-center">
-      <h2 className="text-xl font-serif text-gunmetal mb-3">🌕 You’re in the circle</h2>
+      <h2 className="text-xl font-poetic text-gunmetal mb-3">🌕 You’re in the circle</h2>
       <p className="font-loretta text-gunmetal leading-relaxed mb-4">
         A quiet letter will find its way to your inbox soon.<br />
         If you’d like to help keep this space alight, you can offer your kindness below.
@@ -279,7 +279,7 @@ return (
         rel="noopener noreferrer"
         className="inline-block"
       >
-        <button className="bg-nyanza hover:bg-hookers-green hover:text-isabelline text-gunmetal font-serif text-lg px-6 py-2 rounded-full shadow transition">
+        <button className="bg-nyanza hover:bg-hookers-green hover:text-isabelline text-gunmetal font-poetic text-lg px-6 py-2 rounded-full shadow transition">
           Support the Circle
         </button>
       </a>

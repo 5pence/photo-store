@@ -1,103 +1,91 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 
-
 const Home = () => {
-  const fullStudioText = "spencers.studio";
-  const [studioText, setStudioText] = useState("");
-  const [showStudioText, setShowStudioText] = useState(false);
+  const [showCTA, setShowCTA] = useState(false);
+  const [videoEnded, setVideoEnded] = useState(false);
+  const [isMuted, setIsMuted] = useState(true);
+  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
-    const typingDelay = 3000; 
-    const timeout = setTimeout(() => {
-      setShowStudioText(true);
-    }, typingDelay);
-
-    return () => clearTimeout(timeout);
+    const checkMobile = () => setIsMobile(window.innerWidth < 1200);
+    checkMobile(); // Initial check
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
   }, []);
 
   useEffect(() => {
-    if (showStudioText) {
-      let i = 0;
-      const typingInterval = setInterval(() => {
-        setStudioText((prev) => {
-          if (i < fullStudioText.length) {
-            i++;
-            return fullStudioText.slice(0, i);
-          } else {
-            clearInterval(typingInterval);
-            return prev;
-          }
-        });
-      }, 150);
+    if (isMobile) {
+      setVideoEnded(true);
+      setShowCTA(true);
     }
-  }, [showStudioText]);
+  }, [isMobile]);
+
+  const handleVideoEnd = () => {
+    setVideoEnded(true);
+    setTimeout(() => setShowCTA(true), 300);
+  };
 
   return (
-    <div className="relative flex flex-col items-center justify-center h-screen overflow-hidden bg-gradient-to-r from-[#d64933] via-[#772418] to-[#220B07] animate-moving-gradient">
-      <style>
-        {`
-          /* Multi-Directional Background Animation */
-          @keyframes moving-gradient {
-            0% { background-position: 0% 50%; }
-            25% { background-position: 100% 30%; }
-            50% { background-position: 80% 80%; }
-            75% { background-position: 30% 100%; }
-            100% { background-position: 0% 50%; }
-          }
-          .animate-moving-gradient {
-            background-size: 400% 400%;
-            animation: moving-gradient 18s infinite alternate ease-in-out;
-          }
-
-          /* Slow Pulse Effect */
-          @keyframes slowPulse {
-            0% { transform: scale(1); opacity: 1; }
-            50% { transform: scale(1.02); opacity: 0.95; }
-            100% { transform: scale(1); opacity: 1; }
-          }
-          .slow-pulse {
-            animation: slowPulse 6s infinite ease-in-out;
-          }
-        `}
-      </style>
-      <title>Spencers Studio | Photography, Coding & Creativity</title>
-      <meta
-        name="description"
-        content="Welcome to Spencers Studio – a showcase of photography, web development, and creative projects by Spencer Barriball. Explore stunning visuals, insightful coding tutorials, and unique artistic expressions."
-      />
-      {/* Tagline fades in together */}
-      <motion.h1
-        className="text-4xl md:text-5xl font-light text-white tracking-wide"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 3, delay: 0.5, ease: "easeInOut" }}
-      >
-        photography, creativity, and coding
-      </motion.h1>
-
-      {/* Spencer's Studio types out after fade-in */}
-      {showStudioText && (
-        <motion.h2
-            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mt-6 slow-pulse"
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 2 }}
-        >
-            {studioText}
-        </motion.h2>
+    <div className="relative h-screen bg-[#1B1D2A] text-[#F7F7F7] overflow-hidden">
+      {!videoEnded && !isMobile ? (
+        <div>
+          <button
+            onClick={() => setIsMuted(!isMuted)}
+            className="absolute top-24 right-20 text-white bg-info backdrop-blur-md rounded-full p-4 text-2xl shadow-lg hover:bg-[#442F34]/90 transition z-20"
+          >
+            {isMuted ? "🔇" : "🔊"}
+          </button>
+          <video
+            autoPlay
+            muted={isMuted}
+            playsInline
+            onEnded={handleVideoEnd}
+            className="absolute w-full h-full object-cover"
+          >
+            <source src="/media/wavesOfMemory-final.mp4" type="video/mp4" />
+          </video>
+        </div>
+      ) : (
+        <img
+          src="/media/tide.png"
+          alt="Tide Still"
+          className="absolute w-full h-full object-cover"
+        />
       )}
 
-      <Link to="/photography">
-        <motion.button
-            className="mt-10 px-6 py-3 text-lg font-semibold text-white bg-[#d64933] rounded-full shadow-lg hover:shadow-2xl hover:bg-[#bf3a26] transition relative overflow-hidden"
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.95 }}
-        >
-            Explore My Work
-        </motion.button>
-      </Link>
+      {showCTA && (
+        <div className="relative z-10 flex flex-col items-center justify-center h-full text-center px-4">
+          <motion.h1
+            className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-cormorant tracking-wide italic text-[#F7F7F7] font-light"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 2 }}
+          >
+            start gentle, let beauty lead.
+          </motion.h1>
+            <Link to="/archetype">
+                <button className="relative mt-4 px-6 py-2 bg-moss/50 backdrop-blur-sm text-seasalt rounded-full font-body tracking-wide shadow-md hover:shadow-[0_0_1.25rem_#41625960] transition-all duration-300 ease-[cubic-bezier(0.42,0,0.58,1)] focus:outline-none focus:ring-0 focus:ring-transparent overflow-hidden group">
+                    Begin Your Archetype Journey
+                    <span className="pointer-events-none absolute inset-0 before:content-[''] before:absolute before:top-0 before:left-[-40%] before:h-full before:w-1/3 before:bg-white/20 before:blur-md before:opacity-70 before:transition-transform before:duration-700 before:ease-out group-hover:before:translate-x-[160%]" />
+                </button>
+            </Link>
+
+
+
+          <p className="mt-4 text-base text-base-100/80 font-body">
+            or{" "}
+            <a
+              href="/studio"
+              className="underline hover:text-moss transition"
+            >
+              enter the studio
+            </a>{" "}
+            to see what I've been creating
+          </p>
+        </div>
+      )}
     </div>
   );
 };

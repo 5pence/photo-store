@@ -27,7 +27,7 @@ export default function ArchetypeWheelPage() {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 1.2 }}
-      className="min-h-screen bg-nyanza flex flex-col items-center justify-center px-4 pt-0 pb-12 text-center font-serif"
+      className="min-h-screen bg-nyanza flex flex-col items-center justify-center px-4 pt-0 pb-12 text-center font-poetic"
     >
       <div className="w-full max-w-3xl pt-0 lg:pt-0">
 
@@ -38,7 +38,7 @@ export default function ArchetypeWheelPage() {
                 animate={{ opacity: 1, filter: "blur(0px)" }}
                 transition={{ duration: 2, ease: "easeOut" }}
             >
-                <h1 className="text-5xl lg:text-6xl font-light mt-4 mb-4 tracking-wide text-gunmetal font-serif">
+                <h1 className="text-5xl lg:text-6xl font-light mt-4 mb-4 tracking-wide text-gunmetal font-poetic">
                 Your Inner Compass
                 </h1>
             </motion.div>

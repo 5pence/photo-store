@@ -73,7 +73,7 @@ export default function ArchetypeQuiz() {
   const progress = ((currentIndex + 1) / shuffledQuestions.length) * 100;
 
   return (
-    <div className={`${styles.root} min-h-screen bg-nyanza text-gunmetal font-serif flex flex-col items-center px-4 pt-6 sm:pt-20 pb-12 text-center relative`}>
+    <div className={`${styles.root} min-h-screen bg-nyanza text-gunmetal font-poetic flex flex-col items-center px-4 pt-6 sm:pt-20 pb-12 text-center relative`}>
       <div className="mb-6 sm:mb-16 flex flex-col items-center w-full max-w-md">
         <p className="text-[10px] sm:text-xs italic mb-1 sm:mb-1 mt-2 sm:mt-0">
           Step {currentIndex + 1} of 48 — <span className="text-gunmetal/60">the journey begins in shadow</span>
@@ -185,7 +185,7 @@ export default function ArchetypeQuiz() {
                       }
                       transition={{ duration: 0.3 }}
                     />
-                    <span className="text-base text-gunmetal font-serif">{label}</span>
+                    <span className="text-base text-gunmetal font-poetic">{label}</span>
                   </motion.button>
                 ))}
               </div>
