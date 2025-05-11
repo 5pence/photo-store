@@ -18,7 +18,7 @@ const Photography = () => {
         animate={{ opacity: 1 }}
         transition={{ duration: 0.5 }}
       >
-        <h1 className="text-4xl font-serif font-light text =-center text-charcoal">Studio</h1>
+        <h1 className="text-4xl font-serif font-light text-center text-charcoal">Studio</h1>
 
         <MasonryGrid />
       </motion.div>
