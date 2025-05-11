@@ -44,7 +44,7 @@ const Home = () => {
             onEnded={handleVideoEnd}
             className="absolute w-full h-full object-cover"
           >
-            <source src="/media/wavesOfMemory-final.mp4" type="video/mp4" />
+            <source src="https://e5qi7zbimhaxwelz.public.blob.vercel-storage.com/wavesOfMemory-final-mYnDnSS4BBzJoHhMnDQgVHBqrCxdmC.mp4" type="video/mp4" />
           </video>
         </div>
       ) : (
