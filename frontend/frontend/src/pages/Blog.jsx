@@ -134,7 +134,7 @@ const Blog = () => {
                   ease: "linear"
               }}
             >
-              <Link to={`/blog/${post.slug}`}>
+              <Link to={`/journal/${post.slug}`}>
                 {post.cover_image && (
                   <motion.img
                     src={post.cover_image}
