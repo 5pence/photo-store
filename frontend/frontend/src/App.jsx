@@ -4,19 +4,23 @@ import Footer from "./components/Footer";
 import AnimatedRoutes from "./components/AnimatedRoutes";
 import { AuthProvider } from "./context/AuthContext";  
 import { CartProvider } from "./context/CartContext";
+import { Analytics } from '@vercel/analytics/react';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import "boxicons/css/boxicons.min.css";
 
 
 const App = () => {
     return (
-        <Router>
-            <AuthProvider>
-                <CartProvider>
-                    <MainLayout />
-                </CartProvider>
-            </AuthProvider>        
-        </Router>
+        <>
+            <Router>
+                <AuthProvider>
+                    <CartProvider>
+                        <MainLayout />
+                    </CartProvider>
+                </AuthProvider>        
+            </Router>
+            <Analytics />
+        </>
     );
 };
 
