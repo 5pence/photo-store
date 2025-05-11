@@ -23,6 +23,8 @@ frontend/.cache/
 frontend/dist/
 frontend/.vite/
 frontend/.vite-cache/
+# Media files too large for Git
+frontend/frontend/public/media/wavesOfMemory-final.mp4
 
 # Ignore IDE/editor settings
 .vscode/
