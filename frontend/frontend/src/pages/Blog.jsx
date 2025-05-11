@@ -108,7 +108,7 @@ const Blog = () => {
             className={`px-4 py-1 rounded-full text-sm tracking-wide font-body transition-all duration-300 ${
             activeTag === tag
                 ? "bg-moss text-seasalt shadow"
-                : "bg-seasalt/30 text-charcoal1 hover:bg-seasalt/50"
+                : "bg-seasalt text-charcoal hover:bg-seasalt/70"
             }`}
           >
             {tag}
