@@ -24,40 +24,43 @@ const Contact = () => {
     setLoading(true);
     setSuccess(null);
     setError(null);
-    
+
     try {
       await axios.post(`${API_BASE_URL}/api/contact/`, formData);
-      setSuccess("Your message has been sent successfully! 🎉");
+      setSuccess("Got it. Your note is on its way - I'll write back soon.");
       setFormData({ name: "", email: "", phone: "", message: "" });
     } catch (err) {
-      setError("Something went wrong. Please try again.");
+      setError("Hmm. Something didn’t work. Try again in a moment.");
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <div className="container mx-auto px-4 py-12">
-    <title>Contact | Spencers Studio</title>
-    <meta name="description" content="Get in touch with Spencer Barriball at Spencers Studio. Whether you have a project in mind, need photography services, or just want to connect—reach out today!" />
+    <div className="container mx-auto px-4 pb-16 max-w-4xl text-center">
+      <title>Contact | Spencers Studio</title>
+      <meta
+        name="description"
+        content="Get in touch with Spencer Barriball at Spencers Studio. Whether you have a project in mind, need photography services, or just want to connect—reach out today!"
+      />
 
-      <h1 className="text-4xl font-bold text-center mb-8 text-[#d64933]">Contact Me</h1>
-      <p className="text-center text-lg text-gray-600 max-w-2xl mx-auto">
-        Have a project in mind? Drop me a message and I'll get back to you!
+      <h1 className="text-5xl font-serif text-charcoal mb-4">Contact Me</h1>
+      <p className="text-lg text-vandyke max-w-xl mx-auto mb-10">
+        Write me a note - I’ll write back.
       </p>
-      
-      <div className="max-w-lg mx-auto bg-white p-6 rounded-lg shadow-lg mt-8">
-        {success && <p className="text-green-600 text-center mb-4">{success}</p>}
-        {error && <p className="text-red-600 text-center mb-4">{error}</p>}
-        
-        <form onSubmit={handleSubmit} className="space-y-4">
+
+      <div className="bg-white bg-opacity-80 backdrop-blur-sm p-8 rounded-2xl shadow-xl border border-gray-200">
+        {success && <p className="text-green-600 mb-4">{success}</p>}
+        {error && <p className="text-red-600 mb-4">{error}</p>}
+
+        <form onSubmit={handleSubmit} className="space-y-6">
           <input
             type="text"
             name="name"
             placeholder="Your Name"
             value={formData.name}
             onChange={handleChange}
-            className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-[#d64933]"
+            className="w-full p-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-[#d64933] bg-white"
             required
           />
           <input
@@ -66,7 +69,7 @@ const Contact = () => {
             placeholder="Your Email"
             value={formData.email}
             onChange={handleChange}
-            className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-[#d64933]"
+            className="w-full p-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-[#d64933] bg-white"
             required
           />
           <input
@@ -75,7 +78,7 @@ const Contact = () => {
             placeholder="Your Phone (Optional)"
             value={formData.phone}
             onChange={handleChange}
-            className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-[#d64933]"
+            className="w-full p-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-[#d64933] bg-white"
           />
           <textarea
             name="message"
@@ -83,19 +86,17 @@ const Contact = () => {
             value={formData.message}
             onChange={handleChange}
             rows="5"
-            className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-[#d64933]"
+            className="w-full p-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-[#d64933] bg-white"
             required
           ></textarea>
-          
-          <motion.button
+          <button
             type="submit"
-            className="w-full bg-[#d64933] text-white px-6 py-3 rounded-lg hover:bg-red-700 transition"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
             disabled={loading}
-          >
+            className="relative mt-6 px-8 py-2 bg-moss/80 backdrop-blur-sm text-seasalt rounded-full font-body tracking-wide shadow-md hover:shadow-[0_0_1.25rem_#41625960] transition-all duration-300 ease-[cubic-bezier(0.42,0,0.58,1)] focus:outline-none focus:ring-0 focus:ring-transparent overflow-hidden group w-fit mx-auto"
+            >
             {loading ? "Sending..." : "Send Message"}
-          </motion.button>
+            <span className="pointer-events-none absolute inset-0 before:content-[''] before:absolute before:top-0 before:left-[-40%] before:h-full before:w-1/3 before:bg-white/20 before:blur-md before:opacity-70 before:transition-transform before:duration-700 before:ease-out group-hover:before:translate-x-[160%]" />
+          </button>
         </form>
       </div>
     </div>

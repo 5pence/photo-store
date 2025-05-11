@@ -10,17 +10,16 @@ const Photography = () => {
 
   return (
     <>
-    <title>Photography | Spencers Studio</title>
-    <meta name="description" content="Explore the photography of Spencer Barriball at Spencers Studio. Capturing stunning landscapes, portraits, street photography, and creative visuals." />
+    <title>Studio | Spencers Studio</title>
+    <meta name="description" content="A living portfolio of image, texture, and dream - wander through Spencer's visual storytelling." />
       <motion.div
         className="container mx-auto px-4 py-8 min-h-screen flex flex-col"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.5 }}
       >
-        <h2 className="text-3xl font-bold text-center mb-6 text-[#d64933]">
-          Photography Showcase
-        </h2>
+        <h1 className="text-4xl font-serif font-light text =-center text-charcoal">Studio</h1>
+
         <MasonryGrid />
       </motion.div>
     </>

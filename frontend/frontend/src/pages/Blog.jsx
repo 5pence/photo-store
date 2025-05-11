@@ -95,9 +95,9 @@ const Blog = () => {
 
   return (
     <div className="container mx-auto px-4 py-8">
-    <title>Blog | Spencers Studio</title>
-    <meta name="description" content="Explore Spencers Studio blog for insights on coding, photography, and creativity. Discover tutorials, tips, and behind-the-scenes stories from Spencer Barriball." />
-      <h2 className="text-3xl font-bold text-center mb-6 text-[#d64933]">Blog</h2>
+    <title>Journal | Spencers Studio</title>
+    <meta name="description" content="Quiet reflections from the Studio - notes on craft, story, and soul by Spencer Barriball." />
+      <h1 className="text-4xl font-serif font-light text-center text-charcoal">Journal</h1>
 
       {/* Tag Filter Buttons */}
       <div className="flex flex-wrap justify-center mb-8 gap-2">
@@ -105,8 +105,10 @@ const Blog = () => {
           <button
             key={tag}
             onClick={() => handleTagClick(tag)}
-            className={`px-5 py-2 whitespace-nowrap rounded-lg text-base font-medium focus:outline-none ${
-              activeTag === tag ? "bg-[#d64933] text-white shadow-md" : "bg-gray-200 text-gray-700 hover:bg-gray-300"
+            className={`px-4 py-1 rounded-full text-sm tracking-wide font-body transition-all duration-300 ${
+            activeTag === tag
+                ? "bg-moss text-seasalt shadow"
+                : "bg-seasalt/30 text-charcoal1 hover:bg-seasalt/50"
             }`}
           >
             {tag}
@@ -146,7 +148,8 @@ const Blog = () => {
                 <div className="p-4">
                   <h3 className="text-lg font-semibold">{post.title}</h3>
                   <p className="text-gray-600">{stripHtml(post.meta_description).substring(0, 100)}...</p>
-                  <p className="text-sm text-gray-500 mt-2">📅 {new Date(post.published_date).toLocaleDateString()}</p>
+                  <p className="text-xs text-muted italic mt-2">Filed: {new Date(post.published_date).toLocaleDateString()}</p>
+
                 </div>
               </Link>
             </motion.div>

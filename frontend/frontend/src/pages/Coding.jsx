@@ -1,43 +1,18 @@
-import { useEffect, useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { useEffect } from "react";
 
 const Coding = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
-  const services = [
-    { id: 1, title: "Web Development", description: "Custom web applications with modern tech.", image: "webdev.png", price: "From £499" },
-    { id: 2, title: "Photography Sessions", description: "Professional photoshoots for any occasion.", image: "camera.png", price: "From £199" },
-    { id: 3, title: "Coding Mentorship", description: "Personalised coding mentorship and help.", image: "mentorship.png", price: "From £40" },
-  ];
-
-  const clients = ["SMS", "Oilennium", "Spiderspun", "Spatialist", "Kainos", "PwC", "L3Harris", "Ocean Infinity", "Code Institute"];
-
-  const testimonials = [
-    {
-      quote: "I had the pleasure of being mentored by Spencer for my last two projects that I worked on at The Code Institute, both of which I scored a Distinction grade.",
-      author: "Derek de Goey, Junior Frontend Developer",
-    },
-    // ...additional testimonials
-  ];
-
-  const [currentTestimonial, setCurrentTestimonial] = useState(0);
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentTestimonial((prev) => (prev + 1) % testimonials.length);
-    }, 10000);
-    return () => clearInterval(interval);
-  }, []);
-
   return (
-    <div className="container mx-auto px-4 py-12">
+    <div className="container mx-auto px-4 pb-12">
       <title>About | Spencers Studio</title>
       <meta name="description" content="Learn more about Spencer Barriball – a developer, photographer, and creative mind." />
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-center mb-20">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 mb-20 ">
         <div>
-            <img src="/media/spencer-small.webp" alt="Spencer" className="max-w-full" />
+            <img src="/media/spencer-small.webp" alt="Spencer" className="w-full max-w-[500px] lg:max-w-full mx-auto" />
         </div>
         <div>
             <h1 className="text-4xl font-serif font-light text-charcoal">I make things.</h1>
@@ -80,62 +55,23 @@ const Coding = () => {
 
             <p className="text-lg mt-4 text-vandyke font-medium">
             Because beauty matters. <br />
-            Because good work isn’t just built — it’s felt.<br />
+            Because good work isn’t just built - it’s felt.<br />
             The world doesn’t need more noise. Just something true.
             </p>
         </div>
-        </div>
-
-
-      <h2 className="text-3xl font-bold text-center text-yinmn-blue mb-8">Services</h2>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
-        {services.map((service) => (
-          <motion.div
-            key={service.id}
-            className="bg-seasalt p-6 rounded-xl shadow-lg"
-            whileHover={{ scale: 1.03 }}
-            transition={{ duration: 0.3 }}
-          >
-            <img src={`/images/icons/${service.image}`} alt={service.title} className="w-16 h-16 mb-4" />
-            <h3 className="text-xl font-semibold text-eggplant">{service.title}</h3>
-            <p className="text-warm-black mt-2">{service.description}</p>
-            <p className="text-moss font-bold mt-4">{service.price}</p>
-          </motion.div>
-        ))}
       </div>
-
-      <section className="my-20">
-        <h2 className="text-2xl font-bold text-center text-charcoal mb-6">Clients</h2>
-        <div className="flex flex-wrap justify-center gap-4">
-          {clients.map((client, i) => (
-            <span key={i} className="bg-misty text-raisin-black px-4 py-2 rounded-full text-sm">{client}</span>
-          ))}
-        </div>
-      </section>
-
-      <section className="mb-20 text-center">
-        <h2 className="text-3xl font-semibold text-china-rose mb-8">What People Say</h2>
-        <div className="max-w-2xl mx-auto bg-white p-6 rounded-lg shadow-md">
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={currentTestimonial}
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -10 }}
-              transition={{ duration: 1 }}
-            >
-              <p className="italic text-eggplant text-lg">{testimonials[currentTestimonial].quote}</p>
-              <p className="mt-4 text-sm text-vandyke font-medium">&mdash; {testimonials[currentTestimonial].author}</p>
-            </motion.div>
-          </AnimatePresence>
-          <button
-            className="mt-6 px-4 py-2 text-sm bg-charcoal text-seasalt rounded-md hover:bg-charcoal2"
-            onClick={() => setCurrentTestimonial((prev) => (prev + 1) % testimonials.length)}
-          >
-            Next
-          </button>
-        </div>
-      </section>
+      <div className="mt-16 text-center border-t border-misty pt-12 pb-24">
+        <p className="text-xl font-light text-charcoal font-serif mb-4">
+            Curious to work together, or just say hello?
+        </p>
+        <a
+            href="/contact"
+            className="relative mt-6 px-8 py-2 bg-moss/80 backdrop-blur-sm text-seasalt rounded-full font-body tracking-wide shadow-md hover:shadow-[0_0_1.25rem_#41625960] transition-all duration-300 ease-[cubic-bezier(0.42,0,0.58,1)] focus:outline-none focus:ring-0 focus:ring-transparent overflow-hidden group w-fit mx-auto"
+        >
+            Send a note
+             <span className="pointer-events-none absolute inset-0 before:content-[''] before:absolute before:top-0 before:left-[-40%] before:h-full before:w-1/3 before:bg-white/20 before:blur-md before:opacity-70 before:transition-transform before:duration-700 before:ease-out group-hover:before:translate-x-[160%]" />
+        </a>
+    </div>
     </div>
   );
 };

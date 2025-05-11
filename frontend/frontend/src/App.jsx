@@ -26,7 +26,7 @@ const MainLayout = () => {
     const hideChrome = location.pathname.startsWith("/archetype");
 
     return (
-        <div className="flex flex-col min-h-screen">
+        <div className="flex flex-col min-h-screen bg-paper bg-repeat bg-blend-multiply bg-center">
             {!hideChrome && <Navbar />}
             <main className={`flex-grow ${isHomePage || hideChrome ? "pt-0" : "pt-[80px] lg:pt-[100px]"}`}>
                 <AnimatedRoutes />

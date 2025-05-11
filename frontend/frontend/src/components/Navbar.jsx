@@ -65,15 +65,25 @@ const Navbar = () => {
           </NavLink>
 
           <div className="hidden lg:flex space-x-6 text-lg">
-            {"Photos,About,Shop,Blog,Contact".split(",").concat(user ? ["Account"] : []).map((label) => (
-              <NavLink
-                key={label}
-                to={`/${label.toLowerCase()}`}
-                className="font-proxima font-light tracking-wider hover:text-moss transition"
-              >
-                {label}
-              </NavLink>
-            ))}
+            {[
+  { label: "About", title: "Who I am, and why this place exists" },
+  { label: "Studio", title: "Where I gather what I've made" },
+  { label: "Journal", title: "Quiet entries from the road" },
+  { label: "Emporium", title: "A small trove of crafted things to own or gift" },
+  { label: "Contact", title: "Write to me - your words are welcome" },
+  ...(user ? [{ label: "Account", title: "Your personal dashboard" }] : []),
+].map(({ label, title }) => (
+  <NavLink
+    key={label}
+    to={`/${label.toLowerCase()}`}
+    className="font-proxima font-light tracking-wider hover:text-moss transition"
+    title={title}
+    aria-label={title}
+  >
+    {label}
+  </NavLink>
+))}
+
           </div>
 
           {cart.length > 0 && (
@@ -124,20 +134,28 @@ const Navbar = () => {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -10 }}
               transition={{ duration: 0.4, ease: [0.42, 0, 0.58, 1] }}
-              className="absolute top-20 left-0 w-full backdrop-blur-xl bg-white/10 text-seasalt border-t border-white/10 shadow-inner z-40 rounded-b-xl px-6 pt-4 pb-6 flex flex-col gap-5"
+              className="absolute top-20 left-0 w-full backdrop-blur-xl bg-charcoal2/50 text-seasalt border-t border-white/10 shadow-inner z-40 rounded-b-xl px-6 pt-12 pb-6 flex flex-col gap-5"
             >
-              {["Photos", "About", "Shop", "Blog", "Contact", ...(user ? ["Account"] : [])].map((label) => (
-                <motion.div key={label} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }}>
-                  <NavLink
-                    to={`/${label.toLowerCase()}`}
-                    onClick={() => setMenuOpen(false)}
-                    className="text-center font-proxima tracking-wide py-2 transition hover:text-moss"
-                  >
-                    {label}
-                  </NavLink>
-                </motion.div>
-              ))}
-
+              {[
+  { label: "About", title: "Who I am, and why this place exists" },
+  { label: "Studio", title: "Where I gather what I've made—photographs, paintings" },
+  { label: "Journal", title: "Quiet entries from the road" },
+  { label: "Emporium", title: "A small trove of crafted things to own or gift" },
+  { label: "Contact", title: "Write to me—your words are welcome" },
+  ...(user ? [{ label: "Account", title: "Your personal dashboard" }] : []),
+].map(({ label, title }) => (
+  <motion.div key={label} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }}>
+    <NavLink
+      to={`/${label.toLowerCase()}`}
+      onClick={() => setMenuOpen(false)}
+      className="text-center font-proxima tracking-wide py-2 transition hover:text-moss"
+      title={title}
+      aria-label={title}
+    >
+      {label}
+    </NavLink>
+  </motion.div>
+))}
               {!user && (
                 <>
                   <NavLink

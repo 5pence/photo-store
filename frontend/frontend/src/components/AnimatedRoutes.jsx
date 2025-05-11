@@ -37,10 +37,10 @@ const AnimatedRoutes = ({ user }) => {
         <Route path="/archetype-quiz" element={<AnimatedPage><ArchetypeQuiz /></AnimatedPage>} />
         <Route path="/archetype-wheel" element={<AnimatedPage><ArchetypeWheelPage /></AnimatedPage>} />
         <Route path="/archetype/:slug" element={<AnimatedPage><ArchetypeDetailPage /></AnimatedPage>} />
-        <Route path="/photography" element={<AnimatedPage><Photography /></AnimatedPage>} />
-        <Route path="/store" element={<AnimatedPage><Store /></AnimatedPage>} />
-        <Route path="/blog" element={<AnimatedPage><Blog /></AnimatedPage>} />
-        <Route path="/blog/:slug" element={<AnimatedPage><BlogDetail /></AnimatedPage>} />
+        <Route path="/studio" element={<AnimatedPage><Photography /></AnimatedPage>} />
+        <Route path="/emporium" element={<AnimatedPage><Store /></AnimatedPage>} />
+        <Route path="/journal" element={<AnimatedPage><Blog /></AnimatedPage>} />
+        <Route path="/journal/:slug" element={<AnimatedPage><BlogDetail /></AnimatedPage>} />
         <Route path="/about" element={<AnimatedPage><Coding /></AnimatedPage>} />
         <Route path="/contact" element={<AnimatedPage><Contact /></AnimatedPage>} />
         <Route path="/terms" element={<AnimatedPage><Terms /></AnimatedPage>} />

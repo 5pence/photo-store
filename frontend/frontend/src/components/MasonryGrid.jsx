@@ -13,11 +13,11 @@ const MasonryGrid = () => {
   const [selectedTag, setSelectedTag] = useState("All");
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [loading, setLoading] = useState(true); // ✅ Added loading state
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchImages = async () => {
-      setLoading(true); // Start loading
+      setLoading(true);
       try {
         const url = selectedTag === "All" ? API_URL : `${API_URL}?tag=${selectedTag}`;
         const response = await axios.get(url);
@@ -25,7 +25,7 @@ const MasonryGrid = () => {
       } catch (error) {
         console.error("Error fetching images:", error);
       } finally {
-        setLoading(false); // Stop loading
+        setLoading(false);
       }
     };
     fetchImages();
@@ -97,11 +97,10 @@ const MasonryGrid = () => {
 
   return (
     <div className="container mx-auto px-4">
-      {/* Tag Filters */}
       <div className="flex flex-wrap justify-center gap-2 mb-8">
         <button
-          className={`px-5 py-2 rounded-lg text-base font-medium focus:outline-none ${
-            selectedTag === "All" ? "bg-rust text-white" : "bg-gray-200 text-gray-700 hover:bg-gray-300"
+          className={`px-4 py-1 rounded-full text-sm tracking-wide font-body transition-all duration-300 ${
+            selectedTag === "All" ? "bg-moss text-seasalt shadow" : "bg-seasalt/30 text-charcoal1 hover:bg-seasalt/50"
           }`}
           onClick={() => setSelectedTag("All")}
         >
@@ -111,7 +110,9 @@ const MasonryGrid = () => {
         {tags.map((tag) => (
           <button
             key={tag}
-            className={`px-4 py-2 rounded ${selectedTag === tag ? "bg-rust text-white" : "bg-gray-200 text-gray-700 hover:bg-gray-300"}`}
+            className={`px-4 py-1 rounded-full text-sm tracking-wide font-body transition-all duration-300 ${
+              selectedTag === tag ? "bg-moss text-seasalt shadow" : "bg-seasalt/30 text-charcoal1 hover:bg-seasalt/50"
+            }`}
             onClick={() => setSelectedTag(tag)}
           >
             {tag}
@@ -119,10 +120,9 @@ const MasonryGrid = () => {
         ))}
       </div>
 
-      {/* ✅ Loading Spinner */}
       {loading ? (
         <div className="flex justify-center items-center h-64">
-          <div className="animate-spin rounded-full h-12 w-12 border-t-4 border-rust"></div>
+          <div className="animate-spin rounded-full h-12 w-12 border-t-4 border-moss"></div>
         </div>
       ) : (
         <AnimatePresence mode="wait">
@@ -154,7 +154,6 @@ const MasonryGrid = () => {
         </AnimatePresence>
       )}
 
-      {/* Lightbox with Smooth Transitions, Keyboard & Swipe Support */}
       <AnimatePresence>
         {lightboxOpen && images.length > 0 && (
           <motion.div
@@ -165,13 +164,8 @@ const MasonryGrid = () => {
             transition={{ duration: 0.3, ease: "easeInOut" }}
             {...swipeHandlers}
           >
-            <button className="absolute top-4 right-4 text-white text-2xl" onClick={closeLightbox}>
-              ✖
-            </button>
-
-            <button className="absolute left-4 text-white text-3xl" onClick={prevImage}>
-              ◀
-            </button>
+            <button className="absolute top-4 right-4 text-white text-2xl" onClick={closeLightbox}>✖</button>
+            <button className="absolute left-4 text-white text-3xl" onClick={prevImage}>◀</button>
 
             <motion.img
               key={images[currentIndex].image_url}
@@ -184,9 +178,7 @@ const MasonryGrid = () => {
               transition={{ duration: 0.3, ease: "easeInOut" }}
             />
 
-            <button className="absolute right-4 text-white text-3xl" onClick={nextImage}>
-              ▶
-            </button>
+            <button className="absolute right-4 text-white text-3xl" onClick={nextImage}>▶</button>
           </motion.div>
         )}
       </AnimatePresence>
@@ -194,7 +186,6 @@ const MasonryGrid = () => {
   );
 };
 
-// Prop validation
 MasonryGrid.propTypes = {
   images: PropTypes.arrayOf(
     PropTypes.shape({
