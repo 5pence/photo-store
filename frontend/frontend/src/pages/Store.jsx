@@ -21,12 +21,20 @@ const Store = () => {
   }, []);
 
   return (
-    <div className="bg-warm-white py-10"> {/* ✅ Added subtle background */}
+    <div className="pb-12"> {/* ✅ Added subtle background */}
     <title>Store | Spencers Studio</title>
     <meta name="description" content="Explore the Spencers Studio store. Shop for high-quality prints, digital downloads, and photography-related products. Secure payments and fast delivery." />
       <div className="container mx-auto px-4">
-        <h1 className="text-3xl font-bold text-center mb-8 text-[#d64933]">🛍️ Store</h1>
+        <h1 className="text-4xl text-center mb-8 text-charcoal font-serif font-thin">🛍️ Store</h1>
+        <h2 className="text-2xl font-normal font-serif text-charcoal text-center">
+            🌿 A quiet shelf for now.
+        </h2>
+        <p className="font-body font-light text-center text-vandyke text-lg">
+            This part of the studio is still being shaped - a work in progress, like most good things.<br />
+            Check back soon... I'm crafting something worth the wait.
+        </p>
         <div className="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 place-items-center">
+        
           {products.map((product) => (
             <ProductCard key={product.id} product={product} addToCart={addToCart} />
           ))}

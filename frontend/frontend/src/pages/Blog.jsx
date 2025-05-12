@@ -94,7 +94,7 @@ const Blog = () => {
   };
 
   return (
-    <div className="container mx-auto px-4 py-8 mb-12">
+    <div className="container mx-auto px-4 mb-12">
     <title>Journal | Spencers Studio</title>
     <meta name="description" content="Quiet reflections from the Studio - notes on craft, story, and soul by Spencer Barriball." />
       <h1 className="text-4xl font-serif font-light text-center text-charcoal">Journal</h1>

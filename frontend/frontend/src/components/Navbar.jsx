@@ -161,14 +161,14 @@ const Navbar = () => {
                   <NavLink
                     to="/login"
                     onClick={() => setMenuOpen(false)}
-                    className="w-full py-3.5 px-6 rounded-full text-center font-proxima tracking-wide bg-seasalt text-charcoal2 hover:bg-white/90 transition"
+                    className="w-full py-3.5 px-6 rounded-full text-center font-proxima tracking-wide bg-seasalt text-charcoal2 hover:bg-moss/50  transition"
                   >
                     Login
                   </NavLink>
                   <NavLink
                     to="/signup"
                     onClick={() => setMenuOpen(false)}
-                    className="w-full py-3.5 px-6 rounded-full text-center font-proxima tracking-wide border border-seasalt text-seasalt hover:bg-seasalt hover:text-charcoal2 transition"
+                    className="w-full py-3.5 px-6 rounded-full text-center font-proxima tracking-wide border border-seasalt text-seasalt hover:bg-moss/50 hover:border-none transition"
                   >
                     Signup
                   </NavLink>

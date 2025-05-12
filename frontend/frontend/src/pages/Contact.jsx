@@ -44,7 +44,7 @@ const Contact = () => {
         content="Get in touch with Spencer Barriball at Spencers Studio. Whether you have a project in mind, need photography services, or just want to connect—reach out today!"
       />
 
-      <h1 className="text-5xl font-serif text-charcoal mb-4">Contact Me</h1>
+      <h1 className="text-4xl font-serif font-thin text-charcoal mb-4">Contact Me</h1>
       <p className="text-lg text-vandyke max-w-xl mx-auto mb-10">
         Write me a note - I’ll write back.
       </p>

@@ -6,45 +6,45 @@ const Privacy = () => {
   }, []);
 
   return (
-    <div className="container mx-auto px-4 py-12">
+    <div className="container mx-auto px-4 pb-12">
     <title>Privacy Policy | Spencers Studio</title>
-    <meta name="description" content="Read the Privacy Policy of Spencers Studio. Learn how we collect, use, and protect your data while you browse our website and services." />
+    <meta name="description" content="Read the Privacy Policy of Spencers Studio. Learn how I collect, use, and protect your data while you browse our Ibsite and services." />
 
-      <h1 className="text-4xl font-bold text-center mb-6 text-[#d64933]">Privacy Policy</h1>
+      <h1 className="text-4xl font-thin text-center mb-6 text-charcoal font-serif">Privacy Policy</h1>
       
       <div className="max-w-3xl mx-auto text-gray-700 space-y-6">
         <p>
-          This Privacy Policy describes how we collect, use, and protect your personal information when you visit spencers.studio.
+          This Privacy Policy describes how I collect, use, and protect your personal information when you visit spencers.studio.
         </p>
 
-        <h2 className="text-2xl font-semibold mt-6 text-[#d64933]">1. Information We Collect</h2>
+        <h2 className="text-2xl font-normal mt-6 text-charcoal font-serif">1. Information I Collect</h2>
         <p>
-          We may collect personal information such as your name, email, and any details you provide through our contact form or checkout process.
+          I may collect personal information such as your name, email, and any details you provide through our contact form or checkout process.
         </p>
 
-        <h2 className="text-2xl font-semibold mt-6 text-[#d64933]">2. How We Use Your Information</h2>
+        <h2 className="text-2xl font-normal mt-6 text-charcoal font-serif">2. How I Use Your Information</h2>
         <p>
-          Your information is used for order processing, customer support, and site improvements. We do not sell your data to third parties.
+          Your information is used for order processing, customer support, and site improvements. I do not sell your data to third parties.
         </p>
 
-        <h2 className="text-2xl font-semibold mt-6 text-[#d64933]">3. Cookies & Tracking</h2>
+        <h2 className="text-2xl font-normal mt-6 text-charcoal font-serif">3. Cookies & Tracking</h2>
         <p>
-          We use essential cookies for authentication and session management. No third-party tracking is used for advertising purposes.
+          I use essential cookies for authentication and session management. No third-party tracking is used for advertising purposes.
         </p>
 
-        <h2 className="text-2xl font-semibold mt-6 text-[#d64933]">4. Data Security</h2>
+        <h2 className="text-2xl font-normal mt-6 text-charcoal font-serif">4. Data Security</h2>
         <p>
-          We implement security measures to protect your personal data. However, no online transmission is 100% secure.
+          I implement security measures to protect your personal data. However, no online transmission is 100% secure.
         </p>
 
-        <h2 className="text-2xl font-semibold mt-6 text-[#d64933]">5. Your Rights</h2>
+        <h2 className="text-2xl font-normal mt-6 text-charcoal font-serif">5. Your Rights</h2>
         <p>
-          You have the right to request access, correction, or deletion of your data. Contact us if you wish to exercise these rights.
+          You have the right to request access, correction, or deletion of your data. Contact me if you wish to exercise these rights.
         </p>
 
-        <h2 className="text-2xl font-semibold mt-6 text-[#d64933]">6. Changes to Policy</h2>
+        <h2 className="text-2xl font-normal mt-6 text-charcoal font-serif">6. Changes to Policy</h2>
         <p>
-          We reserve the right to update this policy. Any changes will be reflected on this page.
+          I reserve the right to update this policy. Any changes will be reflected on this page.
         </p>
 
         <p className="text-sm text-gray-500 mt-8">

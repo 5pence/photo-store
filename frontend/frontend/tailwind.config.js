@@ -43,7 +43,6 @@ export default {
         "misty": "#B7BBC3",
         "moss": "#416259",
         "black-bean": "#220B07",
-        "rust": "#D64933", // Rusty Red
         "muted-blue": "#7E7F9A", // Muted Blue
         "dark": "#1C1C1C", // Deep Charcoal
         "light-gray": "#E5E5E5", // Soft Gray

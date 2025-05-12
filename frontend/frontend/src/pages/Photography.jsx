@@ -13,7 +13,7 @@ const Photography = () => {
     <title>Studio | Spencers Studio</title>
     <meta name="description" content="A living portfolio of image, texture, and dream - wander through Spencer's visual storytelling." />
       <motion.div
-        className="container mx-auto px-4 py-8 min-h-screen flex flex-col"
+        className="container mx-auto px-4 pb-8 min-h-screen flex flex-col"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.5 }}
